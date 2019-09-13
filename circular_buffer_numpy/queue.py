@@ -4,7 +4,7 @@
     by Valentyn Stadnytskyi
     created: Nov 4, 2017
     last update: February, 2019
-Queue is an abstract data structure, somewhat similar to Stacks. Unlike stacks, a queue is open at both its ends.One end is always used to insert data (enqueue) and the other is used to remove data (dequeue)..
+Queue is an abstract data structure, somewhat similar to Stacks. Unlike stacks, a queue is open at both its ends.One end is always used to insert data (enqueue) and the other is used to remove data (dequeue).
 Basic Operations
 Queue operations may involve initializing or defining the queue, utilizing it, and then completely erasing it from the memory. Here we shall try to understand the basic operations associated with queues −
 enqueue() − add (store) an item to the queue.
