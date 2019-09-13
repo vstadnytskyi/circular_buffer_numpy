@@ -1,0 +1,13 @@
+[run]
+source =
+    circular_buffer_numpy
+[report]
+omit =
+    */python?.?/*
+    */site-packages/nose/*
+    # ignore _version.py and versioneer.py
+    .*version.*
+    *_version.py
+
+exclude_lines =
+    if __name__ == '__main__':
