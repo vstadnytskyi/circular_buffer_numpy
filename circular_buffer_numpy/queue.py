@@ -27,8 +27,6 @@ class Queue(object):
 
     :ivar rear: initial value: 0
     :ivar length: initial value: 0
-    :ivar dtype: initial value: (20, 2)
-    :ivar shape: initial value: 'float64'
     """
     def __init__(self, shape = (20,2) , dtype = 'float64'):
         """
@@ -37,7 +35,6 @@ class Queue(object):
         from numpy import zeros
         self.rear = 0 #the end of the quequ, where new date will be enquequ.
         self.length = 0
-        """length defined as size of the second axis"""
         if 'float' in dtype:
             self.buffer = zeros(shape, dtype=dtype) * nan
         else:
@@ -96,7 +93,7 @@ class Queue(object):
             if j_pointer < 0:
                 j_pointer = self.shape[1] + (j_pointer)
             debug('front = %r, i = %r , j = %r' %(front,i_pointer,j_pointer))
-            data = self.get_i_j(i_pointer,j_pointer)
+            data = self.peek_i_j(i_pointer,j_pointer)
             self.length -= N
         else:
             data = None
@@ -164,11 +161,12 @@ class Queue(object):
         return self.buffer.shape[1:]
 
     @property
-    def dtype(self):
+    def get_dtype(self):
         """
         dtype: returns the dtype of the circular buffer
         """
         return self.buffer.dtype
+    dtype = property(get_dtype)
 
 
 ####Extra functions that are used for peeking into the queue but not reading the data.
@@ -186,7 +184,7 @@ class Queue(object):
             res = self.buffer[i:j]
         else:
             length = self.shape[1] - i +j
-            res = self.get_N(N = length, M = j-1)
+            res = self.peek_N(N = length, M = j-1)
         return res
 
     def peek_N(self,N,M):
@@ -237,12 +235,12 @@ if __name__ == "__main__": # for testing purposes
     print("---------------------------")
     print("Server functions")
     print("server.append(data)")
-    print("server.get_all()")
-    print("server.get_N(N = integer)")
+    print("server.peek_all()")
+    print("server.peek_N(N = integer)")
     print("---------------------------")
     print("Client functions")
-    print("client.get_all()")
-    print("client.get_update()")
+    print("client.peek_all()")
+    print("client.peek_update()")
     print("client.give_all()")
     print("client.give_N(N = integer)")
     print("---------------------------")

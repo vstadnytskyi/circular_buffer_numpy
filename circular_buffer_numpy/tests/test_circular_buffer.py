@@ -35,7 +35,7 @@ class QueueTest(unittest.TestCase):
 
     def test_1(self):
         from numpy import std,random
-        buffer = CircularBuffer(shape= 100, 2))
+        buffer = CircularBuffer(shape=(100, 2))
         data = random.randint(1024, size=(5, 2))
         buffer.packet_length = 5
         buffer.append(data)

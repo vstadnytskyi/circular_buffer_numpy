@@ -46,7 +46,7 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.rear, 5)
         self.assertEqual(queue.shape, (100, 2))
         self.assertEqual(queue.size, 100*2)
-        self.assertEqual(queue.dtype, 'int16')
+        self.assertEqual(queue.get_dtype, 'int16')
         self.assertEqual(queue.isfull, False)
         self.assertEqual(queue.isempty, False)
 
@@ -57,4 +57,4 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.rear, 0)
         self.assertEqual(queue.shape, (50, 2))
         self.assertEqual(queue.size, 50*2)
-        self.assertEqual(queue.dtype, 'float64')
+        self.assertEqual(queue.get_dtype, 'float64')
