@@ -4,9 +4,12 @@
     by Valentyn Stadnytskyi
     created: Nov 4, 2017
     last update: February, 2019
-Queue is an abstract data structure, somewhat similar to Stacks. Unlike stacks, a queue is open at both its ends.One end is always used to insert data (enqueue) and the other is used to remove data (dequeue).
+Queue is an abstract data structure, somewhat similar to Stacks. Unlike stacks, a queue is open at both its ends.
+One end is always used to insert data (enqueue) and the other is used to remove data (dequeue).
 Basic Operations
-Queue operations may involve initializing or defining the queue, utilizing it, and then completely erasing it from the memory. Here we shall try to understand the basic operations associated with queues −
+Queue operations may involve initializing or defining the queue,
+utilizing it, and then completely erasing it from the memory.
+Here we shall try to understand the basic operations associated with queues −
 enqueue() − add (store) an item to the queue.
 dequeue() − remove (access) an item from the queue.
 Few more functions are required to make the above-mentioned queue operation efficient. These are −
@@ -14,12 +17,10 @@ peek() − Gets the element at the front of the queue without removing it. isful
 isempty() − Checks if the queue is empty.
 """
 
-__version__  = '1.0.0'
+__version__ = '0.0.0'
 
 from logging import debug, info, warn, error
-from numpy import nan, asarray, concatenate
-from pdb import pm
-import traceback
+
 
 class Queue(object):
     """
@@ -28,33 +29,32 @@ class Queue(object):
     :ivar rear: initial value: 0
     :ivar length: initial value: 0
     """
-    def __init__(self, shape = (20,2) , dtype = 'float64'):
+    def __init__(self, shape=(20, 2), dtype='float64'):
         """
         the queue has front pointer and the length.
         """
-        from numpy import zeros
-        self.rear = 0 #the end of the quequ, where new date will be enquequ.
+        from numpy import zeros, nan
+        self.rear = 0  # the end of the quequ, where new date will be enquequ.
         self.length = 0
         if 'float' in dtype:
             self.buffer = zeros(shape, dtype=dtype) * nan
         else:
             self.buffer = zeros(shape, dtype=dtype)
 
-
-    def enqueue(self,data):
+    def enqueue(self, data):
         """
         add (store) an item to the queue.
         """
         from numpy import zeros
         if 'tuple' in str(type(data)) or 'lst' in str(type(data)):
-            arr = zeros((len(data),1))
+            arr = zeros((len(data), 1))
             for idx in range(len(data)):
-                arr[idx,0] = data[idx]
+                arr[idx, 0] = data[idx]
         else:
             arr = data
         try:
             for j in range(arr.shape[0]):
-                if  self.rear == self.shape[0]-1:
+                if self.rear == self.shape[0]-1:
                     self.rear = -1
                 self.buffer[self.rear+1] = arr[j]
                 self.rear = self.rear + 1
@@ -65,7 +65,7 @@ class Queue(object):
         except Exception:
             error(traceback.format_exc())
 
-    def dequeue(self,N = 0):
+    def dequeue(self, N=0):
         """
         remove (access) an item from the queue.
         return N points from the back and move back_pointer
@@ -86,20 +86,20 @@ class Queue(object):
         length = self.length
         if length >= N:
             i_pointer = front - length + 1
-            debug('i_pointer = %r' %(i_pointer))
+            debug('i_pointer = %r' % (i_pointer))
             if i_pointer < 0:
                 i_pointer = self.shape[1] + (i_pointer)
             j_pointer = front - length + N + 1
             if j_pointer < 0:
                 j_pointer = self.shape[1] + (j_pointer)
-            debug('front = %r, i = %r , j = %r' %(front,i_pointer,j_pointer))
-            data = self.peek_i_j(i_pointer,j_pointer)
+            debug('front = %r, i = %r , j = %r' % (front, i_pointer, j_pointer))
+            data = self.peek_i_j(i_pointer, j_pointer)
             self.length -= N
         else:
             data = None
         return data
 
-    ##Few more functions are required to make the above-mentioned queue operation efficient. These are −
+    # Few more functions are required to make the above-mentioned queue operation efficient. These are −
     def peek_last(self):
         """Gets the element at the front of the queue without removing it."""
         raise NotImplementedError()
@@ -122,22 +122,23 @@ class Queue(object):
         """
         resets the queue by setting front and back equal to 0.
         """
-        self.rear = 0 #the last written element
-        self.length = 0 #the last read element
+        self.rear = 0  # the last written element
+        self.length = 0  # the last read element
 
-    def reshape(self, shape, dtype = None):
+    def reshape(self, shape, dtype=None):
         """
         reshapes buffer but also resets it. Takes two parameters as input, shape and dtype.
         dtype atribute can be passed if dtype of the queue needs changes
         """
-        from numpy import zeros
-        if dtype is None: dtype = self.dtype
+        from numpy import zeros, nan
+        if dtype is None:
+            dtype = self.dtype
         if 'float' in dtype:
             self.buffer = zeros(shape, dtype=dtype) * nan
         else:
             self.buffer = zeros(shape, dtype=dtype)
-        self.rear = 0 #the end of the quequ, where new date will be enquequ.
-        self.length = 0 #length defined as size of the second axis
+        self.rear = 0  # the end of the quequ, where new date will be enquequ.
+        self.length = 0  # length defined as size of the second axis
 
     @property
     def size(self):
@@ -168,10 +169,10 @@ class Queue(object):
         return self.buffer.dtype
     dtype = property(get_dtype)
 
+# Extra functions that are used for peeking into the queue but not reading the data.
+# Important for functioning of the queue
 
-####Extra functions that are used for peeking into the queue but not reading the data.
-####Important for functioning of the queue
-    def peek_i_j(self,i,j):
+    def peek_i_j(self, i, j):
         """
         returns buffer between indices i and j (including index i)
         if j < i, it assumes that buffer wrapped around and will give information
@@ -180,14 +181,14 @@ class Queue(object):
         are passed
         NOTE: index i cannot be -1 otherwise it will return empty array
         """
-        if j>i:
+        if j > i:
             res = self.buffer[i:j]
         else:
-            length = self.shape[1] - i +j
-            res = self.peek_N(N = length, M = j-1)
+            length = self.shape[1] - i + j
+            res = self.peek_N(N=length, M=j-1)
         return res
 
-    def peek_N(self,N,M):
+    def peek_N(self, N, M):
         """
         return N points before index M in the circular buffer
         The parameter clear can be used to
@@ -207,24 +208,29 @@ class Queue(object):
         --------
         >>> circual_buffer.Queue.peek_N()
         """
+        from numpy import concatenate
         P = M
         if N-1 <= P:
             result = self.buffer[P+1-N:P+1]
         else:
-            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]),axis = 1)
+            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=1)
         return result
 
-    def peek_last_N(self,N):
+    def peek_last_N(self, N):
         """
         get into last N
         """
         raise NotImplementedError()
 
-if __name__ == "__main__": # for testing purposes
+
+if __name__ == "__main__":  # for testing purposes
+    from pdb import pm
+    import traceback
+
     from time import time
     import logging
     from tempfile import gettempdir
-    logging.basicConfig(#filename=gettempdir()+'/circular_buffer_LL.log',
+    logging.basicConfig(filename=gettempdir()+'/circular_buffer.log',
                         level=logging.DEBUG, format="%(asctime)s %(levelname)s: %(message)s")
 
     queue = Queue()

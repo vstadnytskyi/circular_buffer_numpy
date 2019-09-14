@@ -31,17 +31,13 @@
 
 """
 
-__version__  = '1.1.8'
+__version__ = '1.1.8'
 
-from logging import debug, info,warn,error
-from numpy import nan, zeros, ones, asarray, transpose, concatenate
+from logging import debug, info, warn, error
 import warnings
+# Client section of the Circular Buffer
 
-import traceback
 
-################################################################################################################
-#### Client section of the Circular Buffer
-################################################################################################################
 class CircularBuffer(object):
     """
     Description for class
@@ -50,7 +46,7 @@ class CircularBuffer(object):
     :ivar g_pointer: initial value: -1
     :ivar packet_length: initial value 1
     """
-    def __init__(self, shape = (100,2) , dtype = 'float64', packet_length = 1):
+    def __init__(self, shape=(100, 2), dtype='float64', packet_length=1):
         from numpy import nan, zeros
         """
         initializes the class. creates an empty numpy array with given size and give dtype.
@@ -83,15 +79,15 @@ class CircularBuffer(object):
         else:
             self.buffer = zeros(shape, dtype=dtype)
 
-    def append(self,data):
+    def append(self, data):
         """
         appends data to the existing circular buffer.
         """
         from numpy import zeros
         if 'tuple' in str(type(data)):
-            arr = zeros((len(data),1))
+            arr = zeros((len(data), 1))
             for idx in range(len(data)):
-                arr[idx,0] = data[idx]
+                arr[idx, 0] = data[idx]
         else:
             arr = data
         try:
@@ -105,7 +101,7 @@ class CircularBuffer(object):
         except Exception:
             error(traceback.format_exc())
 
-    def reset(self, clear = False):
+    def reset(self, clear=False):
         """
         resets pointers to -1 (empty buffer), the full reset can be force via parameter clears
         The parameter clear can be used to
@@ -122,6 +118,7 @@ class CircularBuffer(object):
         --------
         >>> circual_buffer.CircularBuffer.reset()
         """
+        from numpy import nan
         if clear:
             if 'float' in self.type:
                 self.buffer = self.buffer * nan
@@ -129,11 +126,12 @@ class CircularBuffer(object):
                 self.buffer = self.buffer*0
         self.pointer = -1
         self.g_pointer = -1
-        debug('{},{}'.format(self.pointer,self.g_pointer))
+        debug('{},{}'.format(self.pointer, self.g_pointer))
 
-    def reshape(self, shape, dtype = None):
-        from numpy import zeros
-        if dtype is None: dtype = self.dtype
+    def reshape(self, shape, dtype=None):
+        from numpy import zeros, nan
+        if dtype is None:
+            dtype = self.dtype
         if 'float' in self.dtype:
             self.buffer = zeros(shape, dtype=self.dtype) * nan
         else:
@@ -155,27 +153,27 @@ class CircularBuffer(object):
         --------
         >>> data = circual_buffer.CircularBuffer.get_all()
         """
-        return self.get_last_N(N = self.shape[0])
+        return self.get_last_N(N=self.shape[0])
 
-    def get_last_N(self,N):
+    def get_last_N(self, N):
         """
         returns last N entries from the known self.pointer(circular buffer pointer)
         """
+        from numpy import concatenate
         P = self.pointer
         if N-1 <= P:
             result = self.buffer[P+1-N:P+1]
         else:
-            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]),axis = 0)
+            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=0)
         return result
 
     def get_last_value(self):
         """
         returns last entry in the circular buffer
         """
-        return get_last_N(N = 1)
+        return self.get_last_N(N=1)
 
-
-    def get_i_j(self,i,j):
+    def get_i_j(self, i, j):
         """
         returns buffer between indices i and j (including index i)
         if j < i, it assumes that buffer wrapped around and will give information
@@ -184,22 +182,23 @@ class CircularBuffer(object):
         are passed
         NOTE: index i cannot be -1 otherwise it will return empty array
         """
-        if j>i:
+        if j > i:
             res = self.buffer[i:j]
         else:
-            length = self.shape[1] - i +j
-            res = self.get_N(N = length, M = j-1)
+            length = self.shape[1] - i + j
+            res = self.get_N(N=length, M=j-1)
         return res
 
-    def get_N(self,N = 0,M = 0):
+    def get_N(self, N=0, M=0):
         """
         return N points before index M in the circular buffer
         """
+        from numpy import concatenate
         P = M
         if N-1 <= P:
             result = self.buffer[P+1-N:P+1]
         else:
-            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]),axis = 1)
+            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=1)
         return result
 
     @property
@@ -242,27 +241,29 @@ class CircularBuffer(object):
     @property
     def data_shape(self):
         """
-        tuple: property objects that returns the shape of one data point(or N dimensional array) of the circular buffer
+        tuple: property objects that returns the shape of one data point
+        (or N dimensional array) of the circular buffer
         """
-        return  self.buffer.shape[1:]
+        return self.buffer.shape[1:]
 
     @property
     def dtype(self):
         """
-        dtype: property objects that returns the shape of one data point(or N dimensional array) of the circular buffer
+        dtype: property objects that returns the shape of one data point
+        (or N dimensional array) of the circular buffer
         """
         return self.buffer.dtype
 
 
-if __name__ == "__main__": # for testing purposes
-    from pdb import pm #for debugging
+if __name__ == "__main__":  # for testing purposes
+    from pdb import pm  # for debugging
     from time import time
     import logging
     from tempfile import gettempdir
+    import traceback
+
     logging.basicConfig(filename=gettempdir()+'/circular_buffer_LL.log',
                         level=logging.DEBUG, format="%(asctime)s %(levelname)s: %(message)s")
-
-    server = Server()
 
     print("Circular buffer library")
     print("two classes: server and client")

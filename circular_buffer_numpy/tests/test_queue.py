@@ -3,17 +3,18 @@
 """test Queue
     by Valentyn Stadnytskyi
      created: August 2, 2019
-
     This is a test library to evaluate the performance of the code.
-
-    Queue is an abstract data structure, somewhat similar to Stacks. Unlike stacks, a queue is open at both its ends. One end is always used to insert data (enqueue) and the other is used to remove data (dequeue)
+    Queue is an abstract data structure, somewhat similar to Stacks.
+    Unlike stacks, a queue is open at both its ends.
+    One end is always used to insert data (enqueue)
+    and the other is used to remove data (dequeue)
 
     to run unittest: python3 -m unittest test_queue
 """
 
 import unittest
 
-#from numpy.testing import assert_, assert_almost_equal, assert_equal
+# from numpy.testing import assert_, assert_almost_equal, assert_equal
 
 from ..queue import Queue
 
@@ -21,7 +22,7 @@ from ..queue import Queue
 class QueueTest(unittest.TestCase):
 
     def test_queue_end(self):
-        queue=Queue(shape=(100, 2))
+        queue = Queue(shape=(100, 2))
         self.assertEqual(queue.rear, 0)
 
     def test_1(self):
