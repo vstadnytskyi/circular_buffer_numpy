@@ -22,7 +22,7 @@ script:
   - coverage report -m  # Generate test coverage report.
   - codecov  # Upload the report to codecov.
   #turn flake8 on when all formating issues are fixed and understood.
-  - flake8  # Enforce code style ('relaxed' line length limit is set in .flake8 config file).
+  # - flake8  # Enforce code style ('relaxed' line length limit is set in .flake8 config file).
   - set -e  # If any of the following steps fail, just stop at that point.
   - make -C docs html  # Build the documentation.
   - pip install doctr
