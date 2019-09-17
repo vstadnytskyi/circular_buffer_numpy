@@ -34,7 +34,7 @@ with open(path.join(here, 'requirements.txt')) as requirements_file:
 
 
 setup(
-    name='circular-buffer-numpy',
+    name='circular_buffer_numpy',
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     description="Package for circular buffer numpy array",
