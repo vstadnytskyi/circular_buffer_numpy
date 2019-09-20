@@ -13,8 +13,6 @@
 """
 import unittest
 
-from ..circular_buffer import CircularBuffer
-
 
 class QueueTest(unittest.TestCase):
     def test_queue_end(self):

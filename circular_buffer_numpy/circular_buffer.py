@@ -234,7 +234,7 @@ class CircularBuffer(object):
         ----------
         i : (integer)
             start index in the buffer
-        j : (intefer)
+        j : (integer)
             end index in the buffer
 
         Returns
@@ -255,6 +255,7 @@ class CircularBuffer(object):
     def get_N(self, N=0, M=0):
         """
         return N points before index M in the circular buffer
+
         Parameters
         ----------
         N : (integer)
