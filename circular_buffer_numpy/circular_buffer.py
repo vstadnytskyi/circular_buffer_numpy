@@ -35,7 +35,6 @@ __version__ = '1.1.8'
 
 from logging import debug, info, warn, error
 import warnings
-# Client section of the Circular Buffer
 
 
 class CircularBuffer(object):
@@ -48,6 +47,7 @@ class CircularBuffer(object):
     """
     pointer = -1 # unning current pointer value
     g_pointer = -1 # running current global_pointer value
+
     def __init__(self, shape=(100, 2), dtype='float64', packet_length=1):
         from numpy import nan, zeros
         """
@@ -104,7 +104,6 @@ class CircularBuffer(object):
             self.pointer += 1
             self.g_pointer += 1
 
-
     def reset(self, clear=False):
         """
         resets pointers to -1 (empty buffer), the full reset can be force via parameter clears
@@ -159,7 +158,6 @@ class CircularBuffer(object):
         new_length = [length] + list(datapoint_shape)
         self.buffer = zeros(shape=new_length, dtype=self.dtype) * nan
         self.append(old_buffer)
-
 
     def get_all(self):
         """
