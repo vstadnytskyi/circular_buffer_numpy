@@ -21,6 +21,7 @@ class QueueTest(unittest.TestCase):
         """
         test if the default pointer in the buffer is -1.
         """
+        from ..circular_buffer import CircularBuffer
         buffer = CircularBuffer(shape=(100, 2))
         self.assertEqual(buffer.pointer, -1)
 
@@ -28,13 +29,15 @@ class QueueTest(unittest.TestCase):
         """
         test if the default pointer in the buffer is -1.
         """
+        from ..circular_buffer import CircularBuffer
         buffer = CircularBuffer(shape=(100, 2))
         self.assertEqual(buffer.pointer, -1)
 
     def test_1(self):
         from numpy import random
-        buffer = CircularBuffer(shape=(100, 2))
-        data = random.randint(1024, size=(5, 2))
+        from ..circular_buffer import CircularBuffer
+        buffer = CircularBuffer(shape=(100, 2, 4))
+        data = random.randint(1024, size=(5, 2, 4))
         buffer.packet_length = 5
         buffer.append(data)
         self.assertEqual(buffer.pointer, 4)
@@ -43,6 +46,7 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(buffer.g_packet_pointer, 0)
 
     def test_attributes(self):
+        from ..circular_buffer import CircularBuffer
         from numpy import random
         buffer = CircularBuffer(shape=(100, 2), dtype='int16')
         data = random.randint(1024, size=(5, 2))
@@ -50,3 +54,18 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(buffer.shape, (100, 2))
         self.assertEqual(buffer.size, 100*2)
         self.assertEqual(buffer.dtype, 'int16')
+
+    def test_full(self):
+        from ..circular_buffer import CircularBuffer
+        from numpy import random, sum
+        buffer = CircularBuffer(shape=(100, 2, 3), dtype='float64')
+        data = random.randint(1024, size=(50, 2, 3))
+        buffer.append(data)
+        assert buffer.pointer == 49
+        assert buffer.g_pointer == 49
+        assert buffer.shape == (100, 2, 3)
+        assert buffer.size == buffer.buffer.shape[0]*buffer.buffer.shape[1]*buffer.buffer.shape[2]
+        assert buffer.dtype == 'float64'
+        assert sum(buffer.get_i_j(i=5, j=6)) == sum(buffer.buffer[5])
+        # get data between pointers 5 and 10 and compare to get 5 points from pointer M
+        assert sum(buffer.get_i_j(i=5, j=10)) == sum(buffer.get_N(N=5, M=9))

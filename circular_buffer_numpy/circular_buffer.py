@@ -46,6 +46,8 @@ class CircularBuffer(object):
     :ivar g_pointer: initial value: -1
     :ivar packet_length: initial value 1
     """
+    pointer = -1 # unning current pointer value
+    g_pointer = -1 # running current global_pointer value
     def __init__(self, shape=(100, 2), dtype='float64', packet_length=1):
         from numpy import nan, zeros
         """
@@ -68,12 +70,8 @@ class CircularBuffer(object):
         self.name = 'circular buffer server'
         self.type = 'server'
         self.packet_length = packet_length
-        self.pointer = -1
-        """ running current pointer value """
-        self.g_pointer = -1
-        """ running current global_pointer value """
-        self.lenngth = shape[0]
         self.datapoint_shape = shape[1:]
+
         if 'float' in dtype:
             self.buffer = zeros(shape, dtype=dtype) * nan
         else:
@@ -82,24 +80,30 @@ class CircularBuffer(object):
     def append(self, data):
         """
         appends data to the existing circular buffer.
+
+        Parameters
+        ----------
+        data : numpy array
+            data to append
+        Returns
+        -------
+
+        Examples
+        --------
+        >>> buffer = circular_buffer_numpy.circular_buffer.CircularBuffer(shape = (10,4)
+        >>> from numpy.random import random
+        >>> rand_arr = random(size=(6,4))
+        >>> buffer.apppend(rand_arr)
+        >>> buffer.pointer
+        5
         """
-        from numpy import zeros
-        if 'tuple' in str(type(data)):
-            arr = zeros((len(data), 1))
-            for idx in range(len(data)):
-                arr[idx, 0] = data[idx]
-        else:
-            arr = data
-        try:
-            if arr is not None:
-                for i in range(arr.shape[0]):
-                    if self.pointer == self.shape[0]-1:
-                        self.pointer = -1
-                    self.buffer[self.pointer+1] = arr[i]
-                    self.pointer += 1
-                    self.g_pointer += 1
-        except Exception:
-            error(traceback.format_exc())
+        for i in range(data.shape[0]):
+            if self.pointer == self.shape[0]-1:
+                self.pointer = -1
+            self.buffer[self.pointer+1] = data[i]
+            self.pointer += 1
+            self.g_pointer += 1
+
 
     def reset(self, clear=False):
         """
@@ -128,14 +132,34 @@ class CircularBuffer(object):
         self.g_pointer = -1
         debug('{},{}'.format(self.pointer, self.g_pointer))
 
-    def reshape(self, shape, dtype=None):
-        from numpy import zeros, nan
-        if dtype is None:
-            dtype = self.dtype
-        if 'float' in self.dtype:
-            self.buffer = zeros(shape, dtype=self.dtype) * nan
-        else:
-            self.buffer = zeros(shape, dtype=self.dtype)
+    def change_length(self, length):
+        """
+        changes length of the buffer
+
+        Parameters
+        ----------
+        length:  (integer)
+            new length of the buffer
+
+        Returns
+        -------
+
+        Examples
+        --------
+        >>> buffer = circual_buffer.CircularBuffer(shape=(10,4))
+        >>> buffer.shape
+        (10,4)
+        >>> buffer.change_length(12)
+        >>> buffer.shape
+        (12,4)
+        """
+        from numpy import zeros, nan, copy
+        old_buffer = self.get_all()
+        datapoint_shape = self.datapoint_shape
+        new_length = [length] + list(datapoint_shape)
+        self.buffer = zeros(shape=new_length, dtype=self.dtype) * nan
+        self.append(old_buffer)
+
 
     def get_all(self):
         """
@@ -158,6 +182,19 @@ class CircularBuffer(object):
     def get_last_N(self, N):
         """
         returns last N entries from the known self.pointer(circular buffer pointer)
+
+        Parameters
+        ----------
+        N : (integer)
+            number of points to return
+
+        Returns
+        -------
+        array (numpy array)
+
+        Examples
+        --------
+        >>> data = circual_buffer.CircularBuffer.get_last_N(10)
         """
         from numpy import concatenate
         P = self.pointer
@@ -169,7 +206,18 @@ class CircularBuffer(object):
 
     def get_last_value(self):
         """
-        returns last entry in the circular buffer
+        returns last entry from the known. Same as self.buffer[self.pointer]
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+        array (numpy array)
+
+        Examples
+        --------
+        >>> data = circual_buffer.CircularBuffer.get_last_value()
         """
         return self.get_last_N(N=1)
 
@@ -181,6 +229,21 @@ class CircularBuffer(object):
         NOTE: the user needs to pay attention to the order at which indices
         are passed
         NOTE: index i cannot be -1 otherwise it will return empty array
+
+        Parameters
+        ----------
+        i : (integer)
+            start index in the buffer
+        j : (intefer)
+            end index in the buffer
+
+        Returns
+        -------
+        array (numpy array)
+
+        Examples
+        --------
+        >>> data = circual_buffer.CircularBuffer.get_i_j(i=2,j=5)
         """
         if j > i:
             res = self.buffer[i:j]
@@ -192,6 +255,20 @@ class CircularBuffer(object):
     def get_N(self, N=0, M=0):
         """
         return N points before index M in the circular buffer
+        Parameters
+        ----------
+        N : (integer)
+            number of points to return
+        M : (integer)
+            index of the pointer
+
+        Returns
+        -------
+        array (numpy array)
+
+        Examples
+        --------
+        >>> data = circual_buffer.CircularBuffer.get_N(N=2, M=5)
         """
         from numpy import concatenate
         P = M
