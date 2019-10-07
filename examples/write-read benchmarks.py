@@ -40,7 +40,7 @@ plt.loglog(t_arr[where(t_arr[:,1] == 10),0],t_arr[where(t_arr[:,1] == 10),3],'-o
 plt.loglog(t_arr[where(t_arr[:,1] == 100),0],t_arr[where(t_arr[:,1] == 100),3],'-og')
 plt.loglog(t_arr[where(t_arr[:,1] == 1000),0],t_arr[where(t_arr[:,1] == 1000),3],'-ob')
 plt.xlabel('N, circular dimension length')
-plt.ylabel('time to write')
+plt.ylabel('time to write, seconds')
 plt.title('Time to write vs data dimensions (length x width) \n where width equal to red: 10; green: 100; blue: 1000')
 fig.savefig("write-benchmarks-{}.jpg".format(__version__), bbox_inches='tight')
 
@@ -50,7 +50,7 @@ plt.loglog(t_arr[where(t_arr[:,1] == 10),0],t_arr[where(t_arr[:,1] == 10),4],'-o
 plt.loglog(t_arr[where(t_arr[:,1] == 100),0],t_arr[where(t_arr[:,1] == 100),4],'-og')
 plt.loglog(t_arr[where(t_arr[:,1] == 1000),0],t_arr[where(t_arr[:,1] == 1000),4],'-ob')
 plt.xlabel('N, circular dimension length')
-plt.ylabel('time to read')
+plt.ylabel('time to read, seconds')
 plt.title('Time to write vs data dimensions (length x width) \n where width equal to red: 10; green: 100; blue: 1000')
 fig.savefig("read-benchmarks-{}.jpg".format(__version__), bbox_inches='tight')
 
