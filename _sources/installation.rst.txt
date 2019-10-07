@@ -4,4 +4,4 @@ Installation
 
 At the command line::
 
-    $ pip install circular-buffer-numpy
+    $ pip3 install circular-buffer-numpy
