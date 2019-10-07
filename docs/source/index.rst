@@ -10,6 +10,7 @@ Numpy array circular buffer Documentation
    :maxdepth: 2
 
    installation
+   theory-of-operation
    usage
    release-history
    min_versions

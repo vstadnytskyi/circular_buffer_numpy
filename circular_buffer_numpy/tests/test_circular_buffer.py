@@ -12,7 +12,7 @@
     to run unittest: python3 -m unittest test_queue
 """
 import unittest
-
+from numpy.testing import assert_array_equal
 
 class QueueTest(unittest.TestCase):
     def test_queue_end(self):
@@ -67,3 +67,14 @@ class QueueTest(unittest.TestCase):
         assert sum(buffer.get_i_j(i=5, j=6)) == sum(buffer.buffer[5])
         # get data between pointers 5 and 10 and compare to get 5 points from pointer M
         assert sum(buffer.get_i_j(i=5, j=10)) == sum(buffer.get_N(N=5, M=9))
+
+    def test_vector_append(self):
+        from ..circular_buffer import CircularBuffer
+        from numpy import random, sum, zeros
+        buffer = CircularBuffer(shape = (1000,3))
+        vec = zeros((1,3))
+        vec[0,0] = 0.0
+        vec[0,1] = 1.0
+        vec[0,2] = 2.0
+        buffer.append(vec)
+        assert_array_equal(buffer.get_last_value(),vec)
