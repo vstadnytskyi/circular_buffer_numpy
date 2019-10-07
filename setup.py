@@ -39,7 +39,7 @@ setup(
     cmdclass=versioneer.get_cmdclass(),
     description="Package for circular buffer numpy array",
     long_description=readme,
-    author="Valentyn Stadnyskyi",
+    author="Valentyn Stadnytskyi",
     author_email='v.stadnytskyi@gmail.com',
     url='https://github.com/vstadnytskyi/circular_buffer_numpy',
     python_requires='>={}'.format('.'.join(str(n) for n in min_version)),
