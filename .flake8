@@ -6,5 +6,6 @@ exclude =
     dist,
     versioneer.py,
     circular_buffer_numpy/_version.py,
+    circular_buffer_numpy/__init__.py,
     docs/source/conf.py
 max-line-length = 115

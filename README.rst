@@ -8,6 +8,8 @@ Numpy array circular buffer
 .. image:: https://img.shields.io/pypi/v/circular_buffer_numpy.svg
         :target: https://pypi.python.org/pypi/circular_buffer_numpy
 
+.. image:: https://img.shields.io/pypi/dm/circular_buffer_numpy.svg
+           :target: https://pypi.org/project/circular_buffer_numpy
 
 Package for circular buffer numpy array
 
@@ -17,4 +19,10 @@ Package for circular buffer numpy array
 Features
 --------
 
-* TODO
+Purpose
+-------
+
+ToDo list
+---------
+- entry 1
+- entry 2
