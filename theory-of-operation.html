@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Theory of Operation &mdash; Numpy array circular buffer 0.0.6 documentation</title>
+  <title>Theory of Operation &mdash; Numpy array circular buffer 0.0.6.post1+g2d23edf documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.0.6
+                0.0.6.post1+g2d23edf
               </div>
             
           
@@ -90,9 +90,15 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Theory of Operation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#design-specification">Design Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#benchmarks">Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#design-specification">Design Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#benchmarks">Benchmarks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#write-read-time-benchmarks">Write/Read time benchmarks</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
@@ -168,17 +174,61 @@
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Buffers are widely used in the computer architecture to allow efficient data storage, handling and later retrieval.</p>
 <p>This project uses numpy array data structures to provide a fast and flexible data handling for streams of data. It is common to have a data acquisition unit that measures at a certain rate. The data from the internal buffer need to be read efficiently and should be available to other programsdevices at later time. The numpy array data structure in Python allows to preallocate memory at the initialization and the data handling from now on is extremely efficient.</p>
-</div>
 <div class="section" id="design-specification">
-<h2>Design Specification<a class="headerlink" href="#design-specification" title="Permalink to this headline">¶</a></h2>
+<h3>Design Specification<a class="headerlink" href="#design-specification" title="Permalink to this headline">¶</a></h3>
+<p>DI-4108 by DATAQ in 4kHz at 8 analog channels at 16bit resolution plus 1 digital channel will produce 68kB of data per second.</p>
 </div>
 <div class="section" id="benchmarks">
-<h2>Benchmarks<a class="headerlink" href="#benchmarks" title="Permalink to this headline">¶</a></h2>
-<p>Configuration:
-DI-4108 by DATAQ in 4kHz at 8 analog channels at 16bit resolution plus 1 digital channel will produce 68kB of data per second.</p>
-<p>TODO write a test to measure write/read time
-write time:</p>
-<p>read time:</p>
+<h3>Benchmarks<a class="headerlink" href="#benchmarks" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="configuration">
+<h4>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">OS</dt>
+<dd class="field-odd"><p>macOS Mojave 10.14.6</p>
+</dd>
+<dt class="field-even">Computer</dt>
+<dd class="field-even"><p>MacBook Pro (13-inch, 2017, Two Thunderbolt 3 ports)</p>
+</dd>
+<dt class="field-odd">Processor</dt>
+<dd class="field-odd"><p>2.3 GHz Intel Core i5</p>
+</dd>
+<dt class="field-even">Memory</dt>
+<dd class="field-even"><p>16 GB 2133 MHz LPDDR3</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="write-read-time-benchmarks">
+<h4>Write/Read time benchmarks<a class="headerlink" href="#write-read-time-benchmarks" title="Permalink to this headline">¶</a></h4>
+<div class="figure align-center">
+<img alt="_images/write-benchmarks-0.0.6.jpg" src="_images/write-benchmarks-0.0.6.jpg" />
+</div>
+<div class="figure align-center">
+<img alt="_images/read-benchmarks-0.0.6.jpg" src="_images/read-benchmarks-0.0.6.jpg" />
+</div>
+<dl>
+<dt>The numerical output :: python</dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">examples</span><span class="o">/</span><span class="n">write</span><span class="o">-</span><span class="n">read</span>\ <span class="n">benchmarks</span><span class="o">.</span><span class="n">py</span>
+<span class="go">  circular buffer numpy version: 0.0.6</span>
+<span class="go">  1.875741365999999e-06 per write and 1.3417917090000007e-06 per read of 1x10 array</span>
+<span class="go">  1.4111644630000003e-05 per write and 1.3084426500000036e-06 per read of 10x10 array</span>
+<span class="go">  0.00012056339729999994 per write and 1.2482045999998803e-06 per read of 100x10 array</span>
+<span class="go">  0.001347408767000001 per write and 1.2678269999994995e-06 per read of 1000x10 array</span>
+<span class="go">  0.01340139582999999 per write and 1.9024200000217206e-06 per read of 10000x10 array</span>
+<span class="go">  2.005417302999998e-06 per write and 1.324801278999999e-06 per read of 1x100 array</span>
+<span class="go">  1.650482488999998e-05 per write and 1.2904178099999797e-06 per read of 10x100 array</span>
+<span class="go">  0.00013166361600000016 per write and 1.2773896999998869e-06 per read of 100x100 array</span>
+<span class="go">  0.0012954091400000003 per write and 1.2730259999997885e-06 per read of 1000x100 array</span>
+<span class="go">  0.013044410029999974 per write and 1.3796100000007528e-06 per read of 10000x100 array</span>
+<span class="go">  1.2233516567000002e-05 per write and 1.455322498000001e-06 per read of 1x1000 array</span>
+<span class="go">  0.00014691199192 per write and 1.2784705600000024e-06 per read of 10x1000 array</span>
+<span class="go">  0.001376928726700001 per write and 1.3089801000006674e-06 per read of 100x1000 array</span>
+<span class="go">  0.012413041053 per write and 1.5748430000002146e-06 per read of 1000x1000 array</span>
+<span class="go">  0.12879166736000003 per write and 8.44166999996787e-06 per read of 10000x1000 array</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
 </div>
 </div>
 
