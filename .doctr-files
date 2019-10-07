@@ -5,6 +5,7 @@
 ./_sources/installation.rst.txt
 ./_sources/min_versions.rst.txt
 ./_sources/release-history.rst.txt
+./_sources/theory-of-operation.rst.txt
 ./_sources/usage.rst.txt
 ./_static/basic.css
 ./_static/copy-button.svg
@@ -70,4 +71,5 @@
 ./release-history.html
 ./search.html
 ./searchindex.js
+./theory-of-operation.html
 ./usage.html

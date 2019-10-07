@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Usage &mdash; Numpy array circular buffer 0.0.2.post3+gbae754a documentation</title>
+  <title>Usage &mdash; Numpy array circular buffer 0.0.6 documentation</title>
   
 
   
@@ -39,7 +39,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Release History" href="release-history.html" />
-    <link rel="prev" title="Installation" href="installation.html" /> 
+    <link rel="prev" title="Theory of Operation" href="theory-of-operation.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.0.2.post3+gbae754a
+                0.0.6
               </div>
             
           
@@ -89,7 +89,12 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory-of-operation.html">Theory of Operation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-circular-buffer-class">The Circular Buffer Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-queue-class">The Queue Class</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="release-history.html">Release History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="min_versions.html">Minimum Version of Python and NumPy</a></li>
 </ul>
@@ -159,8 +164,9 @@
   <div class="section" id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <p>Start by importing Numpy array circular buffer.</p>
+<div class="section" id="the-circular-buffer-class">
+<h2>The Circular Buffer Class<a class="headerlink" href="#the-circular-buffer-class" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">circular_buffer</span>
-<span class="kn">import</span> <span class="nn">queue</span>
 </pre></div>
 </div>
 <dl class="class">
@@ -410,7 +416,12 @@ The parameter clear can be used to</p>
 
 </dd></dl>
 
-<p>And the Queue class</p>
+</div>
+<div class="section" id="the-queue-class">
+<h2>The Queue Class<a class="headerlink" href="#the-queue-class" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">queue</span>
+</pre></div>
+</div>
 <dl class="class">
 <dt id="circular_buffer_numpy.queue.Queue">
 <em class="property">class </em><code class="sig-prename descclassname">circular_buffer_numpy.queue.</code><code class="sig-name descname">Queue</code><span class="sig-paren">(</span><em class="sig-param">shape=(20</em>, <em class="sig-param">2)</em>, <em class="sig-param">dtype='float64'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue" title="Permalink to this definition">¶</a></dt>
@@ -559,6 +570,7 @@ dtype atribute can be passed if dtype of the queue needs changes</p>
 </dd></dl>
 
 </div>
+</div>
 
 
            </div>
@@ -571,7 +583,7 @@ dtype atribute can be passed if dtype of the queue needs changes</p>
         <a href="release-history.html" class="btn btn-neutral float-right" title="Release History" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="theory-of-operation.html" class="btn btn-neutral float-left" title="Theory of Operation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
