@@ -83,8 +83,9 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        data : numpy array
+        data: (numpy array)
             data to append
+
         Returns
         -------
 
@@ -183,7 +184,7 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        N : (integer)
+        N :: (integer)
             number of points to return
 
         Returns
@@ -230,9 +231,9 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        i : (integer)
+        i :: (integer)
             start index in the buffer
-        j : (integer)
+        j :: (integer)
             end index in the buffer
 
         Returns
@@ -256,9 +257,9 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        N : (integer)
+        N :: (integer)
             number of points to return
-        M : (integer)
+        M :: (integer)
             index of the pointer
 
         Returns
