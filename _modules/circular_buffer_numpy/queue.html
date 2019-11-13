@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>circular_buffer_numpy.queue &mdash; Numpy array circular buffer 0.0.7 documentation</title>
+  <title>circular_buffer_numpy.queue &mdash; Numpy array circular buffer 0.0.7.post1+gacaeefe documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.0.7
+                0.0.7.post1+gacaeefe
               </div>
             
           
@@ -200,6 +200,23 @@
 <div class="viewcode-block" id="Queue.enqueue"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue.enqueue">[docs]</a>    <span class="k">def</span> <span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        add (store) an item to the queue.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data :: (numpy array)</span>
+<span class="sd">            data to append</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; queue = circular_buffer_numpy.queue.Queue(shape = (10,4)</span>
+<span class="sd">        &gt;&gt;&gt; from numpy.random import random</span>
+<span class="sd">        &gt;&gt;&gt; rand_arr = random(size=(6,4))</span>
+<span class="sd">        &gt;&gt;&gt; queue.enqueue(rand_arr)</span>
+<span class="sd">        &gt;&gt;&gt; queue.length</span>
+<span class="sd">        6</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">zeros</span>
         <span class="k">if</span> <span class="s1">&#39;tuple&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="ow">or</span> <span class="s1">&#39;lst&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>

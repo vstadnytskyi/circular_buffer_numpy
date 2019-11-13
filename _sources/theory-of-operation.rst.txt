@@ -10,6 +10,13 @@ Buffers are widely used in the computer architecture to allow efficient data sto
 
 This project uses numpy array data structures to provide a fast and flexible data handling for streams of data. It is common to have a data acquisition unit that measures at a certain rate. The data from the internal buffer need to be read efficiently and should be available to other programs\devices at later time. The numpy array data structure in Python allows to preallocate memory at the initialization and the data handling from now on is extremely efficient.
 
+Shape
+-----
+
+The shape of the circular buffer and queue objects follows the numpy convention. The first element in the shape (fast axis) defines the circular length of the buffer and the rest define the dimensionality of the data stored.
+
+Example:
+the shape circular buffer with the shape = (100,2,2) has the length of 100 and datapoint_shape of (2,2)
 
 Design Specification
 ------------------------

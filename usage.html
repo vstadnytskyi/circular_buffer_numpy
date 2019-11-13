@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Usage &mdash; Numpy array circular buffer 0.0.7 documentation</title>
+  <title>Usage &mdash; Numpy array circular buffer 0.0.7.post1+gacaeefe documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.0.7
+                0.0.7.post1+gacaeefe
               </div>
             
           
@@ -189,7 +189,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>data: (numpy array)</strong></dt><dd><p>data to append</p>
+<dt><strong>data :: (numpy array)</strong></dt><dd><p>data to append</p>
 </dd>
 </dl>
 </dd>
@@ -212,7 +212,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>length:  (integer)</strong></dt><dd><p>new length of the buffer</p>
+<dt><strong>length ::  integer</strong></dt><dd><p>new length of the buffer</p>
 </dd>
 </dl>
 </dd>
@@ -389,7 +389,7 @@ The parameter clear can be used to</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>clear:  (boolean)</strong></dt><dd><p>force clearing the buffer</p>
+<dt><strong>clear ::  (boolean)</strong></dt><dd><p>force clearing the buffer</p>
 </dd>
 </dl>
 </dd>
@@ -471,6 +471,23 @@ return N points from the back and move back_pointer</p>
 <dt id="circular_buffer_numpy.queue.Queue.enqueue">
 <code class="sig-name descname">enqueue</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.enqueue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.enqueue" title="Permalink to this definition">¶</a></dt>
 <dd><p>add (store) an item to the queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data :: (numpy array)</strong></dt><dd><p>data to append</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">circular_buffer_numpy</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="k">import</span> <span class="n">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rand_arr</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">rand_arr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">length</span>
+<span class="go">6</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
