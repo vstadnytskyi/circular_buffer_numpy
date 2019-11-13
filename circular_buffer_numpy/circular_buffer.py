@@ -69,8 +69,6 @@ class CircularBuffer(object):
         self.__info__ = "Server RingBuffer"
         self.name = 'circular buffer server'
         self.type = 'server'
-        self.packet_length = packet_length
-        self.datapoint_shape = shape[1:]
 
         if 'float' in dtype:
             self.buffer = zeros(shape, dtype=dtype) * nan
@@ -83,7 +81,7 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        data: (numpy array)
+        data :: (numpy array)
             data to append
 
         Returns
@@ -112,7 +110,7 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        clear:  (boolean)
+        clear ::  (boolean)
             force clearing the buffer
 
         Returns
@@ -138,7 +136,7 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        length:  (integer)
+        length ::  integer
             new length of the buffer
 
         Returns
@@ -155,8 +153,7 @@ class CircularBuffer(object):
         """
         from numpy import zeros, nan, copy
         old_buffer = self.get_all()
-        datapoint_shape = self.datapoint_shape
-        new_length = [length] + list(datapoint_shape)
+        new_length = [length] + list(data_shape)
         self.buffer = zeros(shape=new_length, dtype=self.dtype) * nan
         self.append(old_buffer)
 

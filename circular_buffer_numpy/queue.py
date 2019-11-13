@@ -44,6 +44,23 @@ class Queue(object):
     def enqueue(self, data):
         """
         add (store) an item to the queue.
+
+        Parameters
+        ----------
+        data :: (numpy array)
+            data to append
+
+        Returns
+        -------
+
+        Examples
+        --------
+        >>> queue = circular_buffer_numpy.queue.Queue(shape = (10,4)
+        >>> from numpy.random import random
+        >>> rand_arr = random(size=(6,4))
+        >>> queue.enqueue(rand_arr)
+        >>> queue.length
+        6
         """
         from numpy import zeros
         if 'tuple' in str(type(data)) or 'lst' in str(type(data)):

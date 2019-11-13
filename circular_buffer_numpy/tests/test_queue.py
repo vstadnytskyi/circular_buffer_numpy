@@ -22,13 +22,13 @@ from ..queue import Queue
 class QueueTest(unittest.TestCase):
 
     def test_queue_end(self):
-        queue = Queue(shape=(100, 2))
+        queue = Queue(shape=(100, 2, 2, 2))
         self.assertEqual(queue.rear, 0)
 
     def test_1(self):
         from numpy import std, random
-        queue = Queue(shape=(100, 2))
-        data = random.randint(1024, size=(5, 2))
+        queue = Queue(shape=(100, 2, 2, 2))
+        data = random.randint(1024, size=(5, 2, 2, 2))
         queue.enqueue(data)
         self.assertEqual(queue.length, 5)
         self.assertEqual(queue.rear, 5)
@@ -39,23 +39,32 @@ class QueueTest(unittest.TestCase):
 
     def test_attributes(self):
         from numpy import random
-        queue = Queue(shape=(100, 2), dtype='int16')
-        data = random.randint(1024, size=(5, 2))
+        queue = Queue(shape=(100, 2, 3, 4), dtype='int16')
+        data = random.randint(1024, size=(5, 2, 3, 4))
         self.assertEqual(queue.isempty, True)
         queue.enqueue(data)
         self.assertEqual(queue.length, 5)
         self.assertEqual(queue.rear, 5)
-        self.assertEqual(queue.shape, (100, 2))
-        self.assertEqual(queue.size, 100*2)
+        self.assertEqual(queue.shape, (100, 2, 3, 4))
+        self.assertEqual(queue.size, 100*2*3*4)
         self.assertEqual(queue.get_dtype, 'int16')
         self.assertEqual(queue.isfull, False)
         self.assertEqual(queue.isempty, False)
 
     def test_reshape(self):
-        queue = Queue(shape=(100, 2), dtype='int16')
-        queue.reshape(shape=(50, 2), dtype='float64')
+        queue = Queue(shape=(100, 2, 3, 4), dtype='int16')
+        queue.reshape(shape=(50, 2, 3, 4), dtype='float64')
         self.assertEqual(queue.length, 0)
         self.assertEqual(queue.rear, 0)
-        self.assertEqual(queue.shape, (50, 2))
-        self.assertEqual(queue.size, 50*2)
+        self.assertEqual(queue.shape, (50, 2, 3, 4))
+        self.assertEqual(queue.size, 50*2*3*4)
+        self.assertEqual(queue.get_dtype, 'float64')
+
+    def test_loop_around(self):
+        queue = Queue(shape=(100, 2, 3, 4), dtype='int16')
+        queue.reshape(shape=(50, 2, 3, 4), dtype='float64')
+        self.assertEqual(queue.length, 0)
+        self.assertEqual(queue.rear, 0)
+        self.assertEqual(queue.shape, (50, 2, 3, 4))
+        self.assertEqual(queue.size, 50*2*3*4)
         self.assertEqual(queue.get_dtype, 'float64')
