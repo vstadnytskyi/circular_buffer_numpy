@@ -1,6 +1,14 @@
-language: python
+language:
+  - python
+os:
+  - windows
+  - linux
+  - osx
 python:
+  - 2.7
   - 3.6
+  - 3.7
+  - 3.8
 cache:
   directories:
     - $HOME/.cache/pip

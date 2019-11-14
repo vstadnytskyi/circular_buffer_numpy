@@ -89,11 +89,11 @@ class Queue(object):
 
         Parameters
         ----------
-        N (integer)
+        N :: integer
 
         Returns
         -------
-        array (numpy array)
+        array :: numpy array
 
         Examples
         --------
@@ -124,20 +124,57 @@ class Queue(object):
     @property
     def isfull(self):
         """
-        boolean: Checks if the queue is full.
+        Checks if the queue is full.
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+        flag :: boolean
+
+        Examples
+        --------
+        >>> queue = Queue()
+        >>> queue.isfull()
+            False
         """
         return self.length >= self.shape[0]
 
     @property
     def isempty(self):
         """
-        boolean: Checks if the queue is empty.
+        Checks if the queue is empty.
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+        flag :: boolean
+
+        Examples
+        --------
+        >>> queue = Queue()
+        >>> queue.isempty()
+            True
         """
         return self.length == 0
 
     def reset(self):
         """
         resets the queue by setting front and back equal to 0.
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+
+        Examples
+        --------
+        >>> queue = Queue()
+        >>> queue.reset()
         """
         self.rear = 0  # the last written element
         self.length = 0  # the last read element
@@ -146,6 +183,23 @@ class Queue(object):
         """
         reshapes buffer but also resets it. Takes two parameters as input, shape and dtype.
         dtype atribute can be passed if dtype of the queue needs changes
+
+        Parameters
+        ----------
+        shape :: tuple
+            new shape of the queue
+        dtype :: numpy datatype string
+            new data type
+
+        Returns
+        -------
+
+        Examples
+        --------
+        >>> queue = Queue(shape = (100,2))
+        >>> queue.reshape(shape = (1000,2))
+        >>> queue.shape
+            (1000,2)
         """
         from numpy import zeros, nan
         if dtype is None:
@@ -154,8 +208,7 @@ class Queue(object):
             self.buffer = zeros(shape, dtype=dtype) * nan
         else:
             self.buffer = zeros(shape, dtype=dtype)
-        self.rear = 0  # the end of the quequ, where new date will be enquequ.
-        self.length = 0  # length defined as size of the second axis
+        self.reset()
 
     @property
     def size(self):

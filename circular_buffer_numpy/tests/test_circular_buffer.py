@@ -71,16 +71,16 @@ class QueueTest(unittest.TestCase):
     def test_vector_append(self):
         from ..circular_buffer import CircularBuffer
         from numpy import random, sum, zeros, concatenate
-        buffer = CircularBuffer(shape = (1000,3))
-        vec1 = zeros((1,3))
-        vec2 = zeros((1,3))
-        vec1[0,0] = 0.0
-        vec1[0,1] = 1.0
-        vec1[0,2] = 2.0
+        buffer = CircularBuffer(shape=(1000, 3))
+        vec1 = zeros((1, 3))
+        vec2 = zeros((1, 3))
+        vec1[0, 0] = 0.0
+        vec1[0, 1] = 1.0
+        vec1[0, 2] = 2.0
         buffer.append(vec1)
-        vec2[0,0] = 3.0
-        vec2[0,1] = 4.0
-        vec2[0,2] = 5.0
+        vec2[0, 0] = 3.0
+        vec2[0, 1] = 4.0
+        vec2[0, 2] = 5.0
         buffer.append(vec2)
-        assert_array_equal(buffer.get_last_value(),vec2)
-        assert_array_equal(buffer.get_last_N(2),concatenate((vec1,vec2)))
+        assert_array_equal(buffer.get_last_value(), vec2)
+        assert_array_equal(buffer.get_last_N(2),concatenate((vec1, vec2)))
