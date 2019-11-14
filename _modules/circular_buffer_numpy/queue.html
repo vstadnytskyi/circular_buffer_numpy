@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>circular_buffer_numpy.queue &mdash; Numpy array circular buffer 0.0.7.post2+g828bbf4 documentation</title>
+  <title>circular_buffer_numpy.queue &mdash; Numpy array circular buffer 0.0.7.post3+g8a6bbd6 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.0.7.post2+g828bbf4
+                0.0.7.post3+g8a6bbd6
               </div>
             
           
@@ -245,11 +245,11 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        N (integer)</span>
+<span class="sd">        N :: integer</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        array (numpy array)</span>
+<span class="sd">        array :: numpy array</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
@@ -280,20 +280,57 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">isfull</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        boolean: Checks if the queue is full.</span>
+<span class="sd">        Checks if the queue is full.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        flag :: boolean</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; queue = Queue()</span>
+<span class="sd">        &gt;&gt;&gt; queue.isfull()</span>
+<span class="sd">            False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">isempty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        boolean: Checks if the queue is empty.</span>
+<span class="sd">        Checks if the queue is empty.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        flag :: boolean</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; queue = Queue()</span>
+<span class="sd">        &gt;&gt;&gt; queue.isempty()</span>
+<span class="sd">            True</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">0</span>
 
 <div class="viewcode-block" id="Queue.reset"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        resets the queue by setting front and back equal to 0.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; queue = Queue()</span>
+<span class="sd">        &gt;&gt;&gt; queue.reset()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rear</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># the last written element</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># the last read element</span></div>
@@ -302,6 +339,23 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        reshapes buffer but also resets it. Takes two parameters as input, shape and dtype.</span>
 <span class="sd">        dtype atribute can be passed if dtype of the queue needs changes</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        shape :: tuple</span>
+<span class="sd">            new shape of the queue</span>
+<span class="sd">        dtype :: numpy datatype string</span>
+<span class="sd">            new data type</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; queue = Queue(shape = (100,2))</span>
+<span class="sd">        &gt;&gt;&gt; queue.reshape(shape = (1000,2))</span>
+<span class="sd">        &gt;&gt;&gt; queue.shape</span>
+<span class="sd">            (1000,2)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">zeros</span><span class="p">,</span> <span class="n">nan</span>
         <span class="k">if</span> <span class="n">dtype</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -310,8 +364,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span> <span class="o">*</span> <span class="n">nan</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rear</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># the end of the quequ, where new date will be enquequ.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># length defined as size of the second axis</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
