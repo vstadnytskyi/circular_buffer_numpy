@@ -70,9 +70,10 @@ env:
 
 install:
   # Install this package and the packages listed in requirements.txt.
-  - pip install .
+  - pip3 install --upgrade pip
+  - pip3 install . #pip install --upgrade pip
   # Install extra requirements for running tests and building docs.
-  - pip install -r requirements-dev.txt
+  - pip3 install -r requirements-dev.txt
 
 script:
   - coverage run -m pytest  # Run the tests and check for test coverage.
