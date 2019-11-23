@@ -50,24 +50,6 @@ jobs:
         - pip3 install --upgrade pytest
       env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
 
-notifications:
-  email: false
-cache:
-  directories:
-    - $HOME/.cache/pip
-    - $HOME/.ccache  # https://github.com/travis-ci/travis-ci/issues/5853
-
-install:
-  # Install this package and the packages listed in requirements.txt.
-  - pip3 install --upgrade pip
-  - pip3 install . #pip install --upgrade pip
-  # Install extra requirements for running tests and building docs.
-  - pip3 install -r requirements-dev.txt
-env:
-  global:
-    # Doctr deploy key for vstadnytskyi/circular_buffer_numpy
-    - secure: "Q6FeIJaBuTT7kN1FXDHqtpWpt+cXzDcRdWE6BOTmcqZr7HurzmCvsS8VZoz0aFGFIkVcsh8vck3z61PYgHu3D/gyP6YJjPUqyXVSxFCfKTcYnMA6DTQhXxPVcPuWN08bAlyS+LwuugOtqKKRkYpssH3/QS74jEgkbpKv0zyIfE7DdbvdxXjsR6zM9ivPRQPDYOdDBfOTGB0/vI249XNkw6O1HUstgeBNCX4aA2l2G3eqYkHPeD2KRS/I26HEBB2h10ux6wjAAetmMSIyae7WX0oQlo8W/GNGxSUmyZ2Q7Tx1tr8XSDy19ZpAfLIkbtW4LAtgFj5TJk9cHSJrCK3KAzEgkUoEKPI2DSafY+NuiR0HrTwyLpZwRTj1M5g8l3Zzg6H5et5nHPBrck8n3CR40CTDLuCEWzakpQhfqGKrDH/43HUJuUZJp83GLqjU8BkcxTBfmHJ3A384kg/iflZAnu9p2y09XzSmhttdsmWr2AczFiDapFq5uln15daZse3KVP75RNQzAVYU8RWVufW93NxZduYZJ4g3q1OgSzxsaW0PoVN6TKJ4qoyoBslN2XIjX2wLAwojLI8jNYWte+tfGFPOB4HwbfEKtypAIFbRb0ihTJOK0281MaO3W7qvDm4V75J0CKVcqpfA0XgKHDQbyqMDDFZi3KMQ0oyGkwe6cyQ="
-
 install:
   # Install this package and the packages listed in requirements.txt.
   - pip3 install --upgrade pip
@@ -81,3 +63,15 @@ script:
   - codecov  # Upload the report to codecov.
   #turn flake8 on when all formating issues are fixed and understood.
   # - flake8  # Enforce code style ('relaxed' line length limit is set in .flake8 config file).
+
+notifications:
+  email: false
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/.ccache  # https://github.com/travis-ci/travis-ci/issues/5853
+
+env:
+  global:
+    # Doctr deploy key for vstadnytskyi/circular_buffer_numpy
+    - secure: "Q6FeIJaBuTT7kN1FXDHqtpWpt+cXzDcRdWE6BOTmcqZr7HurzmCvsS8VZoz0aFGFIkVcsh8vck3z61PYgHu3D/gyP6YJjPUqyXVSxFCfKTcYnMA6DTQhXxPVcPuWN08bAlyS+LwuugOtqKKRkYpssH3/QS74jEgkbpKv0zyIfE7DdbvdxXjsR6zM9ivPRQPDYOdDBfOTGB0/vI249XNkw6O1HUstgeBNCX4aA2l2G3eqYkHPeD2KRS/I26HEBB2h10ux6wjAAetmMSIyae7WX0oQlo8W/GNGxSUmyZ2Q7Tx1tr8XSDy19ZpAfLIkbtW4LAtgFj5TJk9cHSJrCK3KAzEgkUoEKPI2DSafY+NuiR0HrTwyLpZwRTj1M5g8l3Zzg6H5et5nHPBrck8n3CR40CTDLuCEWzakpQhfqGKrDH/43HUJuUZJp83GLqjU8BkcxTBfmHJ3A384kg/iflZAnu9p2y09XzSmhttdsmWr2AczFiDapFq5uln15daZse3KVP75RNQzAVYU8RWVufW93NxZduYZJ4g3q1OgSzxsaW0PoVN6TKJ4qoyoBslN2XIjX2wLAwojLI8jNYWte+tfGFPOB4HwbfEKtypAIFbRb0ihTJOK0281MaO3W7qvDm4V75J0CKVcqpfA0XgKHDQbyqMDDFZi3KMQ0oyGkwe6cyQ="
