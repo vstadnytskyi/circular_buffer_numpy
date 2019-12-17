@@ -66,8 +66,8 @@ The numerical output :: python
      1.650482488999998e-05 per write and 1.2904178099999797e-06 per read of 10x100 array
      0.00013166361600000016 per write and 1.2773896999998869e-06 per read of 100x100 array
      0.0012954091400000003 per write and 1.2730259999997885e-06 per read of 1000x100 array
-     0.013044410029999974 per write and 1.3796100000007528e-06 per read of 10000x100 array
-     1.2233516567000002e-05 per write and 1.455322498000001e-06 per read of 1x1000 array
+     0.013044410029999974 per write and 1.377e-06 per read of 10000x100 array
+     1.2233516567000002e-05 per write and 1.455e-06 per read of 1x1000 array
      0.00014691199192 per write and 1.2784705600000024e-06 per read of 10x1000 array
      0.001376928726700001 per write and 1.3089801000006674e-06 per read of 100x1000 array
      0.012413041053 per write and 1.5748430000002146e-06 per read of 1000x1000 array

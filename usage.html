@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Usage &mdash; Numpy array circular buffer 0.0.7.post13+gc7eb0f8 documentation</title>
+  <title>Usage &mdash; Numpy array circular buffer 0.0.7.post14+gf68b0ac documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.0.7.post13+gc7eb0f8
+                0.0.7.post14+gf68b0ac
               </div>
             
           
@@ -168,27 +168,27 @@
 <h2>The Circular Buffer Class<a class="headerlink" href="#the-circular-buffer-class" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">circular_buffer_numpy.circular_buffer</span> <span class="kn">import</span> <span class="n">CircularBuffer</span>
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="nb">buffer</span> <span class="o">=</span> <span class="n">CircularBuffer</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">CircularBuffer</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s1">&#39;float64&#39;</span><span class="p">)</span>
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="nb">buffer</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">buffer</span><span class="o">.</span><span class="n">shape</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="nb">buffer</span><span class="o">.</span><span class="n">length</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">buffer</span><span class="o">.</span><span class="n">length</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="mi">100</span>
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="nb">buffer</span><span class="o">.</span><span class="n">data_shape</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">buffer</span><span class="o">.</span><span class="n">data_shape</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="nb">buffer</span><span class="o">.</span><span class="n">pointer</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">buffer</span><span class="o">.</span><span class="n">pointer</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="o">-</span><span class="mi">1</span>
 
 <span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">zeros</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="nb">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="nb">buffer</span><span class="o">.</span><span class="n">pointer</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">buffer</span><span class="o">.</span><span class="n">pointer</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="mi">9</span>
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="nb">buffer</span><span class="o">.</span><span class="n">get_last_value</span><span class="p">()</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">buffer</span><span class="o">.</span><span class="n">get_last_value</span><span class="p">()</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span>
 <span class="n">array</span><span class="p">([[[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
          <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
@@ -225,8 +225,8 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">buffer</span> <span class="o">=</span> <span class="n">circular_buffer_numpy</span><span class="o">.</span><span class="n">circular_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="k">import</span> <span class="n">random</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">buffer</span> <span class="o">=</span> <span class="n">circular_buffer_numpy</span><span class="o">.</span><span class="n">circular_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">random</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rand_arr</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">buffer</span><span class="o">.</span><span class="n">apppend</span><span class="p">(</span><span class="n">rand_arr</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">buffer</span><span class="o">.</span><span class="n">pointer</span>
@@ -248,7 +248,7 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">buffer</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">buffer</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">buffer</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(10,4)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">buffer</span><span class="o">.</span><span class="n">change_length</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
@@ -299,7 +299,7 @@ The packet pointer can be a float number. It serves as an indaction something wa
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">get_N</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">get_N</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -317,7 +317,7 @@ last value is the last collected.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -347,7 +347,7 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">get_i_j</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">get_i_j</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -370,7 +370,7 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">get_last_N</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">get_last_N</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -387,7 +387,7 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">get_last_value</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">get_last_value</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -425,7 +425,7 @@ The parameter clear can be used to</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -486,7 +486,7 @@ return N points from the back and move back_pointer</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">Queue</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">Queue</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -510,8 +510,8 @@ return N points from the back and move back_pointer</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">circular_buffer_numpy</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="k">import</span> <span class="n">random</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">circular_buffer_numpy</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">random</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rand_arr</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">rand_arr</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">length</span>
@@ -538,7 +538,7 @@ return N points from the back and move back_pointer</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">isempty</span><span class="p">()</span>
 <span class="go">    True</span>
 </pre></div>
@@ -557,7 +557,7 @@ return N points from the back and move back_pointer</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">isfull</span><span class="p">()</span>
 <span class="go">    False</span>
 </pre></div>
@@ -585,7 +585,7 @@ The parameter clear can be used to</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">circual_buffer</span><span class="o">.</span><span class="n">Queue</span><span class="o">.</span><span class="n">peek_N</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">circual_buffer</span><span class="o">.</span><span class="n">Queue</span><span class="o">.</span><span class="n">peek_N</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -618,7 +618,7 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 <code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>resets the queue by setting front and back equal to 0.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -640,7 +640,7 @@ dtype atribute can be passed if dtype of the queue needs changes</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">    (1000,2)</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>circular_buffer_numpy.queue &mdash; Numpy array circular buffer 0.0.7.post13+gc7eb0f8 documentation</title>
+  <title>circular_buffer_numpy.queue &mdash; Numpy array circular buffer 0.0.7.post14+gf68b0ac documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.0.7.post13+gc7eb0f8
+                0.0.7.post14+gf68b0ac
               </div>
             
           
@@ -175,7 +175,8 @@
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.0.0&#39;</span>
 
-<span class="kn">from</span> <span class="nn">logging</span> <span class="k">import</span> <span class="n">debug</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">warn</span><span class="p">,</span> <span class="n">error</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">debug</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">warn</span><span class="p">,</span> <span class="n">error</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
 
 
 <div class="viewcode-block" id="Queue"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue">[docs]</a><span class="k">class</span> <span class="nc">Queue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -185,11 +186,11 @@
 <span class="sd">    :ivar rear: initial value: 0</span>
 <span class="sd">    :ivar length: initial value: 0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        the queue has front pointer and the length.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">zeros</span><span class="p">,</span> <span class="n">nan</span>
+        <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">zeros</span><span class="p">,</span> <span class="n">nan</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rear</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># the end of the quequ, where new date will be enquequ.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="s1">&#39;float&#39;</span> <span class="ow">in</span> <span class="n">dtype</span><span class="p">:</span>
@@ -218,7 +219,7 @@
 <span class="sd">        &gt;&gt;&gt; queue.length</span>
 <span class="sd">        6</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">zeros</span>
+        <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">zeros</span>
         <span class="k">if</span> <span class="s1">&#39;tuple&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="ow">or</span> <span class="s1">&#39;lst&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
             <span class="n">arr</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
@@ -357,7 +358,7 @@
 <span class="sd">        &gt;&gt;&gt; queue.shape</span>
 <span class="sd">            (1000,2)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">zeros</span><span class="p">,</span> <span class="n">nan</span>
+        <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">zeros</span><span class="p">,</span> <span class="n">nan</span>
         <span class="k">if</span> <span class="n">dtype</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span>
         <span class="k">if</span> <span class="s1">&#39;float&#39;</span> <span class="ow">in</span> <span class="n">dtype</span><span class="p">:</span>
@@ -434,7 +435,7 @@
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; circual_buffer.Queue.peek_N()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">concatenate</span>
+        <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">concatenate</span>
         <span class="n">P</span> <span class="o">=</span> <span class="n">M</span>
         <span class="k">if</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">P</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">P</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">N</span><span class="p">:</span><span class="n">P</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
@@ -450,12 +451,12 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>  <span class="c1"># for testing purposes</span>
-    <span class="kn">from</span> <span class="nn">pdb</span> <span class="k">import</span> <span class="n">pm</span>
+    <span class="kn">from</span> <span class="nn">pdb</span> <span class="kn">import</span> <span class="n">pm</span>
     <span class="kn">import</span> <span class="nn">traceback</span>
 
-    <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+    <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
     <span class="kn">import</span> <span class="nn">logging</span>
-    <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">gettempdir</span>
+    <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">gettempdir</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">gettempdir</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;/circular_buffer.log&#39;</span><span class="p">,</span>
                         <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">: </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
 
