@@ -20,6 +20,7 @@ isempty() − Checks if the queue is empty.
 __version__ = '0.0.0'
 
 from logging import debug, info, warn, error
+import traceback
 
 
 class Queue(object):
