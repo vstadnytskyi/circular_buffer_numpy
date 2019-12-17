@@ -11,6 +11,9 @@ Numpy array circular buffer
 .. image:: https://img.shields.io/pypi/dm/circular_buffer_numpy.svg
            :target: https://pypi.org/project/circular_buffer_numpy
 
+.. image:: https://zenodo.org/badge/208356512.svg
+  :target: https://zenodo.org/badge/latestdoi/208356512
+
 Package for circular buffer numpy array
 
 * Free software: 3-clause BSD license
