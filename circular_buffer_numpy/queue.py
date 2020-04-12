@@ -17,11 +17,8 @@ peek() − Gets the element at the front of the queue without removing it. isful
 isempty() − Checks if the queue is empty.
 """
 
-__version__ = '0.0.0'
 
-from logging import debug, info, warn, error
-import traceback
-
+    from logging import debug, info, warn, error
 
 class Queue(object):
     """
@@ -80,8 +77,8 @@ class Queue(object):
                     pass
                 else:
                     self.length += 1
-        except Exception:
-            error(traceback.format_exc())
+        except Exception as err:
+            error(err)
 
     def dequeue(self, N=0):
         """
@@ -296,6 +293,7 @@ class Queue(object):
 
 if __name__ == "__main__":  # for testing purposes
     from pdb import pm
+
     import traceback
 
     from time import time
