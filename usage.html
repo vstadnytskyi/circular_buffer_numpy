@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Usage &mdash; Numpy array circular buffer 0.0.8.post1+g503c71c documentation</title>
+  <title>Usage &mdash; Numpy array circular buffer 0.0.8.post3+gf1ea908 documentation</title>
   
 
   
@@ -21,12 +21,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
-        <script type="text/javascript" src="_static/copybutton.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.0.8.post1+g503c71c
+                0.0.8.post3+gf1ea908
               </div>
             
           
@@ -199,9 +199,9 @@
          <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]]]])</span>
 </pre></div>
 </div>
-<dl class="class">
+<dl class="py class">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer">
-<em class="property">class </em><code class="sig-prename descclassname">circular_buffer_numpy.circular_buffer.</code><code class="sig-name descname">CircularBuffer</code><span class="sig-paren">(</span><em class="sig-param">shape=(100</em>, <em class="sig-param">2)</em>, <em class="sig-param">dtype='float64'</em>, <em class="sig-param">packet_length=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">circular_buffer_numpy.circular_buffer.</code><code class="sig-name descname">CircularBuffer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">shape</span><span class="o">=</span><span class="default_value">100, 2</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">'float64'</span></em>, <em class="sig-param"><span class="n">packet_length</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Description for class</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
@@ -212,9 +212,9 @@
 </ul>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.append">
-<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.append" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.append" title="Permalink to this definition">¶</a></dt>
 <dd><p>appends data to the existing circular buffer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -235,9 +235,9 @@
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.change_length">
-<code class="sig-name descname">change_length</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">length</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.change_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.change_length" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">change_length</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.change_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.change_length" title="Permalink to this definition">¶</a></dt>
 <dd><p>changes length of the buffer</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -258,30 +258,30 @@
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.data_shape">
 <em class="property">property </em><code class="sig-name descname">data_shape</code><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.data_shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>tuple: property objects that returns the shape of one data point
 (or N dimensional array) of the circular buffer</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.dtype">
 <em class="property">property </em><code class="sig-name descname">dtype</code><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.dtype" title="Permalink to this definition">¶</a></dt>
 <dd><p>dtype: property objects that returns the shape of one data point
 (or N dimensional array) of the circular buffer</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.g_packet_pointer">
 <em class="property">property </em><code class="sig-name descname">g_packet_pointer</code><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.g_packet_pointer" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns global packet pointer calculated from global pointer and packet size.
 The packet pointer can be a float number. It serves as an indaction something was not appended in packets.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.get_N">
-<code class="sig-name descname">get_N</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">N=0</em>, <em class="sig-param">M=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_N"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_N" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_N</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">N</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">M</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_N"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_N" title="Permalink to this definition">¶</a></dt>
 <dd><p>return N points before index M in the circular buffer</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -304,9 +304,9 @@ The packet pointer can be a float number. It serves as an indaction something wa
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.get_all">
-<code class="sig-name descname">get_all</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_all" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_all</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_all" title="Permalink to this definition">¶</a></dt>
 <dd><p>return entire circular buffer server in ordered way, where
 last value is the last collected.</p>
 <dl class="field-list simple">
@@ -322,9 +322,9 @@ last value is the last collected.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.get_i_j">
-<code class="sig-name descname">get_i_j</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_i_j"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_i_j" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_i_j</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">j</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_i_j"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_i_j" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns buffer between indices i and j (including index i)
 if j &lt; i, it assumes that buffer wrapped around and will give information
 accordingly.
@@ -352,9 +352,9 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.get_last_N">
-<code class="sig-name descname">get_last_N</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">N</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_last_N"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_last_N" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_last_N</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">N</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_last_N"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_last_N" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns last N entries from the known self.pointer(circular buffer pointer)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -375,9 +375,9 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.get_last_value">
-<code class="sig-name descname">get_last_value</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_last_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_last_value" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_last_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_last_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_last_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns last entry from the known. Same as self.buffer[self.pointer]</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -392,28 +392,28 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.get_length">
-<code class="sig-name descname">get_length</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_length" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_length</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_length" title="Permalink to this definition">¶</a></dt>
 <dd><p>integer: returns the length of the circular buffer along fast</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.length">
 <em class="property">property </em><code class="sig-name descname">length</code><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.length" title="Permalink to this definition">¶</a></dt>
 <dd><p>integer: returns the length of the circular buffer along fast</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.packet_pointer">
 <em class="property">property </em><code class="sig-name descname">packet_pointer</code><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.packet_pointer" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns packet pointer calculated from local pointer and packet size.
 The packet pointer can be a float number. It serves as an indaction something was not appended in packets.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.reset">
-<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">clear=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.reset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">clear</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>resets pointers to -1 (empty buffer), the full reset can be force via parameter clears
 The parameter clear can be used to</p>
 <dl class="field-list simple">
@@ -430,13 +430,13 @@ The parameter clear can be used to</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.shape">
 <em class="property">property </em><code class="sig-name descname">shape</code><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>tuple: property objects that returns the shape of the circular buffer.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.circular_buffer.CircularBuffer.size">
 <em class="property">property </em><code class="sig-name descname">size</code><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>integer: property objects that returns the size of the circular buffer.</p>
@@ -450,9 +450,9 @@ The parameter clear can be used to</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">queue</span>
 </pre></div>
 </div>
-<dl class="class">
+<dl class="py class">
 <dt id="circular_buffer_numpy.queue.Queue">
-<em class="property">class </em><code class="sig-prename descclassname">circular_buffer_numpy.queue.</code><code class="sig-name descname">Queue</code><span class="sig-paren">(</span><em class="sig-param">shape=(20</em>, <em class="sig-param">2)</em>, <em class="sig-param">dtype='float64'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">circular_buffer_numpy.queue.</code><code class="sig-name descname">Queue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">shape</span><span class="o">=</span><span class="default_value">20, 2</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">'float64'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue" title="Permalink to this definition">¶</a></dt>
 <dd><p>queue data structure implemented using numpy arrays.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
@@ -462,15 +462,15 @@ The parameter clear can be used to</p>
 </ul>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.data_shape">
 <em class="property">property </em><code class="sig-name descname">data_shape</code><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.data_shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>tuple: returns the shape of the circular buffer</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.dequeue">
-<code class="sig-name descname">dequeue</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">N=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.dequeue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.dequeue" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dequeue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">N</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.dequeue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.dequeue" title="Permalink to this definition">¶</a></dt>
 <dd><p>remove (access) an item from the queue.
 return N points from the back and move back_pointer</p>
 <dl class="field-list simple">
@@ -491,15 +491,15 @@ return N points from the back and move back_pointer</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.dtype">
 <em class="property">property </em><code class="sig-name descname">dtype</code><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.dtype" title="Permalink to this definition">¶</a></dt>
 <dd><p>dtype: returns the dtype of the circular buffer</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.enqueue">
-<code class="sig-name descname">enqueue</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.enqueue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.enqueue" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">enqueue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.enqueue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.enqueue" title="Permalink to this definition">¶</a></dt>
 <dd><p>add (store) an item to the queue.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -520,13 +520,13 @@ return N points from the back and move back_pointer</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.get_dtype">
 <em class="property">property </em><code class="sig-name descname">get_dtype</code><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.get_dtype" title="Permalink to this definition">¶</a></dt>
 <dd><p>dtype: returns the dtype of the circular buffer</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.isempty">
 <em class="property">property </em><code class="sig-name descname">isempty</code><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.isempty" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the queue is empty.</p>
@@ -545,7 +545,7 @@ return N points from the back and move back_pointer</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.isfull">
 <em class="property">property </em><code class="sig-name descname">isfull</code><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.isfull" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the queue is full.</p>
@@ -564,9 +564,9 @@ return N points from the back and move back_pointer</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.peek_N">
-<code class="sig-name descname">peek_N</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">N</em>, <em class="sig-param">M</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_N"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_N" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">peek_N</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">N</span></em>, <em class="sig-param"><span class="n">M</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_N"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_N" title="Permalink to this definition">¶</a></dt>
 <dd><p>return N points before index M in the circular buffer
 The parameter clear can be used to</p>
 <dl class="field-list simple">
@@ -590,9 +590,9 @@ The parameter clear can be used to</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.peek_i_j">
-<code class="sig-name descname">peek_i_j</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_i_j"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_i_j" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">peek_i_j</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">j</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_i_j"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_i_j" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns buffer between indices i and j (including index i)
 if j &lt; i, it assumes that buffer wrapped around and will give information
 accordingly.
@@ -601,21 +601,21 @@ are passed
 NOTE: index i cannot be -1 otherwise it will return empty array</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.peek_last">
-<code class="sig-name descname">peek_last</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_last"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_last" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">peek_last</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_last"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_last" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the element at the front of the queue without removing it.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.peek_last_N">
-<code class="sig-name descname">peek_last_N</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">N</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_last_N"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_last_N" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">peek_last_N</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">N</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_last_N"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_last_N" title="Permalink to this definition">¶</a></dt>
 <dd><p>get into last N</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.reset">
-<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.reset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>resets the queue by setting front and back equal to 0.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
@@ -624,9 +624,9 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.reshape">
-<code class="sig-name descname">reshape</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">shape</em>, <em class="sig-param">dtype=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.reshape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.reshape" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reshape</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">shape</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.reshape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.reshape" title="Permalink to this definition">¶</a></dt>
 <dd><p>reshapes buffer but also resets it. Takes two parameters as input, shape and dtype.
 dtype atribute can be passed if dtype of the queue needs changes</p>
 <dl class="field-list simple">
@@ -648,13 +648,13 @@ dtype atribute can be passed if dtype of the queue needs changes</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.shape">
 <em class="property">property </em><code class="sig-name descname">shape</code><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>tuple: returns the shape of the circular buffer</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="circular_buffer_numpy.queue.Queue.size">
 <em class="property">property </em><code class="sig-name descname">size</code><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>integer: returns the size of the circular buffer</p>
