@@ -18,7 +18,7 @@ isempty() − Checks if the queue is empty.
 """
 
 
-    from logging import debug, info, warn, error
+from logging import debug, info, warn, error
 
 class Queue(object):
     """
