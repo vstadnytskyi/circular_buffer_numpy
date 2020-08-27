@@ -17,11 +17,11 @@ peek() − Gets the element at the front of the queue without removing it. isful
 isempty() − Checks if the queue is empty.
 """
 
-<<<<<<< HEAD
+__version__ = '0.0.0'
 
-=======
->>>>>>> restoration
 from logging import debug, info, warn, error
+import traceback
+
 
 class Queue(object):
     """
@@ -35,14 +35,7 @@ class Queue(object):
         the queue has front pointer and the length.
         """
         from numpy import zeros, nan
-<<<<<<< HEAD
         self.rear = 0  # the end of the quequ, where new date will be enquequ.
-=======
-        from threading import RLock
-        self.lock = RLock()
-        self.rear = 0  # the end of the Queue, where new date will be enquequ.
-        self.global_rear = 0
->>>>>>> restoration
         self.length = 0
         if 'float' in dtype:
             self.buffer = zeros(shape, dtype=dtype) * nan
@@ -77,7 +70,6 @@ class Queue(object):
                 arr[idx, 0] = data[idx]
         else:
             arr = data
-<<<<<<< HEAD
         try:
             for j in range(arr.shape[0]):
                 if self.rear == self.shape[0]-1:
@@ -88,22 +80,8 @@ class Queue(object):
                     pass
                 else:
                     self.length += 1
-        except Exception as err:
-            error(err)
-=======
-        with self.lock:
-            try:
-                for j in range(arr.shape[0]):
-                    if self.rear == self.shape[0]-1:
-                        self.rear = -1
-                    self.buffer[self.rear+1] = arr[j]
-                    self.rear += 1
-                    self.global_rear += 1
-                    if self.length != self.shape[0]:
-                        self.length += 1
-            except Exception as err:
-                error(err)
->>>>>>> restoration
+        except Exception:
+            error(traceback.format_exc())
 
     def dequeue(self, N=0):
         """
@@ -122,7 +100,6 @@ class Queue(object):
         --------
         >>> data = circual_buffer.Queue.dequeue()
         """
-<<<<<<< HEAD
         front = self.rear
         length = self.length
         if length >= N:
@@ -144,26 +121,6 @@ class Queue(object):
     def peek_last(self):
         """Gets the element at the front of the queue without removing it."""
         raise NotImplementedError()
-=======
-        with self.lock:
-            front = self.rear
-            length = self.length
-            shape = self.shape[0]
-            if length >= N:
-                i_pointer = front - length + 1
-                if i_pointer < 0:
-                    i_pointer =  shape + (i_pointer)
-                j_pointer = front - length + N + 1
-                if j_pointer < 0:
-                    j_pointer = shape + (j_pointer)
-                data = self.peek_i_j(i_pointer, j_pointer)
-                self.length -= N
-            else:
-                data = None
-        return data
-
-    # Few more functions are required to make the above-mentioned queue operation efficient. These are −
->>>>>>> restoration
 
     @property
     def isfull(self):
@@ -221,10 +178,6 @@ class Queue(object):
         >>> queue.reset()
         """
         self.rear = 0  # the last written element
-<<<<<<< HEAD
-=======
-        self.global_rear = 0
->>>>>>> restoration
         self.length = 0  # the last read element
 
     def reshape(self, shape, dtype=None):
@@ -302,11 +255,7 @@ class Queue(object):
         if j > i:
             res = self.buffer[i:j]
         else:
-<<<<<<< HEAD
             length = self.shape[1] - i + j
-=======
-            length = self.shape[0] - (i + j)
->>>>>>> restoration
             res = self.peek_N(N=length, M=j-1)
         return res
 
@@ -335,69 +284,18 @@ class Queue(object):
         if N-1 <= P:
             result = self.buffer[P+1-N:P+1]
         else:
-<<<<<<< HEAD
             result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=1)
-=======
-            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=0)
->>>>>>> restoration
         return result
 
     def peek_last_N(self, N):
         """
-<<<<<<< HEAD
         get into last N
         """
         raise NotImplementedError()
 
-=======
-        return N points before index current rear index in the circular buffer
-        The parameter clear can be used to
-
-        Parameters
-        ----------
-        N:  (integer)
-            number of points requested before the pointer
-        M:  (integer)
-            pointer
-
-        Returns
-        -------
-        array (numpy array)
-
-        Examples
-        --------
-        >>> circual_buffer.Queue.peek_last_N()
-        """
-        from numpy import concatenate
-        P = self.rear
-        if N-1 <= P:
-            result = self.buffer[P+1-N:P+1]
-        else:
-            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=0)
-        return result
-
-    def peek_all(self):
-        """
-        peeks into the queue and return entire buffer sorted. The last entry will be the end of the queue.
-        """
-        raise NotImplementedError()
-
-    def peek_rear(self):
-        """
-        Gets the element at the rear of the queue without removing it.
-        """
-        return self.buffer[self.rear]
-
-    def peek_front(self):
-        """
-        Gets the element at the front of the queue without removing it.
-        """
-        return self.buffer[self.rear-self.length+1]
->>>>>>> restoration
 
 if __name__ == "__main__":  # for testing purposes
     from pdb import pm
-
     import traceback
 
     from time import time

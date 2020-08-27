@@ -4,31 +4,48 @@
     by Valentyn Stadnytskyi
     created: Nov 4, 2017
     last update: February, 2019
+
+    contains 2 classes: Server and Client circular buffer. Are very similar except
+
+    1.0.4 - dtype = 'float32' was replaced with 'float64' as a default data type in the server buffer.
+            This solves problem is one is trying to use epoch time.
+    1.1.0   - cathing exception in server append function in case
+                the input data has wrong format
+            - added logging
+    1.1.1   - buffer start as nan instead of 0 or 1
+                this actually caused a lot of problem with standard numpy functions
+                that do not work with nan. However, there is often a version that
+                works with nan(e.g. max -> nanmax)
+    1.1.2   - nan cannot be encoded in int array. if array is multiplied by nan
+                its' type gets converted to float
+            - fixed appending of a tuple with size (2,)
+            - added names CBserver(Circular Buffer server)
+                and CBclient(Circrula Buffer client)
+                the server and client are kept for back compatibility
+
+    1.1.3   - Added append function to the client circular buffer
+
+    1.1.4   - Added clear function to both client and server, that will clear the buffers and reset counters.
+
+    1.1.5 - fixed python 3 competability
+
 """
+
+__version__ = '1.1.8'
+
 from logging import debug, info, warn, error
 import warnings
 
-<<<<<<< HEAD
 
 class CircularBuffer(object):
     """
     Description for class
 
-
-=======
-class CircularBuffer(object):
-    """
-    Description for class
->>>>>>> restoration
     :ivar pointer: initial value: -1
     :ivar g_pointer: initial value: -1
     :ivar packet_length: initial value 1
     """
-<<<<<<< HEAD
     pointer = -1 # unning current pointer value
-=======
-    pointer = -1 # running current pointer value
->>>>>>> restoration
     g_pointer = -1 # running current global_pointer value
 
     def __init__(self, shape=(100, 2), dtype='float64', packet_length=1):
@@ -52,10 +69,6 @@ class CircularBuffer(object):
         self.__info__ = "Server RingBuffer"
         self.name = 'circular buffer server'
         self.type = 'server'
-<<<<<<< HEAD
-=======
-        self.packet_length = packet_length
->>>>>>> restoration
 
         if 'float' in dtype:
             self.buffer = zeros(shape, dtype=dtype) * nan
