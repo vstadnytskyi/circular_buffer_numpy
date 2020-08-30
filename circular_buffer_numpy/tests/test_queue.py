@@ -25,23 +25,6 @@ class QueueTest(unittest.TestCase):
         queue = Queue(shape=(100, 2, 2, 2))
         self.assertEqual(queue.rear, 0)
 
-    def test_1(self):
-        from numpy import std, random
-        queue = Queue(shape=(100, 2, 2, 2))
-        data = random.randint(1024, size=(5, 2, 2, 2))
-        queue.enqueue(data)
-        self.assertEqual(queue.length, 5)
-        self.assertEqual(queue.rear, 5)
-        queue.enqueue(data)
-        dequeue_data = queue.dequeue(N=3)
-        self.assertEqual(queue.length, 7)
-<<<<<<< HEAD
-        self.assertEqual(std(dequeue_data), std(data[:3]))
-=======
-        self.assertEqual(dequeue_data.shape, data[-3:].shape)
-        self.assertEqual(std(dequeue_data), std(data[-3:]))
->>>>>>> restoration
-
     def test_attributes(self):
         from numpy import random
         queue = Queue(shape=(100, 2, 3, 4), dtype='int16')
@@ -73,8 +56,6 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.shape, (50, 2, 3, 4))
         self.assertEqual(queue.size, 50*2*3*4)
         self.assertEqual(queue.get_dtype, 'float64')
-<<<<<<< HEAD
-=======
 
     def test_peeks(self):
         queue = Queue(shape=(10, 2, 3, 4), dtype='int16')
@@ -98,4 +79,29 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.rear, 5)
         self.assertEqual(queue.global_rear, 25)
         self.assertEqual((dequeue_data == arr_rand[-10:]).all(), True)
->>>>>>> restoration
+
+    def test_dequeue(self):
+        from numpy import random
+        queue = Queue(shape=(11, 2, 3, 4), dtype='int16')
+        for i in range(100):
+            arr_in = random.randint(4096,size = (2,2,3,4))
+            queue.enqueue(arr_in)
+            arr_out = queue.dequeue(2)
+            self.assertEqual((arr_in==arr_out).all(), True)
+            self.assertEqual(queue.length,0)
+            self.assertEqual(queue.global_rear,(i+1)*2)
+            self.assertEqual(queue.rear,2*(i+1)-int(2*(i+1)/11)*11)
+
+
+    def test_1(self):
+        from numpy import std, random
+        queue = Queue(shape=(100, 2, 2, 2))
+        data = random.randint(0,1024, size=(5, 2, 2, 2))
+        queue.enqueue(data)
+        self.assertEqual(queue.length, 5)
+        self.assertEqual(queue.rear, 5)
+        queue.enqueue(data)
+        dequeue_data = queue.dequeue(N=3)
+        self.assertEqual(queue.length, 7)
+        self.assertEqual(dequeue_data.shape, data[:3].shape)
+        self.assertEqual(std(dequeue_data), std(data[:3]))

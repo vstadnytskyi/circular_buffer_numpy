@@ -8,27 +8,13 @@
 from logging import debug, info, warn, error
 import warnings
 
-<<<<<<< HEAD
-
 class CircularBuffer(object):
     """
-    Description for class
-
-
-=======
-class CircularBuffer(object):
-    """
-    Description for class
->>>>>>> restoration
     :ivar pointer: initial value: -1
     :ivar g_pointer: initial value: -1
     :ivar packet_length: initial value 1
     """
-<<<<<<< HEAD
-    pointer = -1 # unning current pointer value
-=======
     pointer = -1 # running current pointer value
->>>>>>> restoration
     g_pointer = -1 # running current global_pointer value
 
     def __init__(self, shape=(100, 2), dtype='float64', packet_length=1):
@@ -52,10 +38,7 @@ class CircularBuffer(object):
         self.__info__ = "Server RingBuffer"
         self.name = 'circular buffer server'
         self.type = 'server'
-<<<<<<< HEAD
-=======
         self.packet_length = packet_length
->>>>>>> restoration
 
         if 'float' in dtype:
             self.buffer = zeros(shape, dtype=dtype) * nan
