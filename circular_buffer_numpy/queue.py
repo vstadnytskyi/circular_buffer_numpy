@@ -23,7 +23,7 @@ class Queue(object):
     """
     queue data structure implemented using numpy arrays.
 
-    :ivar rear: initial value: 0
+    :ivar rear: initial value: -1
     :ivar length: initial value: 0
     """
     def __init__(self, shape=(20, 2), dtype='float64'):
@@ -74,11 +74,11 @@ class Queue(object):
         with self.lock:
             try:
                 for j in range(arr.shape[0]):
-                    if self.rear == self.shape[0]-1:
-                        self.rear = -1
-                    self.buffer[self.rear+1] = arr[j]
                     self.rear += 1
                     self.global_rear += 1
+                    if self.rear == self.shape[0]:
+                        self.rear = 0
+                    self.buffer[self.rear] = arr[j]
                     if self.length != self.shape[0]:
                         self.length += 1
             except Exception as err:
@@ -103,14 +103,14 @@ class Queue(object):
         >>> data = circual_buffer.Queue.dequeue()
         """
         with self.lock:
-            front = self.rear
+            rear = self.rear
             length = self.length
             shape = self.shape[0]
             if length >= N:
-                i_pointer = front - length + 1
+                i_pointer = rear - length + 1
                 if i_pointer < 0:
                     i_pointer =  shape + (i_pointer)
-                j_pointer = front - length + N + 1
+                j_pointer = rear - length + N + 1
                 if j_pointer < 0:
                     j_pointer = shape + (j_pointer)
                 data = self.peek_i_j(i_pointer, j_pointer)
@@ -260,8 +260,7 @@ class Queue(object):
 
     def peek_N(self, N, M):
         """
-        return N points before index M in the circular buffer
-        The parameter clear can be used to
+        return N points before index M(including) in the circular buffer
 
         Parameters
         ----------
@@ -279,25 +278,22 @@ class Queue(object):
         >>> circual_buffer.Queue.peek_N()
         """
         from numpy import concatenate
-        P = M
-        if N-1 <= P:
-            result = self.buffer[P+1-N:P+1]
+        R = M
+        if N-1 <= R:
+            result = self.buffer[R-N:R]
         else:
-            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=0)
+            result = concatenate((self.buffer[-(N-R-1):], self.buffer[:R+1]), axis=0)
 
         return result
 
     def peek_last_N(self, N):
         """
-        return N points before index current rear index in the circular buffer
-        The parameter clear can be used to
+        return last N entries
 
         Parameters
         ----------
         N:  (integer)
-            number of points requested before the pointer
-        M:  (integer)
-            pointer
+            number of points requested
 
         Returns
         -------
@@ -308,11 +304,11 @@ class Queue(object):
         >>> circual_buffer.Queue.peek_last_N()
         """
         from numpy import concatenate
-        P = self.rear
-        if N-1 <= P:
-            result = self.buffer[P+1-N:P+1]
+        R = self.rear
+        if N-1 <= R:
+            result = self.buffer[R+1-N:R+1]
         else:
-            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=0)
+            result = concatenate((self.buffer[-(N-R-1):], self.buffer[:R+1]), axis=0)
         return result
 
     def peek_all(self):

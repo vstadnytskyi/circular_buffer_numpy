@@ -13,6 +13,19 @@ This project uses numpy array data structures to provide a fast and flexible dat
 Queue
 -----
 
+Queue is an abstract data type where data is maintained in a sequence and can be modified by addition and removal of the entries. By convention, the end of the sequence at which elements are added is called the back, tail, or rear of the queue, and the end at which elements are removed is called the head or front of the queue, analogously to the words used when people line up to wait for goods or services. (read more https://en.wikipedia.org/wiki/Queue_(abstract_data_type)). The implementation of the Queue in this library uses underlying numpy array structure to insure fast and reliable data addition and removal from the queue.
+
+Definitions
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+In this section, we describe definitions of variables and their meaning.
+
+* 'rear' is a pointer at current next available cell to enqueue.
+
+* 'length' the number of entries in the queue.
+
+* 'data_shape' - the shape of the one data entry.
+
+* 'shape' - shape of the entire available queue space.
 
 Circular Buffer
 ---------------
