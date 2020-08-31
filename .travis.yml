@@ -64,6 +64,7 @@ script:
   #turn flake8 on when all formating issues are fixed and understood.
   # - flake8  # Enforce code style ('relaxed' line length limit is set in .flake8 config file).
 
+
 notifications:
   email: false
 cache:
