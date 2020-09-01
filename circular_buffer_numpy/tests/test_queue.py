@@ -160,14 +160,40 @@ class QueueTest(unittest.TestCase):
                 self.assertEqual(queue.length,queue.shape[0])
             else:
                 self.assertEqual(queue.length,j)
-
-            #self.assertEqual(queue.rear,j)
             self.assertEqual(queue.global_rear,j)
         self.assertEqual((queue.peek_N(1,0) == arr_rand[-1]).all(), True)
-        #self.assertEqual((queue.peek_N(2,0) == arr_rand[-2:]).all(), True)
+
+        self.assertEqual((queue.peek_N(2,1) == arr_rand[2]).all(), True)
 
         dequeue_data = queue.dequeue(10)
         self.assertEqual(queue.length, 0)
         self.assertEqual(queue.rear, 5)
         self.assertEqual(queue.global_rear, 25)
         self.assertEqual((dequeue_data == arr_rand[-10:]).all(), True)
+
+    def test_1(self):
+        from numpy import zeros
+        from time import sleep
+        queue = Queue(shape=(16, 2, 3), dtype='int16')
+        for i in range(40):
+            arr_in = zeros((1,2,3),dtype ='int16')+i
+            queue.enqueue(arr_in)
+            arr_out = queue.dequeue(1)
+            self.assertEqual(i,arr_out[0,0,0])
+
+        from ubcs_auxiliary.threading import new_thread
+
+        def run(queue):
+            for i in range(200):
+                from time import sleep
+                arr_in = zeros((1,2,3),dtype ='int16')+i
+                queue.enqueue(arr_in)
+                sleep(0.2)
+        new_thread(run, queue)
+        j = 0
+        while j < 99:
+            if queue.length > 0:
+                arr_out = queue.dequeue(1)
+                self.assertEqual(j,arr_out[0,0,0])
+                j+=1
+            sleep(0.03)
