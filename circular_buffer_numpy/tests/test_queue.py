@@ -13,11 +13,10 @@
 """
 
 import unittest
-
+import logging
 # from numpy.testing import assert_, assert_almost_equal, assert_equal
 
 from ..queue import Queue
-
 
 class QueueTest(unittest.TestCase):
 
@@ -100,6 +99,57 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.global_rear, 25)
         self.assertEqual((dequeue_data == arr_rand[-10:]).all(), True)
 
+    def test_peek_i_j(self):
+        #         2020-09-07 13:40:59,920 DEBUG: ======== dequeue === start ======
+        # 2020-09-07 13:40:59,921 DEBUG: rear = 2
+        # 2020-09-07 13:40:59,921 DEBUG: length = 4
+        # 2020-09-07 13:40:59,921 DEBUG: shape = 32
+        # 2020-09-07 13:40:59,921 DEBUG: N = 1
+        # 2020-09-07 13:40:59,921 DEBUG: i = 31, f = 0
+        # 2020-09-07 13:41:00,028 DEBUG: data shape = (4, 3000, 4096)
+        # 2020-09-07 13:41:00,028 DEBUG: ======== dequeue === end ======
+        from numpy import random
+        queue = Queue(shape=(10, 2, 2), dtype='int16')
+        self.assertEqual(queue.length, 0)
+        self.assertEqual(queue.rear, 0)
+        self.assertEqual(queue.shape, (10, 2, 2))
+        self.assertEqual(queue.size, 10*2*2)
+        self.assertEqual(queue.get_dtype, 'int16')
+        arr_in = random.randint(4096,size = (1,2,2))*0+1
+        for i in range(10):
+            queue.enqueue(arr_in*i)
+        self.assertEqual(queue.get_dtype, 'int16')
+        self.assertEqual(queue.peek_i_j(0,1)[0,0,0],0)
+        self.assertEqual(queue.peek_i_j(0,2)[0,0,0],0)
+
+
+    def test_peek_all(self):
+        queue = Queue(shape=(10, 2, 3, 4), dtype='int16')
+        self.assertEqual(queue.length, 0)
+        self.assertEqual(queue.rear, 0)
+        self.assertEqual(queue.shape, (10, 2, 3, 4))
+        self.assertEqual(queue.size, 10*2*3*4)
+        self.assertEqual(queue.get_dtype, 'int16')
+
+        from numpy import random
+        arr_rand = random.randint(4096,size = (25,2,3,4))
+        queue.reset()
+        j = 0
+        for i in range(25):
+            arr_rand[i][0,0,0] = i
+            queue.enqueue(arr_rand[i].reshape(1,2,3,4))
+            self.assertEqual(queue.peek_last_N(1)[0,0,0,0] ,i) 
+            j+=1
+            if j > queue.shape[0]:
+                self.assertEqual(queue.length,queue.shape[0])
+            else:
+                self.assertEqual(queue.length,j)
+        self.assertEqual((queue.peek_all() == arr_rand[15:]).all(), True)
+
+        #the queue.rear pointer has to point at empty space in the queue.
+        self.assertEqual(queue.buffer[queue.rear-1][0,0,0],i)
+        self.assertEqual(queue.peek_last_N(1)[0,0,0,0] ,i)
+
     def test_dequeue(self):
         """
         Testing dequeue operaritoin via writing and reading data from a queue multipletimes and keeping track of counters and length.
@@ -171,29 +221,63 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.global_rear, 25)
         self.assertEqual((dequeue_data == arr_rand[-10:]).all(), True)
 
-    def test_1(self):
-        from numpy import zeros
+    def test_threaded_1(self):
+        from numpy import zeros,arange,copy
         from time import sleep
-        queue = Queue(shape=(16, 2, 3), dtype='int16')
-        for i in range(40):
-            arr_in = zeros((1,2,3),dtype ='int16')+i
+        queue = Queue(shape=(4, 3000, 4096), dtype='int16')
+        for i in range(10):
+            arr_in = zeros((1,3000,4096),dtype ='int16')+i
             queue.enqueue(arr_in)
-            arr_out = queue.dequeue(1)
-            self.assertEqual(i,arr_out[0,0,0])
+            arr_out = queue.dequeue(1)[-1]
+            self.assertEqual(i,arr_out[0,0])
 
         from ubcs_auxiliary.threading import new_thread
 
         def run(queue):
-            for i in range(200):
+            for i in range(100):
                 from time import sleep
-                arr_in = zeros((1,2,3),dtype ='int16')+i
+                arr_in = zeros((1,3000,4096),dtype ='int16')+i
                 queue.enqueue(arr_in)
-                sleep(0.2)
+                sleep(0.1)
         new_thread(run, queue)
         j = 0
+        arr2 = arange(0,99)
+        arr = copy(arr2)*0
+
         while j < 99:
             if queue.length > 0:
-                arr_out = queue.dequeue(1)
-                self.assertEqual(j,arr_out[0,0,0])
+                arr_out = queue.dequeue(1)[-1]
+                self.assertEqual(j,arr_out[0,0])
+                arr[j] = arr_out[0,0]
                 j+=1
+                logging.debug(f'dequeue: {j}')
             sleep(0.03)
+
+        self.assertEqual((arr==arr2).all(),True)
+
+
+
+    def test_dequeue_async(self):
+        #from circular_buffer_numpy.queue import Queue
+        from numpy import zeros,arange,copy, random
+        from time import sleep
+        queue = Queue(shape=(16, 3000, 4096), dtype='int16')
+        from ubcs_auxiliary.threading import new_thread
+        queue.reset()
+        j = 0
+        arr2 = arange(0,499)
+        arr = copy(arr2)*0
+        for i in range(500):
+            from time import sleep
+            arr_in = random.randint(0,4096,(1,3000,4096),dtype ='int16')
+            arr_in[0,0,0] = i
+            queue.enqueue(arr_in)
+            sleep(0.2)
+            if i%5 == 0:
+                while queue.length > 0:
+                    arr_out = queue.dequeue(1)[-1]
+                    #print(j,arr_out[0,0,0])
+                    arr[j] = arr_out[0,0]
+                    #print(f'dequeue: {arr_out[0,0]}, {j}, {arr_out[0,0]==j}')
+                    self.assertEqual(arr_out[0,0],j)
+                    j+=1

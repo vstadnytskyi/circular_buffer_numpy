@@ -18,7 +18,7 @@ isempty() − Checks if the queue is empty.
 """
 
 from logging import debug, info, warn, error
-
+debug('importing queue')
 class Queue(object):
     """
     queue data structure implemented using numpy arrays.
@@ -32,7 +32,7 @@ class Queue(object):
         """
         from numpy import zeros, nan
 
-        from threading import RLock
+        from threading import RLock, Lock
         self.lock = RLock()
         self.rear = 0  # the end of the Queue, where new date will be enquequ.
         self.global_rear = 0
@@ -74,11 +74,12 @@ class Queue(object):
         with self.lock:
             try:
                 for j in range(arr.shape[0]):
+                    self.buffer[self.rear] = arr[j]
                     self.rear += 1
                     self.global_rear += 1
                     if self.rear == self.shape[0]:
                         self.rear = 0
-                    self.buffer[self.rear] = arr[j]
+
                     if self.length != self.shape[0]:
                         self.length += 1
             except Exception as err:
@@ -106,17 +107,25 @@ class Queue(object):
             rear = self.rear
             length = self.length
             shape = self.shape[0]
+            debug(f'======== dequeue === start ======')
+            debug(f'rear = {rear}')
+            debug(f'length = {length}')
+            debug(f'shape = {shape}')
+            debug(f'N = {N}')
             if length >= N:
-                i_pointer = rear - length + 1
+                i_pointer = rear - length
                 if i_pointer < 0:
                     i_pointer =  shape + (i_pointer)
-                j_pointer = rear - length + N + 1
+                j_pointer = rear - length + N
                 if j_pointer < 0:
                     j_pointer = shape + (j_pointer)
+                debug(f'i = {i_pointer}, f = {j_pointer}')
                 data = self.peek_i_j(i_pointer, j_pointer)
                 self.length -= N
             else:
                 data = None
+            debug(f'data shape = {data.shape}')
+            debug(f'======== dequeue === end ======')
         return data
 
     # Few more functions are required to make the above-mentioned queue operation efficient. These are −
@@ -305,17 +314,18 @@ class Queue(object):
         """
         from numpy import concatenate
         R = self.rear
-        if N-1 <= R:
-            result = self.buffer[R+1-N:R+1]
+        if N <= R:
+            result = self.buffer[R-N:R]
         else:
-            result = concatenate((self.buffer[-(N-R-1):], self.buffer[:R+1]), axis=0)
+            result = concatenate((self.buffer[R-N:], self.buffer[:R]), axis=0)
         return result
 
     def peek_all(self):
         """
         peeks into the queue and return entire buffer sorted. The last entry will be the end of the queue.
         """
-        raise NotImplementedError()
+        N = self.length
+        return self.peek_last_N(N)
 
     def peek_rear(self):
         """

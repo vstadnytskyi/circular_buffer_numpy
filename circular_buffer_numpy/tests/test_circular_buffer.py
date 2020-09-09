@@ -14,7 +14,7 @@
 import unittest
 from numpy.testing import assert_array_equal
 
-class QueueTest(unittest.TestCase):
+class CircularBufferTest(unittest.TestCase):
     def test_queue_end(self):
         """
         test if the default pointer in the buffer is -1.
