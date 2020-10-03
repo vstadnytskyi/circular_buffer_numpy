@@ -20,5 +20,13 @@ circular_buffer_numpy.egg-info/top_level.txt
 circular_buffer_numpy/tests/__init__.py
 circular_buffer_numpy/tests/conftest.py
 circular_buffer_numpy/tests/test_circular_buffer.py
-circular_buffer_numpy/tests/test_examples.py
 circular_buffer_numpy/tests/test_queue.py
+docs/Makefile
+docs/make.bat
+docs/source/conf.py
+docs/source/index.rst
+docs/source/installation.rst
+docs/source/min_versions.rst
+docs/source/release-history.rst
+docs/source/theory-of-operation.rst
+docs/source/usage.rst

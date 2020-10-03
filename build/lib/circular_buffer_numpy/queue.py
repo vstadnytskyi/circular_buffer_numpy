@@ -17,17 +17,13 @@ peek() − Gets the element at the front of the queue without removing it. isful
 isempty() − Checks if the queue is empty.
 """
 
-__version__ = '0.0.0'
-
 from logging import debug, info, warn, error
-import traceback
-
-
+debug('importing queue')
 class Queue(object):
     """
     queue data structure implemented using numpy arrays.
 
-    :ivar rear: initial value: 0
+    :ivar rear: initial value: -1
     :ivar length: initial value: 0
     """
     def __init__(self, shape=(20, 2), dtype='float64'):
@@ -35,7 +31,12 @@ class Queue(object):
         the queue has front pointer and the length.
         """
         from numpy import zeros, nan
-        self.rear = 0  # the end of the quequ, where new date will be enquequ.
+
+        from threading import RLock, Lock
+        self.lock = RLock()
+        self.rear = 0  # the end of the Queue, where new date will be enquequ.
+        self.global_rear = 0
+
         self.length = 0
         if 'float' in dtype:
             self.buffer = zeros(shape, dtype=dtype) * nan
@@ -70,23 +71,25 @@ class Queue(object):
                 arr[idx, 0] = data[idx]
         else:
             arr = data
-        try:
-            for j in range(arr.shape[0]):
-                if self.rear == self.shape[0]-1:
-                    self.rear = -1
-                self.buffer[self.rear+1] = arr[j]
-                self.rear = self.rear + 1
-                if self.length == self.shape[0]:
-                    pass
-                else:
-                    self.length += 1
-        except Exception:
-            error(traceback.format_exc())
+        with self.lock:
+            try:
+                for j in range(arr.shape[0]):
+                    self.buffer[self.rear] = arr[j]
+                    self.rear += 1
+                    self.global_rear += 1
+                    if self.rear == self.shape[0]:
+                        self.rear = 0
+
+                    if self.length != self.shape[0]:
+                        self.length += 1
+            except Exception as err:
+                error(err)
+
 
     def dequeue(self, N=0):
         """
         remove (access) an item from the queue.
-        return N points from the back and move back_pointer
+        return N points from the back and move rear_pointer
 
         Parameters
         ----------
@@ -100,28 +103,32 @@ class Queue(object):
         --------
         >>> data = circual_buffer.Queue.dequeue()
         """
-        front = self.rear
-        length = self.length
-        if length >= N:
-            i_pointer = front - length + 1
-            debug('i_pointer = %r' % (i_pointer))
-            if i_pointer < 0:
-                i_pointer = self.shape[1] + (i_pointer)
-            j_pointer = front - length + N + 1
-            if j_pointer < 0:
-                j_pointer = self.shape[1] + (j_pointer)
-            debug('front = %r, i = %r , j = %r' % (front, i_pointer, j_pointer))
-            data = self.peek_i_j(i_pointer, j_pointer)
-            self.length -= N
-        else:
-            data = None
+        with self.lock:
+            rear = self.rear
+            length = self.length
+            shape = self.shape[0]
+            debug(f'======== dequeue === start ======')
+            debug(f'rear = {rear}')
+            debug(f'length = {length}')
+            debug(f'shape = {shape}')
+            debug(f'N = {N}')
+            if length >= N:
+                i_pointer = rear - length
+                if i_pointer < 0:
+                    i_pointer =  shape + (i_pointer)
+                j_pointer = rear - length + N
+                if j_pointer < 0:
+                    j_pointer = shape + (j_pointer)
+                debug(f'i = {i_pointer}, f = {j_pointer}')
+                data = self.peek_i_j(i_pointer, j_pointer)
+                self.length -= N
+            else:
+                data = None
+            debug(f'data shape = {data.shape}')
+            debug(f'======== dequeue === end ======')
         return data
 
     # Few more functions are required to make the above-mentioned queue operation efficient. These are −
-    def peek_last(self):
-        """Gets the element at the front of the queue without removing it."""
-        raise NotImplementedError()
-
     @property
     def isfull(self):
         """
@@ -178,6 +185,7 @@ class Queue(object):
         >>> queue.reset()
         """
         self.rear = 0  # the last written element
+        self.global_rear = 0
         self.length = 0  # the last read element
 
     def reshape(self, shape, dtype=None):
@@ -252,17 +260,16 @@ class Queue(object):
         are passed
         NOTE: index i cannot be -1 otherwise it will return empty array
         """
+        length = self.length
         if j > i:
             res = self.buffer[i:j]
         else:
-            length = self.shape[1] - i + j
             res = self.peek_N(N=length, M=j-1)
         return res
 
     def peek_N(self, N, M):
         """
-        return N points before index M in the circular buffer
-        The parameter clear can be used to
+        return N points before index M(including) in the circular buffer
 
         Parameters
         ----------
@@ -280,22 +287,62 @@ class Queue(object):
         >>> circual_buffer.Queue.peek_N()
         """
         from numpy import concatenate
-        P = M
-        if N-1 <= P:
-            result = self.buffer[P+1-N:P+1]
+        R = M
+        if N-1 <= R:
+            result = self.buffer[R-N:R]
         else:
-            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=1)
+            result = concatenate((self.buffer[-(N-R-1):], self.buffer[:R+1]), axis=0)
+
         return result
 
     def peek_last_N(self, N):
         """
-        get into last N
+        return last N entries
+
+        Parameters
+        ----------
+        N:  (integer)
+            number of points requested
+
+        Returns
+        -------
+        array (numpy array)
+
+        Examples
+        --------
+        >>> circual_buffer.Queue.peek_last_N()
         """
-        raise NotImplementedError()
+        from numpy import concatenate
+        R = self.rear
+        if N <= R:
+            result = self.buffer[R-N:R]
+        else:
+            result = concatenate((self.buffer[R-N:], self.buffer[:R]), axis=0)
+        return result
+
+    def peek_all(self):
+        """
+        peeks into the queue and return entire buffer sorted. The last entry will be the end of the queue.
+        """
+        N = self.length
+        return self.peek_last_N(N)
+
+    def peek_rear(self):
+        """
+        Gets the element at the rear of the queue without removing it.
+        """
+        return self.buffer[self.rear]
+
+    def peek_front(self):
+        """
+        Gets the element at the front of the queue without removing it.
+        """
+        return self.buffer[self.rear-self.length+1]
 
 
 if __name__ == "__main__":  # for testing purposes
     from pdb import pm
+
     import traceback
 
     from time import time
