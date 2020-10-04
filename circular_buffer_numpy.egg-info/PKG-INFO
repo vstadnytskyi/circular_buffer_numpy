@@ -1,6 +1,6 @@
 Metadata-Version: 1.2
 Name: circular-buffer-numpy
-Version: 0.0.12.post0.dev0+gdc328af
+Version: 0.0.13.post0.dev0+g1e85201
 Summary: Package for circular buffer numpy array
 Home-page: https://github.com/vstadnytskyi/circular_buffer_numpy
 Author: Valentyn Stadnytskyi
