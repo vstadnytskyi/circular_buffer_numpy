@@ -5,8 +5,10 @@
     created: Nov 4, 2017
     last update: February, 2019
 """
+import logging
 from logging import debug, info, warn, error
 import warnings
+logging.getLogger(__name__).addHandler(logging.NullHandler())
 
 class CircularBuffer(object):
     """
@@ -66,6 +68,8 @@ class CircularBuffer(object):
         >>> buffer.pointer
         5
         """
+        if len(data.shape) == len(self.shape)-1:
+            data = data.reshape((1,data.shape[0]))
         for i in range(data.shape[0]):
             if self.pointer == self.shape[0]-1:
                 self.pointer = -1
@@ -266,6 +270,7 @@ class CircularBuffer(object):
         """
         integer: property objects that returns the size of the circular buffer.
         """
+        debug('returing size')
         return self.buffer.size
 
     @property
@@ -306,8 +311,11 @@ if __name__ == "__main__":  # for testing purposes
     from tempfile import gettempdir
     import traceback
 
+    #https://docs.python.org/3/library/logging.html#logrecord-attributes
+    from tempfile import gettempdir
     logging.basicConfig(filename=gettempdir()+'/circular_buffer_LL.log',
-                        level=logging.DEBUG, format="%(asctime)s %(levelname)s: %(message)s")
+                level=logging.DEBUG,
+                format="%(asctime)-15s|PID:%(process)-6s|%(levelname)-8s|%(name)s| module:%(module)s-%(funcName)s|message:%(message)s")   
 
     print("Circular buffer library")
     print("two classes: server and client")

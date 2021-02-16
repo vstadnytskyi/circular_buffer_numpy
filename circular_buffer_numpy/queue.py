@@ -17,7 +17,10 @@ peek() − Gets the element at the front of the queue without removing it. isful
 isempty() − Checks if the queue is empty.
 """
 
+import logging
 from logging import debug, info, warn, error
+import warnings
+logging.getLogger(__name__).addHandler(logging.NullHandler())
 debug('importing queue')
 class Queue(object):
     """
@@ -346,10 +349,10 @@ if __name__ == "__main__":  # for testing purposes
     import traceback
 
     from time import time
-    import logging
     from tempfile import gettempdir
     logging.basicConfig(filename=gettempdir()+'/circular_buffer.log',
-                        level=logging.DEBUG, format="%(asctime)s %(levelname)s: %(message)s")
+                level=logging.DEBUG,
+                format="%(asctime)-15s|PID:%(process)-6s|%(levelname)-8s|%(name)s| module:%(module)s-%(funcName)s|message:%(message)s")
 
     queue = Queue()
 
