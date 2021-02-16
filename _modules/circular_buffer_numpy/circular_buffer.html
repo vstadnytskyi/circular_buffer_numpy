@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>circular_buffer_numpy.circular_buffer &mdash; Numpy array circular buffer 0.0.15.post1+g59ddd81 documentation</title>
+  <title>circular_buffer_numpy.circular_buffer &mdash; Numpy array circular buffer 0.0.15.post2+g2bab352 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.0.15.post1+g59ddd81
+                0.0.15.post2+g2bab352
               </div>
             
           
@@ -312,6 +312,27 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_N</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
 
+<div class="viewcode-block" id="CircularBuffer.get_data"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.circular_buffer.CircularBuffer.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return all valid circular buffer entries in ordered way, where</span>
+<span class="sd">        last value is the last collected.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array (numpy array)</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; data = circual_buffer.CircularBuffer.get_data()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">g_pointer</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_N</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g_pointer</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="CircularBuffer.get_last_N"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.circular_buffer.CircularBuffer.get_last_N">[docs]</a>    <span class="k">def</span> <span class="nf">get_last_N</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns last N entries from the known self.pointer(circular buffer pointer)</span>
@@ -478,7 +499,7 @@
     <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">gettempdir</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">gettempdir</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;/circular_buffer_LL.log&#39;</span><span class="p">,</span>
                 <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
-                <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)-15s</span><span class="s2">|PID:</span><span class="si">%(process)-6s</span><span class="s2">|</span><span class="si">%(levelname)-8s</span><span class="s2">|</span><span class="si">%(name)s</span><span class="s2">| module:</span><span class="si">%(module)s</span><span class="s2">-</span><span class="si">%(funcName)s</span><span class="s2">|message:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>   
+                <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)-15s</span><span class="s2">|PID:</span><span class="si">%(process)-6s</span><span class="s2">|</span><span class="si">%(levelname)-8s</span><span class="s2">|</span><span class="si">%(name)s</span><span class="s2">| module:</span><span class="si">%(module)s</span><span class="s2">-</span><span class="si">%(funcName)s</span><span class="s2">|message:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Circular buffer library&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;two classes: server and client&quot;</span><span class="p">)</span>
