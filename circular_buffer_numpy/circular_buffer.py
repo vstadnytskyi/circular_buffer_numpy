@@ -149,6 +149,27 @@ class CircularBuffer(object):
         """
         return self.get_last_N(N=self.shape[0])
 
+    def get_data(self):
+        """
+        return all valid circular buffer entries in ordered way, where
+        last value is the last collected.
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+        array (numpy array)
+
+        Examples
+        --------
+        >>> data = circual_buffer.CircularBuffer.get_data()
+        """
+        if self.g_pointer + 1 < self.length:
+            return self.get_last_N(self.g_pointer+1)
+        else:
+            return self.get_all()
+
     def get_last_N(self, N):
         """
         returns last N entries from the known self.pointer(circular buffer pointer)
@@ -315,7 +336,7 @@ if __name__ == "__main__":  # for testing purposes
     from tempfile import gettempdir
     logging.basicConfig(filename=gettempdir()+'/circular_buffer_LL.log',
                 level=logging.DEBUG,
-                format="%(asctime)-15s|PID:%(process)-6s|%(levelname)-8s|%(name)s| module:%(module)s-%(funcName)s|message:%(message)s")   
+                format="%(asctime)-15s|PID:%(process)-6s|%(levelname)-8s|%(name)s| module:%(module)s-%(funcName)s|message:%(message)s")
 
     print("Circular buffer library")
     print("two classes: server and client")

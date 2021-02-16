@@ -84,3 +84,39 @@ class CircularBufferTest(unittest.TestCase):
         buffer.append(vec2)
         assert_array_equal(buffer.get_last_value(), vec2)
         assert_array_equal(buffer.get_last_N(2),concatenate((vec1, vec2)))
+
+
+    def test_get_data(self):
+        from ..circular_buffer import CircularBuffer
+        from numpy import random, sum, zeros, concatenate, array
+        buffer = CircularBuffer(shape=(1000, 3))
+        res_buffer = []
+
+        j = 0
+        for i in range(5):
+            vec = zeros((3,))
+            vec[0] = j
+            vec[1] = j**2
+            vec[2] = j**3
+            buffer.append(vec)
+            res_buffer.append(vec)
+            j+=1
+        assert_array_equal(array(res_buffer),buffer.get_data())
+        for i in range(555):
+            vec = zeros((3,))
+            vec[0] = j
+            vec[1] = j**2
+            vec[2] = j**3
+            buffer.append(vec)
+            res_buffer.append(vec)
+            j+=1
+        assert_array_equal(array(res_buffer),buffer.get_data())
+        for i in range(1300):
+            vec = zeros((3,))
+            vec[0] = j
+            vec[1] = j**2
+            vec[2] = j**3
+            buffer.append(vec)
+            res_buffer.append(vec)
+            j+=1
+        assert_array_equal(array(res_buffer[-1000:]),buffer.get_data())
