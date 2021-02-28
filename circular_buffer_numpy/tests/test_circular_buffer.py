@@ -102,6 +102,7 @@ class CircularBufferTest(unittest.TestCase):
             res_buffer.append(vec)
             j+=1
         assert_array_equal(array(res_buffer),buffer.get_data())
+
         for i in range(555):
             vec = zeros((3,))
             vec[0] = j
@@ -111,6 +112,8 @@ class CircularBufferTest(unittest.TestCase):
             res_buffer.append(vec)
             j+=1
         assert_array_equal(array(res_buffer),buffer.get_data())
+
+        #the 1000-long buffer spils over and overwrites existing values. The function get_data returns only
         for i in range(1300):
             vec = zeros((3,))
             vec[0] = j

@@ -12,5 +12,7 @@ Numpy array circular buffer Documentation
    installation
    theory-of-operation
    usage
+   the-circular-buffer-class-details
+   the-queue-class-details
    release-history
    min_versions
