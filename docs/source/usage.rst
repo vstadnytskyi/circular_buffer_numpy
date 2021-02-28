@@ -11,7 +11,7 @@ In this section you will:
 The Circular Buffer
 -------------------------
 
-The circular buffer is a data structure that allows you to allocate part of memory to store data, quickly append data and retrieve data. Remember that the circular buffer has limited "length" and the data is overwritten when you append more data than it can hold.
+The circular buffer is a data structure that allows you to allocate part of memory to store data, quickly append data and retrieve data. Remember that the circular buffer has limited "length" and the data is overwritten when you append more data than it can hold. The naming of the buffer class properties are taken from numpy array names, hence it should be familiar to numpy array users.
 
 First, let us import the "CircularBuffer" class and create our first circular buffer. In the example below, we create a circular buffer with "shape" 100 by 2, and 'float64' as type of stored data. The length of the buffer is 100 and each entry holds 2 values, for example (time, temperature).
 
@@ -44,32 +44,59 @@ Now, we have an instance of circular buffer named buffer. Let us explore inner p
 
 Now, we have an instance of circular buffer named buffer and we know something about. Let us explore different operation that can be performed with the buffer.
 
-First, let us create a empty array with
+First, let us create a test numpy array of with the shape corresponding to "data_shape" of the buffer. Let us make a vector of length two and populate it with two values: current time and a random number. These two numbers represent one 2D  data point (number vs time). Remember! the data point in this circular buffer can be a numpy array on its' own.
 
 .. code-block:: python
 
     In [7]: from numpy import empty, random
     In [8]: from time import time
-    In [9]: arr = empty(shape = buffer.data_shape)
-    In [10]: arr[0] = time()
-    In [11]: arr[1] = random.randint(0,4096)
+    In [9]: data_point = empty(shape = buffer.data_shape)
+    In [10]: data_point[0] = time()
+    In [11]: data_point[1] = random.randint(0,4096)
 
-First, let us create
+The "data_point" represents a typical single data entry acquired from a data acquisition device. This data can be now appened to the circular buffer. We can examine the location of the last known entry in the buffer, which is "0" in our case since we added only one data point.
 
 .. code-block:: python
     In [12]: buffer.append(arr)
-    In [14]: buffer.pointer
-    Out[15]: 9
+    In [13]: buffer.pointer
+    Out[13]: 0
+    In [14]: for i in range(10):
+                data_point[0] = time();
+                data_point[1] = random.randint(0,4096);
+                buffer.append(data_point)
 
-    In [16]: buffer.get_last_value()
-    Out[16]:
-    array([[[[0., 0., 0., 0.],
-             [0., 0., 0., 0.],
-             [0., 0., 0., 0.]],
+Next, we can examine the content of the circular buffer. There are several build in methods to get data from the buffer.
 
-            [[0., 0., 0., 0.],
-             [0., 0., 0., 0.],
-             [0., 0., 0., 0.]]]])
+* "get_data()" - returns all valid data in the buffer.
+* "get_last_N(N=5)" - returns last N entries in the circular buffer
+* "get_last_value()" - returns the very last known entry in the circular buffer
+
+.. code-block:: python
+    In [15]: buffer.get_data()
+    Out[15]:
+    array([[1.61452783e+09, 4.07500000e+03],
+           [1.61452783e+09, 1.00600000e+03],
+           [1.61452788e+09, 2.01400000e+03],
+           [1.61452788e+09, 2.02300000e+03],
+           [1.61452788e+09, 2.83000000e+03],
+           [1.61452788e+09, 7.12000000e+02],
+           [1.61452788e+09, 1.31900000e+03],
+           [1.61452788e+09, 1.40500000e+03],
+           [1.61452788e+09, 3.41600000e+03],
+           [1.61452788e+09, 2.27000000e+02],
+           [1.61452788e+09, 2.59000000e+02],
+           [1.61452788e+09, 3.69000000e+03]])
+
+     In [16]: buffer.get_last_N(5)
+     Out[16]: 
+     array([[1.61452788e+09, 1.40500000e+03],
+            [1.61452788e+09, 3.41600000e+03],
+            [1.61452788e+09, 2.27000000e+02],
+            [1.61452788e+09, 2.59000000e+02],
+            [1.61452788e+09, 3.69000000e+03]])
+
+      In [17]: buffer.get_last_value()
+      Out[17]: array([[1.61452788e+09, 3.69000000e+03]])
 
 The Queue Class
 ---------------
