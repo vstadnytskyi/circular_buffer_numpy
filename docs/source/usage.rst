@@ -57,12 +57,13 @@ First, let us create a test numpy array of with the shape corresponding to "data
 The "data_point" represents a typical single data entry acquired from a data acquisition device. This data can be now appened to the circular buffer. We can examine the location of the last known entry in the buffer, which is "0" in our case since we added only one data point.
 
 .. code-block:: python
+
     In [12]: buffer.append(arr)
     In [13]: buffer.pointer
     Out[13]: 0
     In [14]: for i in range(10):
-                data_point[0] = time();
-                data_point[1] = random.randint(0,4096);
+                data_point[0] = time()
+                data_point[1] = random.randint(0,4096)
                 buffer.append(data_point)
 
 Next, we can examine the content of the circular buffer. There are several build in methods to get data from the buffer.
@@ -72,6 +73,7 @@ Next, we can examine the content of the circular buffer. There are several build
 * "get_last_value()" - returns the very last known entry in the circular buffer
 
 .. code-block:: python
+
     In [15]: buffer.get_data()
     Out[15]:
     array([[1.61452783e+09, 4.07500000e+03],
@@ -88,7 +90,7 @@ Next, we can examine the content of the circular buffer. There are several build
            [1.61452788e+09, 3.69000000e+03]])
 
      In [16]: buffer.get_last_N(5)
-     Out[16]: 
+     Out[16]:
      array([[1.61452788e+09, 1.40500000e+03],
             [1.61452788e+09, 3.41600000e+03],
             [1.61452788e+09, 2.27000000e+02],
