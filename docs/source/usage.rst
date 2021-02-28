@@ -44,7 +44,7 @@ Now, we have an instance of circular buffer named buffer. Let us explore inner p
 
 Now, we have an instance of circular buffer named buffer and we know something about. Let us explore different operation that can be performed with the buffer.
 
-First, let us create a test numpy array of with the shape corresponding to "data_shape" of the buffer. Let us make a vector of length two and populate it with two values: current time and a random number. These two numbers represent one 2D  data point (number vs time). Remember! the data point in this circular buffer can be a numpy array on its' own.
+First, let us create a test numpy array with the shape corresponding to "data_shape" of the buffer. Let us make a vector of length two and populate it with two values: current time and a random number. These two numbers represent one 2D  data point (number vs time). Remember! the data point in this circular buffer can be a numpy array on its' own.
 
 .. code-block:: python
 
@@ -136,4 +136,4 @@ Now, we have an instance of the Queue class named "queue". Let us explore inner 
   Out[7]: 0
 
 
-The "data_point" represents a typical single data entry acquired from a data acquisition device. This data can be now appened to the circular buffer. We can examine the location of the last known entry in the buffer, which is "0" in our case since we added only one data point.
+The "data_point" represents a typical single data entry acquired from a data acquisition device. This data can be now appended to the circular buffer. We can examine the location of the last known entry in the buffer, which is "0" in our case since we added only one data point.
