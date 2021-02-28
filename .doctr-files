@@ -7,6 +7,8 @@
 ./_sources/installation.rst.txt
 ./_sources/min_versions.rst.txt
 ./_sources/release-history.rst.txt
+./_sources/the-circular-buffer-class-details.rst.txt
+./_sources/the-queue-class-details.rst.txt
 ./_sources/theory-of-operation.rst.txt
 ./_sources/usage.rst.txt
 ./_static/basic.css
@@ -58,5 +60,7 @@
 ./release-history.html
 ./search.html
 ./searchindex.js
+./the-circular-buffer-class-details.html
+./the-queue-class-details.html
 ./theory-of-operation.html
 ./usage.html

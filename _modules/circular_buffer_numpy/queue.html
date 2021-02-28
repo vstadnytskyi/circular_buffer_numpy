@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>circular_buffer_numpy.queue &mdash; Numpy array circular buffer 0.0.15.post2+g2bab352 documentation</title>
+  <title>circular_buffer_numpy.queue &mdash; Numpy array circular buffer 0.0.16.post3+g71c4aed documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.0.15.post2+g2bab352
+                0.0.16.post3+g71c4aed
               </div>
             
           
@@ -93,6 +93,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../theory-of-operation.html">Theory of Operation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../the-circular-buffer-class-details.html">The Circular Buffer Class Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../the-queue-class-details.html">The Queue Class Details</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release-history.html">Release History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../min_versions.html">Minimum Version of Python and NumPy</a></li>
 </ul>
@@ -185,7 +187,7 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
 <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;importing queue&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="Queue"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue">[docs]</a><span class="k">class</span> <span class="nc">Queue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Queue"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue">[docs]</a><span class="k">class</span> <span class="nc">Queue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    queue data structure implemented using numpy arrays.</span>
 
@@ -209,7 +211,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Queue.enqueue"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue.enqueue">[docs]</a>    <span class="k">def</span> <span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="Queue.enqueue"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.enqueue">[docs]</a>    <span class="k">def</span> <span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        add (store) an item to the queue.</span>
 
@@ -252,7 +254,7 @@
                 <span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Queue.dequeue"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue.dequeue">[docs]</a>    <span class="k">def</span> <span class="nf">dequeue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="Queue.dequeue"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.dequeue">[docs]</a>    <span class="k">def</span> <span class="nf">dequeue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        remove (access) an item from the queue.</span>
 <span class="sd">        return N points from the back and move rear_pointer</span>
@@ -335,7 +337,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">0</span>
 
-<div class="viewcode-block" id="Queue.reset"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Queue.reset"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        resets the queue by setting front and back equal to 0.</span>
 
@@ -354,7 +356,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">global_rear</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># the last read element</span></div>
 
-<div class="viewcode-block" id="Queue.reshape"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue.reshape">[docs]</a>    <span class="k">def</span> <span class="nf">reshape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Queue.reshape"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.reshape">[docs]</a>    <span class="k">def</span> <span class="nf">reshape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        reshapes buffer but also resets it. Takes two parameters as input, shape and dtype.</span>
 <span class="sd">        dtype atribute can be passed if dtype of the queue needs changes</span>
@@ -417,7 +419,7 @@
 <span class="c1"># Extra functions that are used for peeking into the queue but not reading the data.</span>
 <span class="c1"># Important for functioning of the queue</span>
 
-<div class="viewcode-block" id="Queue.peek_i_j"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue.peek_i_j">[docs]</a>    <span class="k">def</span> <span class="nf">peek_i_j</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<div class="viewcode-block" id="Queue.peek_i_j"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.peek_i_j">[docs]</a>    <span class="k">def</span> <span class="nf">peek_i_j</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns buffer between indices i and j (including index i)</span>
 <span class="sd">        if j &lt; i, it assumes that buffer wrapped around and will give information</span>
@@ -433,7 +435,7 @@
             <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_N</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">res</span></div>
 
-<div class="viewcode-block" id="Queue.peek_N"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue.peek_N">[docs]</a>    <span class="k">def</span> <span class="nf">peek_N</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
+<div class="viewcode-block" id="Queue.peek_N"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.peek_N">[docs]</a>    <span class="k">def</span> <span class="nf">peek_N</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        return N points before index M(including) in the circular buffer</span>
 
@@ -461,7 +463,7 @@
 
         <span class="k">return</span> <span class="n">result</span></div>
 
-<div class="viewcode-block" id="Queue.peek_last_N"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue.peek_last_N">[docs]</a>    <span class="k">def</span> <span class="nf">peek_last_N</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+<div class="viewcode-block" id="Queue.peek_last_N"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.peek_last_N">[docs]</a>    <span class="k">def</span> <span class="nf">peek_last_N</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        return last N entries</span>
 
@@ -486,20 +488,20 @@
             <span class="n">result</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">R</span><span class="o">-</span><span class="n">N</span><span class="p">:],</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[:</span><span class="n">R</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div>
 
-<div class="viewcode-block" id="Queue.peek_all"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue.peek_all">[docs]</a>    <span class="k">def</span> <span class="nf">peek_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Queue.peek_all"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.peek_all">[docs]</a>    <span class="k">def</span> <span class="nf">peek_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        peeks into the queue and return entire buffer sorted. The last entry will be the end of the queue.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_last_N</span><span class="p">(</span><span class="n">N</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Queue.peek_rear"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue.peek_rear">[docs]</a>    <span class="k">def</span> <span class="nf">peek_rear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Queue.peek_rear"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.peek_rear">[docs]</a>    <span class="k">def</span> <span class="nf">peek_rear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets the element at the rear of the queue without removing it.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rear</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Queue.peek_front"><a class="viewcode-back" href="../../usage.html#circular_buffer_numpy.queue.Queue.peek_front">[docs]</a>    <span class="k">def</span> <span class="nf">peek_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Queue.peek_front"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.peek_front">[docs]</a>    <span class="k">def</span> <span class="nf">peek_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets the element at the front of the queue without removing it.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
