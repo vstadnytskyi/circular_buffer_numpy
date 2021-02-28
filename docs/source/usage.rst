@@ -103,6 +103,37 @@ Next, we can examine the content of the circular buffer. There are several build
 The Queue Class
 ---------------
 
+The queue class has very similar functionality to the circular buffer class with few modifications. The valid entry in the queue can be read only once, when you retrieve the data from the queue, it is not available anymore. The class mimics performance of first in first out(FIFO) buffer.
+
 .. code-block:: python
 
-  import queue
+  In [1]: from circular_buffer_numpy.queue import Queue
+  In [2]: queue = Queue(shape = (100,2), dtype = 'float64')
+
+Now, we have an instance of the Queue class named "queue". Let us explore inner properties of the queue.
+
+  * "shape" - total shape of the underlying numpy array
+  * "length" - length of the buffer.
+  * "data_shape" - size of the individual data point.
+  * "rear" - the index in the underlying numpy array pointing at the last empty slot in the queue.
+  * "global_rear" - the global index showing how many data points have been enqueued since the creation of the instance.
+  .. code-block:: python
+
+
+  In [3]: queue.length
+  Out[3]: 0
+
+  In [4]: queue.shape
+  Out[4]: (100, 2)
+
+  In [5]: queue.data_shape
+  Out[5]: (2,)
+
+  In [6]: queue.rear
+  Out[6]: 0
+
+  In [7]: queue.global_rear
+  Out[7]: 0
+
+
+The "data_point" represents a typical single data entry acquired from a data acquisition device. This data can be now appened to the circular buffer. We can examine the location of the last known entry in the buffer, which is "0" in our case since we added only one data point.
