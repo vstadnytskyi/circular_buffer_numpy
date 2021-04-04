@@ -117,6 +117,7 @@ Now, we have an instance of the Queue class named "queue". Let us explore inner 
   * "data_shape" - size of the individual data point.
   * "rear" - the index in the underlying numpy array pointing at the last empty slot in the queue.
   * "global_rear" - the global index showing how many data points have been enqueued since the creation of the instance.
+  
   .. code-block:: python
 
 
