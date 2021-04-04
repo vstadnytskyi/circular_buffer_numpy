@@ -47,6 +47,7 @@
 ./_static/js/theme.js
 ./_static/language_data.js
 ./_static/minus.png
+./_static/plot_directive.css
 ./_static/plus.png
 ./_static/pygments.css
 ./_static/searchtools.js

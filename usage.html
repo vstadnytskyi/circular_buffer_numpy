@@ -4,15 +4,17 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Usage &mdash; Numpy array circular buffer 0.0.16.post3+g71c4aed documentation</title>
+  <title>Usage &mdash; Numpy array circular buffer 0.0.16.post6+g1bf661b documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
 
   
@@ -66,7 +68,7 @@
             
             
               <div class="version">
-                0.0.16.post3+g71c4aed
+                0.0.16.post6+g1bf661b
               </div>
             
           
@@ -170,7 +172,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="usage">
+  <section id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <p>In this section you will:</p>
 <ul class="simple">
@@ -178,7 +180,7 @@
 <li><p>Learn how to create your first queue buffer and perform simple operations with it.</p></li>
 <li><p>Learn few example on when to use circular buffer and when to use queue.</p></li>
 </ul>
-<div class="section" id="the-circular-buffer">
+<section id="the-circular-buffer">
 <h2>The Circular Buffer<a class="headerlink" href="#the-circular-buffer" title="Permalink to this headline">¶</a></h2>
 <p>The circular buffer is a data structure that allows you to allocate part of memory to store data, quickly append data and retrieve data. Remember that the circular buffer has limited “length” and the data is overwritten when you append more data than it can hold. The naming of the buffer class properties are taken from numpy array names, hence it should be familiar to numpy array users.</p>
 <p>First, let us import the “CircularBuffer” class and create our first circular buffer. In the example below, we create a circular buffer with “shape” 100 by 2, and ‘float64’ as type of stored data. The length of the buffer is 100 and each entry holds 2 values, for example (time, temperature).</p>
@@ -208,7 +210,7 @@
 </pre></div>
 </div>
 <p>Now, we have an instance of circular buffer named buffer and we know something about. Let us explore different operation that can be performed with the buffer.</p>
-<p>First, let us create a test numpy array of with the shape corresponding to “data_shape” of the buffer. Let us make a vector of length two and populate it with two values: current time and a random number. These two numbers represent one 2D  data point (number vs time). Remember! the data point in this circular buffer can be a numpy array on its’ own.</p>
+<p>First, let us create a test numpy array with the shape corresponding to “data_shape” of the buffer. Let us make a vector of length two and populate it with two values: current time and a random number. These two numbers represent one 2D  data point (number vs time). Remember! the data point in this circular buffer can be a numpy array on its’ own.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">empty</span><span class="p">,</span> <span class="n">random</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">data_point</span> <span class="o">=</span> <span class="n">empty</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">data_shape</span><span class="p">)</span>
@@ -259,14 +261,40 @@
   <span class="n">Out</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">array</span><span class="p">([[</span><span class="mf">1.61452788e+09</span><span class="p">,</span> <span class="mf">3.69000000e+03</span><span class="p">]])</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-queue-class">
+</section>
+<section id="the-queue-class">
 <h2>The Queue Class<a class="headerlink" href="#the-queue-class" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">queue</span>
+<p>The queue class has very similar functionality to the circular buffer class with few modifications. The valid entry in the queue can be read only once, when you retrieve the data from the queue, it is not available anymore. The class mimics performance of first in first out(FIFO) buffer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">circular_buffer_numpy.queue</span> <span class="kn">import</span> <span class="n">Queue</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s1">&#39;float64&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Now, we have an instance of the Queue class named “queue”. Let us explore inner properties of the queue.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>“shape” - total shape of the underlying numpy array</p></li>
+<li><p>“length” - length of the buffer.</p></li>
+<li><p>“data_shape” - size of the individual data point.</p></li>
+<li><p>“rear” - the index in the underlying numpy array pointing at the last empty slot in the queue.</p></li>
+<li><p>“global_rear” - the global index showing how many data points have been enqueued since the creation of the instance.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
-</div>
+<p>In [3]: queue.length
+Out[3]: 0</p>
+<p>In [4]: queue.shape
+Out[4]: (100, 2)</p>
+<p>In [5]: queue.data_shape
+Out[5]: (2,)</p>
+<p>In [6]: queue.rear
+Out[6]: 0</p>
+<p>In [7]: queue.global_rear
+Out[7]: 0</p>
+</div></blockquote>
+<p>The “data_point” represents a typical single data entry acquired from a data acquisition device. This data can be now appended to the circular buffer. We can examine the location of the last known entry in the buffer, which is “0” in our case since we added only one data point.</p>
+</section>
+</section>
 
 
            </div>
