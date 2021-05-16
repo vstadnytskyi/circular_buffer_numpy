@@ -64,7 +64,7 @@ class CircularBuffer(object):
         >>> buffer = circular_buffer_numpy.circular_buffer.CircularBuffer(shape = (10,4)
         >>> from numpy.random import random
         >>> rand_arr = random(size=(6,4))
-        >>> buffer.apppend(rand_arr)
+        >>> buffer.append(rand_arr)
         >>> buffer.pointer
         5
         """
