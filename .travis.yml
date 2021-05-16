@@ -10,7 +10,7 @@ jobs:
         - set -e  # If any of the following steps fail, just stop at that point.
         - make -C docs html  # Build the documentation.
         - pip3 install doctr
-        - doctr deploy --built-docs docs/build/html .  # Publish the documentation.
+        - doctr deploy . --built-docs docs/build/html/  # Publish the documentation.
     - name: "Python 3.6.0 on Xenial Linux"
       python: 3.6           # this works for Linux but is ignored on macOS or Windows
       # https://blog.travis-ci.com/2018-10-11-windows-early-release
