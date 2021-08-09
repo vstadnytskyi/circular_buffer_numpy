@@ -138,7 +138,7 @@ class QueueTest(unittest.TestCase):
         for i in range(25):
             arr_rand[i][0,0,0] = i
             queue.enqueue(arr_rand[i].reshape(1,2,3,4))
-            self.assertEqual(queue.peek_last_N(1)[0,0,0,0] ,i) 
+            self.assertEqual(queue.peek_last_N(1)[0,0,0,0] ,i)
             j+=1
             if j > queue.shape[0]:
                 self.assertEqual(queue.length,queue.shape[0])
@@ -176,6 +176,21 @@ class QueueTest(unittest.TestCase):
             self.assertEqual(queue.length,0)
             self.assertEqual(queue.global_rear,(i+1)*1)
             self.assertEqual(queue.rear,1*(i+1)-int(1*(i+1)/queue.shape[0])*queue.shape[0])
+
+    def test_di4108_dequeue(self):
+        """
+        Test to check if queue can perform in case of DI-4108 DATAQ operation mode.
+        """
+        from numpy import random
+        queue = Queue(shape=(6400,10), dtype='int16')
+        for i in range(1000):
+            arr_in = random.randint(4096,size = (64,10))
+            queue.enqueue(arr_in)
+            arr_out = queue.dequeue(64)
+            self.assertEqual((arr_in==arr_out).all(), True)
+            self.assertEqual(queue.length,0)
+            self.assertEqual(queue.global_rear,(i+1)*64)
+            #self.assertEqual(queue.rear,2*(i+1)-int(64*(i+1)/6400)*6400)
 
 
     def test_1(self):

@@ -2,8 +2,6 @@ language:
   - python
 jobs:
   include:
-    - name: "Python 3.8.0 on Xenial Linux"
-      python: 3.8           # this works for Linux but is ignored on macOS or Windows
     - name: "Python 3.7.0 on Xenial Linux"
       python: 3.7           # this works for Linux but is ignored on macOS or Windows
       script:
@@ -11,44 +9,6 @@ jobs:
         - make -C docs html  # Build the documentation.
         - pip3 install doctr
         - doctr deploy . --built-docs docs/build/html/  # Publish the documentation.
-    - name: "Python 3.6.0 on Xenial Linux"
-      python: 3.6           # this works for Linux but is ignored on macOS or Windows
-      # https://blog.travis-ci.com/2018-10-11-windows-early-release
-    - name: "Python 3.7.5 on macOS, xcode11.2"
-      os: osx
-      osx_image: xcode11.2  # Python 3.7.5 running on macOS 10.14.4
-      language: shell       # 'language: python' is an error on Travis CI macOS
-      # python: 3.7         # 'python:' is ignored on Travis CI macOS
-      before_install:
-        python3 --version ; pip3 --version ; sw_vers
-    - name: "Python 3.7.5 on macOS, xcode10"
-      os: osx
-      osx_image: xcode10  # Python 3.7.4 running on macOS 10.13.6
-      language: shell       # 'language: python' is an error on Travis CI macOS
-      # python: 3.7         # 'python:' is ignored on Travis CI macOS
-      before_install:
-        python3 --version ; pip3 --version ; sw_vers
-    - name: "Python 3.7.4 on Windows"
-      os: windows           # Windows 10.0.17134 N/A Build 17134
-      language: shell       # 'language: python' is an error on Travis CI Windows
-      # python: 3.7         # 'python:' is ignored on Travis CI Windows
-      before_install:
-        - choco install python --version 3.7.4
-        - python --version
-        - python -m pip install --upgrade pip
-        - pip3 install --upgrade pytest
-        - pip3 install codecov
-      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-    - name: "Python 3.8.0 on Windows"
-      os: windows           # Windows 10.0.17134 N/A Build 17134
-      language: shell       # 'language: python' is an error on Travis CI Windows
-      # python: 3.7         # 'python:' is ignored on Travis CI Windows
-      before_install:
-        - choco install python --version 3.8.0
-        - python --version
-        - python -m pip install --upgrade pip
-        - pip3 install --upgrade pytest
-      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
 
 install:
   # Install this package and the packages listed in requirements.txt.
@@ -63,6 +23,7 @@ script:
   - codecov  # Upload the report to codecov.
   #turn flake8 on when all formating issues are fixed and understood.
   # - flake8  # Enforce code style ('relaxed' line length limit is set in .flake8 config file).
+
 
 notifications:
   email: false
