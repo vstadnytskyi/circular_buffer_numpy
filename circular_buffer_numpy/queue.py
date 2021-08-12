@@ -116,14 +116,15 @@ class Queue(object):
             debug(f'shape = {shape}')
             debug(f'N = {N}')
             if length >= N:
-                i_pointer = rear - length
-                if i_pointer < 0:
-                    i_pointer =  shape + (i_pointer)
-                j_pointer = rear - length + N
-                if j_pointer < 0:
-                    j_pointer = shape + (j_pointer)
-                debug(f'i = {i_pointer}, f = {j_pointer}')
-                data = self.peek_i_j(i_pointer, j_pointer)
+                # i_pointer = rear - length
+                # if i_pointer < 0:
+                #     i_pointer =  shape + (i_pointer)
+                # j_pointer = rear - length + N
+                # if j_pointer < 0:
+                #     j_pointer = shape + (j_pointer)
+                # debug(f'i = {i_pointer}, f = {j_pointer}')
+                # data = self.peek_i_j(i_pointer, j_pointer)
+                data = self.peek_first_N(N)
                 self.length -= N
             else:
                 data = None
@@ -251,56 +252,29 @@ class Queue(object):
         return self.buffer.dtype
     dtype = property(get_dtype)
 
+    @property
+    def front(self):
+        """
+        points at the front element in the queue. first one to dequeue.
+        """
+
+        F = self.rear-self.length
+        if F <0:
+            F = self.shape[0] + F
+        if self.isempty:
+            F = None
+        return F
+
 # Extra functions that are used for peeking into the queue but not reading the data.
 # Important for functioning of the queue
 
-    def peek_i_j(self, i, j):
-        """
-        returns buffer between indices i and j (including index i)
-        if j < i, it assumes that buffer wrapped around and will give information
-        accordingly.
-        NOTE: the user needs to pay attention to the order at which indices
-        are passed
-        NOTE: index i cannot be -1 otherwise it will return empty array
-        """
-        length = self.length
-        if j > i:
-            res = self.buffer[i:j]
-        else:
-            res = self.peek_N(N=length, M=j-1)
-        return res
-
-    def peek_N(self, N, M):
-        """
-        return N points before index M(including) in the circular buffer
-
-        Parameters
-        ----------
-        N:  (integer)
-            number of points requested before the pointer
-        M:  (integer)
-            pointer
-
-        Returns
-        -------
-        array (numpy array)
-
-        Examples
-        --------
-        >>> circual_buffer.Queue.peek_N()
-        """
-        from numpy import concatenate
-        R = M
-        if N-1 <= R:
-            result = self.buffer[R-N:R]
-        else:
-            result = concatenate((self.buffer[-(N-R-1):], self.buffer[:R+1]), axis=0)
-
-        return result
-
     def peek_last_N(self, N):
         """
-        return last N entries
+        return last N entries in the queue. [last to go].
+
+        algorithms:
+        1. find i (right index in the numpy array)
+        2. find j (left index in the numpy array)
 
         Parameters
         ----------
@@ -317,11 +291,71 @@ class Queue(object):
         """
         from numpy import concatenate
         R = self.rear
-        if N <= R:
-            result = self.buffer[R-N:R]
+        j = R
+        i = R-N
+        if N<=R:
+            result = self.buffer[i:j]
         else:
-            result = concatenate((self.buffer[R-N:], self.buffer[:R]), axis=0)
+            result = concatenate((self.buffer[i:], self.buffer[:j]), axis=0)
         return result
+
+    def peek_first_N(self, N):
+        """
+        return first N entries in the queue. [first to go].
+
+        Parameters
+        ----------
+        N:  (integer)
+            number of points requested
+
+        Returns
+        -------
+        array (numpy array)
+
+        Examples
+        --------
+        >>> from circular_buffer_numpy.queue import Queue
+        queue = Queue((100,2), dtype = 'int16')
+        queue.length = 5
+        queue.peek_first_N(N = 5)
+        """
+        # rear points at the next available empty slot in the queue.
+        from numpy import concatenate
+        R = self.rear
+        L = self.length
+        F = self.front
+        S = self.shape[0]
+        i = F
+        j = i + N
+
+        if j>S:
+            j = j - S
+
+        if i<j:
+            result = self.buffer[i:j]
+        else:
+            result = concatenate((self.buffer[i:], self.buffer[:j]), axis=0)
+        return result
+
+    def peek_i_j(self, i, j):
+        """
+        returns buffer between indices i and j (including index i)
+        if j < i, it assumes that buffer wrapped around and will give information
+        accordingly.
+        NOTE: the user needs to pay attention to the order at which indices
+        are passed
+        NOTE: index i cannot be -1 otherwise it will return empty array
+        """
+        from numpy import concatenate
+        R = self.rear
+        L = self.length
+        R = j
+        N = j-i
+        if i<j:
+            res = self.buffer[i:j]
+        else:
+            res = concatenate((self.buffer[i:], self.buffer[:j]), axis=0)
+        return res
 
     def peek_all(self):
         """
@@ -340,7 +374,13 @@ class Queue(object):
         """
         Gets the element at the front of the queue without removing it.
         """
-        return self.buffer[self.rear-self.length+1]
+        F = self.front
+        if F is not None:
+            return self.buffer[F]
+        else:
+            return None
+
+
 
 
 if __name__ == "__main__":  # for testing purposes
@@ -379,3 +419,25 @@ if __name__ == "__main__":  # for testing purposes
     print("queue.isfull()")
     print("queue.front, queue.back")
     print("queue.size, queue.len, queue.type")
+
+
+def test_peek_last_N(self):
+    queue = Queue(shape=(10, 2, 3, 4), dtype='int16')
+    print(queue.length == 0)
+    print(queue.rear, 0)
+    print(queue.shape, (10, 2, 3, 4))
+    print(queue.size, 10*2*3*4)
+    print(queue.get_dtype, 'int16')
+
+    from numpy import random
+    arr_rand = random.randint(4096,size = (25,2,3,4))
+    queue.reset()
+    j = 0
+    for i in range(25):
+        queue.enqueue(arr_rand[i].reshape(1,2,3,4))
+        j+=1
+        if j > queue.shape[0]:
+            print(queue.length,queue.shape[0])
+        else:
+            print(queue.length,j)
+            print((queue.peek_last_N(1) == arr_rand[i]).all(), True)

@@ -113,11 +113,11 @@ The queue class has very similar functionality to the circular buffer class with
 Now, we have an instance of the Queue class named "queue". Let us explore inner properties of the queue.
 
   * "shape" - total shape of the underlying numpy array
-  * "length" - length of the buffer.
+  * "length" - number of entried in the queue.
   * "data_shape" - size of the individual data point.
-  * "rear" - the index in the underlying numpy array pointing at the last empty slot in the queue.
+  * "rear" - the index in the underlying numpy array pointing at the next empty slot in the queue.
   * "global_rear" - the global index showing how many data points have been enqueued since the creation of the instance.
-  
+
   .. code-block:: python
 
 

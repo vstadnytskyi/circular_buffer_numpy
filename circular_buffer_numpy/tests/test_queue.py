@@ -65,6 +65,28 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.size, 50*2*3*4)
         self.assertEqual(queue.get_dtype, 'float64')
 
+    def test_peak_first_N(self):
+        from numpy import random, array
+        queue = Queue(shape=(10, 2), dtype='int16')
+
+        self.assertEqual(queue.length, 0)
+        self.assertEqual(queue.rear, 0)
+        self.assertEqual(queue.shape, (10, 2))
+        self.assertEqual(queue.size, 10*2)
+        self.assertEqual(queue.get_dtype, 'int16')
+
+        queue.buffer[:,0] = array(range(10))
+        queue.buffer[:,1] = array(range(10))*10
+
+        for i in range(10):
+            for j in range(1,10):
+                queue.rear = i
+                queue.length = j
+                arr = queue.peek_first_N(j)
+                arr2 = queue.dequeue(j)
+                self.assertEqual((arr==arr2).all(),True)
+
+
     def test_peek_last_N(self):
         queue = Queue(shape=(10, 2, 3, 4), dtype='int16')
         self.assertEqual(queue.length, 0)
@@ -78,19 +100,18 @@ class QueueTest(unittest.TestCase):
         queue.reset()
         j = 0
         for i in range(25):
-            queue.enqueue(arr_rand[i].reshape(1,2,3,4))
             j+=1
-            if j > queue.shape[0]:
+            queue.enqueue(arr_rand[i].reshape(1,2,3,4))
+            if i > queue.shape[0]:
                 self.assertEqual(queue.length,queue.shape[0])
-            else:
-                self.assertEqual(queue.length,j)
             self.assertEqual((queue.peek_last_N(1) == arr_rand[i]).all(), True)
 
-            #self.assertEqual(queue.rear,j)
             self.assertEqual(queue.global_rear,j)
+
         self.assertEqual((queue.peek_last_N(1) == arr_rand[-1]).all(), True)
         self.assertEqual((queue.peek_last_N(2) == arr_rand[-2:]).all(), True)
         self.assertEqual((queue.peek_last_N(5) == arr_rand[-5:]).all(), True)
+        print('10',queue.peek_last_N(10),arr_rand[-10:])
         self.assertEqual((queue.peek_last_N(10) == arr_rand[-10:]).all(), True)
 
         dequeue_data = queue.dequeue(10)
@@ -100,14 +121,6 @@ class QueueTest(unittest.TestCase):
         self.assertEqual((dequeue_data == arr_rand[-10:]).all(), True)
 
     def test_peek_i_j(self):
-        #         2020-09-07 13:40:59,920 DEBUG: ======== dequeue === start ======
-        # 2020-09-07 13:40:59,921 DEBUG: rear = 2
-        # 2020-09-07 13:40:59,921 DEBUG: length = 4
-        # 2020-09-07 13:40:59,921 DEBUG: shape = 32
-        # 2020-09-07 13:40:59,921 DEBUG: N = 1
-        # 2020-09-07 13:40:59,921 DEBUG: i = 31, f = 0
-        # 2020-09-07 13:41:00,028 DEBUG: data shape = (4, 3000, 4096)
-        # 2020-09-07 13:41:00,028 DEBUG: ======== dequeue === end ======
         from numpy import random
         queue = Queue(shape=(10, 2, 2), dtype='int16')
         self.assertEqual(queue.length, 0)
@@ -121,6 +134,21 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.get_dtype, 'int16')
         self.assertEqual(queue.peek_i_j(0,1)[0,0,0],0)
         self.assertEqual(queue.peek_i_j(0,2)[0,0,0],0)
+
+    def test_peek_i_j_2(self):
+        from numpy import random
+        queue = Queue(shape=(100, 10), dtype='int16')
+        queue.length = 48
+        queue.rear = 48
+        i_pointer = 84
+        j_pointer = 0
+        self.assertEqual(queue.peek_i_j(i_pointer, j_pointer).shape,  (16, 10))
+
+        i_pointer = 20
+        j_pointer = 36
+        self.assertEqual(queue.peek_i_j(i_pointer, j_pointer).shape,  (16, 10))
+
+
 
 
     def test_peek_all(self):
@@ -177,20 +205,17 @@ class QueueTest(unittest.TestCase):
             self.assertEqual(queue.global_rear,(i+1)*1)
             self.assertEqual(queue.rear,1*(i+1)-int(1*(i+1)/queue.shape[0])*queue.shape[0])
 
-    def test_di4108_dequeue(self):
+    def test_dequeue_2(self):
         """
         Test to check if queue can perform in case of DI-4108 DATAQ operation mode.
         """
         from numpy import random
-        queue = Queue(shape=(6400,10), dtype='int16')
+        queue = Queue(shape=(100,10), dtype='int16')
+        for i in range(5): queue.enqueue( random.randint(0,4096,(16,10)) )
         for i in range(1000):
-            arr_in = random.randint(4096,size = (64,10))
-            queue.enqueue(arr_in)
-            arr_out = queue.dequeue(64)
-            self.assertEqual((arr_in==arr_out).all(), True)
-            self.assertEqual(queue.length,0)
-            self.assertEqual(queue.global_rear,(i+1)*64)
-            #self.assertEqual(queue.rear,2*(i+1)-int(64*(i+1)/6400)*6400)
+            self.assertEqual(queue.dequeue(16).shape,(16,10))
+            queue.enqueue(random.randint(0,4096,(16,10)) )
+
 
 
     def test_1(self):
@@ -205,36 +230,6 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.length, 7)
         self.assertEqual(dequeue_data.shape, data[:3].shape)
         self.assertEqual(std(dequeue_data), std(data[:3]))
-
-    def test_peek_N(self):
-        queue = Queue(shape=(10, 2, 3), dtype='int16')
-        self.assertEqual(queue.length, 0)
-        self.assertEqual(queue.rear, 0)
-        self.assertEqual(queue.shape, (10, 2, 3))
-        self.assertEqual(queue.size, 10*2*3)
-        self.assertEqual(queue.get_dtype, 'int16')
-
-        from numpy import random
-        arr_rand = random.randint(4096,size = (25,2,3))
-        queue.reset()
-        j = 0
-        for i in range(25):
-            queue.enqueue(arr_rand[i].reshape(1,2,3))
-            j+=1
-            if j > queue.shape[0]:
-                self.assertEqual(queue.length,queue.shape[0])
-            else:
-                self.assertEqual(queue.length,j)
-            self.assertEqual(queue.global_rear,j)
-        self.assertEqual((queue.peek_N(1,0) == arr_rand[-1]).all(), True)
-
-        self.assertEqual((queue.peek_N(2,1) == arr_rand[2]).all(), True)
-
-        dequeue_data = queue.dequeue(10)
-        self.assertEqual(queue.length, 0)
-        self.assertEqual(queue.rear, 5)
-        self.assertEqual(queue.global_rear, 25)
-        self.assertEqual((dequeue_data == arr_rand[-10:]).all(), True)
 
     def test_threaded_1(self):
         from numpy import zeros,arange,copy
@@ -269,8 +264,6 @@ class QueueTest(unittest.TestCase):
             sleep(0.03)
 
         self.assertEqual((arr==arr2).all(),True)
-
-
 
     def test_dequeue_async(self):
         #from circular_buffer_numpy.queue import Queue
