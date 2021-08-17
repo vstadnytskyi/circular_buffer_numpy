@@ -4,16 +4,17 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Theory of Operation &mdash; Numpy array circular buffer 0.0.16.post6+g1bf661b documentation</title>
+  <title>Theory of Operation &mdash; Numpy array circular buffer 0.0.16.post25+g1224f3d documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
 
@@ -32,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -68,7 +70,7 @@
             
             
               <div class="version">
-                0.0.16.post6+g1bf661b
+                0.0.16.post25+g1224f3d
               </div>
             
           
@@ -185,16 +187,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="theory-of-operation">
+  <div class="section" id="theory-of-operation">
 <h1>Theory of Operation<a class="headerlink" href="#theory-of-operation" title="Permalink to this headline">¶</a></h1>
-<section id="introduction">
+<div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Buffers are widely used in the computer architecture to allow efficient data storage, handling and later retrieval.</p>
 <p>This project uses numpy array data structures to provide a fast and flexible data handling for streams of data. It is common to have a data acquisition unit that measures at a certain rate. The data from the internal buffer need to be read efficiently and should be available to other programsdevices at later time. The numpy array data structure in Python allows to preallocate memory at the initialization and the data handling from now on is extremely efficient.</p>
-<section id="queue">
+<div class="section" id="queue">
 <h3>Queue<a class="headerlink" href="#queue" title="Permalink to this headline">¶</a></h3>
 <p>Queue is an abstract data type where data is maintained in a sequence and can be modified by addition and removal of the entries. By convention, the end of the sequence at which elements are added is called the back, tail, or rear of the queue, and the end at which elements are removed is called the head or front of the queue, analogously to the words used when people line up to wait for goods or services. (read more <a class="reference external" href="https://en.wikipedia.org/wiki/Queue_(abstract_data_type">https://en.wikipedia.org/wiki/Queue_(abstract_data_type</a>)). The implementation of the Queue in this library uses underlying numpy array structure to insure fast and reliable data addition and removal from the queue.</p>
-<section id="definitions">
+<div class="section" id="definitions">
 <h4>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h4>
 <p>In this section, we describe definitions of variables and their meaning.</p>
 <ul class="simple">
@@ -203,24 +205,24 @@
 <li><p>‘data_shape’ - the shape of the one data entry.</p></li>
 <li><p>‘shape’ - shape of the entire available queue space.</p></li>
 </ul>
-</section>
-</section>
-<section id="circular-buffer">
+</div>
+</div>
+<div class="section" id="circular-buffer">
 <h3>Circular Buffer<a class="headerlink" href="#circular-buffer" title="Permalink to this headline">¶</a></h3>
-</section>
-<section id="shape">
+</div>
+<div class="section" id="shape">
 <h3>Shape<a class="headerlink" href="#shape" title="Permalink to this headline">¶</a></h3>
 <p>The shape of the circular buffer and queue objects follows the numpy convention. The first element in the shape (fast axis) defines the circular length of the buffer and the rest define the dimensionality of the data stored.</p>
 <p>Example:
 the shape circular buffer with the shape = (100,2,2) has the length of 100 and datapoint_shape of (2,2)</p>
-</section>
-<section id="design-specification">
+</div>
+<div class="section" id="design-specification">
 <h3>Design Specification<a class="headerlink" href="#design-specification" title="Permalink to this headline">¶</a></h3>
 <p>DI-4108 by DATAQ in 4kHz at 8 analog channels at 16bit resolution plus 1 digital channel will produce 68kB of data per second.</p>
-</section>
-<section id="benchmarks">
+</div>
+<div class="section" id="benchmarks">
 <h3>Benchmarks<a class="headerlink" href="#benchmarks" title="Permalink to this headline">¶</a></h3>
-<section id="configuration">
+<div class="section" id="configuration">
 <h4>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h4>
 <dl class="field-list simple">
 <dt class="field-odd">OS</dt>
@@ -236,15 +238,15 @@ the shape circular buffer with the shape = (100,2,2) has the length of 100 and d
 <dd class="field-even"><p>16 GB 2133 MHz LPDDR3</p>
 </dd>
 </dl>
-</section>
-<section id="write-read-time-benchmarks">
+</div>
+<div class="section" id="write-read-time-benchmarks">
 <h4>Write/Read time benchmarks<a class="headerlink" href="#write-read-time-benchmarks" title="Permalink to this headline">¶</a></h4>
-<figure class="align-center">
+<div class="figure align-center">
 <img alt="_images/write-benchmarks-0.0.6.jpg" src="_images/write-benchmarks-0.0.6.jpg" />
-</figure>
-<figure class="align-center">
+</div>
+<div class="figure align-center">
 <img alt="_images/read-benchmarks-0.0.6.jpg" src="_images/read-benchmarks-0.0.6.jpg" />
-</figure>
+</div>
 <dl>
 <dt>The numerical output :: python</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">examples</span><span class="o">/</span><span class="n">write</span><span class="o">-</span><span class="n">read</span>\ <span class="n">benchmarks</span><span class="o">.</span><span class="n">py</span>
 <span class="go">  circular buffer numpy version: 0.0.6</span>
@@ -267,10 +269,10 @@ the shape circular buffer with the shape = (100,2,2) has the length of 100 and d
 </div>
 </dd>
 </dl>
-</section>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
+</div>
 
 
            </div>

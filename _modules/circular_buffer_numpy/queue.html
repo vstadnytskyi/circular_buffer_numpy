@@ -7,12 +7,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>circular_buffer_numpy.queue &mdash; Numpy array circular buffer 0.0.16.post6+g1bf661b documentation</title>
+  <title>circular_buffer_numpy.queue &mdash; Numpy array circular buffer 0.0.16.post25+g1224f3d documentation</title>
   
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
 
@@ -31,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -65,7 +68,7 @@
             
             
               <div class="version">
-                0.0.16.post6+g1bf661b
+                0.0.16.post25+g1224f3d
               </div>
             
           
@@ -282,14 +285,15 @@
             <span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;shape = </span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;N = </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">length</span> <span class="o">&gt;=</span> <span class="n">N</span><span class="p">:</span>
-                <span class="n">i_pointer</span> <span class="o">=</span> <span class="n">rear</span> <span class="o">-</span> <span class="n">length</span>
-                <span class="k">if</span> <span class="n">i_pointer</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">i_pointer</span> <span class="o">=</span>  <span class="n">shape</span> <span class="o">+</span> <span class="p">(</span><span class="n">i_pointer</span><span class="p">)</span>
-                <span class="n">j_pointer</span> <span class="o">=</span> <span class="n">rear</span> <span class="o">-</span> <span class="n">length</span> <span class="o">+</span> <span class="n">N</span>
-                <span class="k">if</span> <span class="n">j_pointer</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">j_pointer</span> <span class="o">=</span> <span class="n">shape</span> <span class="o">+</span> <span class="p">(</span><span class="n">j_pointer</span><span class="p">)</span>
-                <span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;i = </span><span class="si">{</span><span class="n">i_pointer</span><span class="si">}</span><span class="s1">, f = </span><span class="si">{</span><span class="n">j_pointer</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_i_j</span><span class="p">(</span><span class="n">i_pointer</span><span class="p">,</span> <span class="n">j_pointer</span><span class="p">)</span>
+                <span class="c1"># i_pointer = rear - length</span>
+                <span class="c1"># if i_pointer &lt; 0:</span>
+                <span class="c1">#     i_pointer =  shape + (i_pointer)</span>
+                <span class="c1"># j_pointer = rear - length + N</span>
+                <span class="c1"># if j_pointer &lt; 0:</span>
+                <span class="c1">#     j_pointer = shape + (j_pointer)</span>
+                <span class="c1"># debug(f&#39;i = {i_pointer}, f = {j_pointer}&#39;)</span>
+                <span class="c1"># data = self.peek_i_j(i_pointer, j_pointer)</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_first_N</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">-=</span> <span class="n">N</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
@@ -410,63 +414,35 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">get_dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        dtype: returns the dtype of the circular buffer</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">dtype</span>
-    <span class="n">dtype</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_dtype</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        points at the front element in the queue. first one to dequeue.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rear</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span>
+        <span class="k">if</span> <span class="n">F</span> <span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">F</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isempty</span><span class="p">:</span>
+            <span class="n">F</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">F</span>
 
 <span class="c1"># Extra functions that are used for peeking into the queue but not reading the data.</span>
 <span class="c1"># Important for functioning of the queue</span>
 
-<div class="viewcode-block" id="Queue.peek_i_j"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.peek_i_j">[docs]</a>    <span class="k">def</span> <span class="nf">peek_i_j</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        returns buffer between indices i and j (including index i)</span>
-<span class="sd">        if j &lt; i, it assumes that buffer wrapped around and will give information</span>
-<span class="sd">        accordingly.</span>
-<span class="sd">        NOTE: the user needs to pay attention to the order at which indices</span>
-<span class="sd">        are passed</span>
-<span class="sd">        NOTE: index i cannot be -1 otherwise it will return empty array</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
-        <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">i</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek_N</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">res</span></div>
-
-<div class="viewcode-block" id="Queue.peek_N"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.peek_N">[docs]</a>    <span class="k">def</span> <span class="nf">peek_N</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        return N points before index M(including) in the circular buffer</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        N:  (integer)</span>
-<span class="sd">            number of points requested before the pointer</span>
-<span class="sd">        M:  (integer)</span>
-<span class="sd">            pointer</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        array (numpy array)</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; circual_buffer.Queue.peek_N()</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">concatenate</span>
-        <span class="n">R</span> <span class="o">=</span> <span class="n">M</span>
-        <span class="k">if</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">R</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">R</span><span class="o">-</span><span class="n">N</span><span class="p">:</span><span class="n">R</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">R</span><span class="o">-</span><span class="mi">1</span><span class="p">):],</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[:</span><span class="n">R</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">result</span></div>
-
 <div class="viewcode-block" id="Queue.peek_last_N"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.peek_last_N">[docs]</a>    <span class="k">def</span> <span class="nf">peek_last_N</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        return last N entries</span>
+<span class="sd">        return last N entries in the queue. [last to go].</span>
+
+<span class="sd">        algorithms:</span>
+<span class="sd">        1. find i (right index in the numpy array)</span>
+<span class="sd">        2. find j (left index in the numpy array)</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -483,11 +459,71 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">concatenate</span>
         <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rear</span>
-        <span class="k">if</span> <span class="n">N</span> <span class="o">&lt;=</span> <span class="n">R</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">R</span><span class="o">-</span><span class="n">N</span><span class="p">:</span><span class="n">R</span><span class="p">]</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">R</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">R</span><span class="o">-</span><span class="n">N</span>
+        <span class="k">if</span> <span class="n">N</span><span class="o">&lt;=</span><span class="n">R</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">R</span><span class="o">-</span><span class="n">N</span><span class="p">:],</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[:</span><span class="n">R</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">:],</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[:</span><span class="n">j</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="Queue.peek_first_N"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.peek_first_N">[docs]</a>    <span class="k">def</span> <span class="nf">peek_first_N</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return first N entries in the queue. [first to go].</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        N:  (integer)</span>
+<span class="sd">            number of points requested</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array (numpy array)</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from circular_buffer_numpy.queue import Queue</span>
+<span class="sd">        queue = Queue((100,2), dtype = &#39;int16&#39;)</span>
+<span class="sd">        queue.length = 5</span>
+<span class="sd">        queue.peek_first_N(N = 5)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># rear points at the next available empty slot in the queue.</span>
+        <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">concatenate</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rear</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">front</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">F</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">N</span>
+
+        <span class="k">if</span> <span class="n">j</span><span class="o">&gt;</span><span class="n">S</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="n">S</span>
+
+        <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">:],</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[:</span><span class="n">j</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="Queue.peek_i_j"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.peek_i_j">[docs]</a>    <span class="k">def</span> <span class="nf">peek_i_j</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns buffer between indices i and j (including index i)</span>
+<span class="sd">        if j &lt; i, it assumes that buffer wrapped around and will give information</span>
+<span class="sd">        accordingly.</span>
+<span class="sd">        NOTE: the user needs to pay attention to the order at which indices</span>
+<span class="sd">        are passed</span>
+<span class="sd">        NOTE: index i cannot be -1 otherwise it will return empty array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">concatenate</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rear</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">j</span><span class="o">-</span><span class="n">i</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">:],</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[:</span><span class="n">j</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
 
 <div class="viewcode-block" id="Queue.peek_all"><a class="viewcode-back" href="../../the-queue-class-details.html#circular_buffer_numpy.queue.Queue.peek_all">[docs]</a>    <span class="k">def</span> <span class="nf">peek_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -506,7 +542,13 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets the element at the front of the queue without removing it.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rear</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span></div></div>
+        <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">front</span>
+        <span class="k">if</span> <span class="n">F</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">F</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div></div>
+
+
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>  <span class="c1"># for testing purposes</span>
@@ -545,6 +587,28 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;queue.isfull()&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;queue.front, queue.back&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;queue.size, queue.len, queue.type&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">test_peek_last_N</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int16&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">rear</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">get_dtype</span><span class="p">,</span> <span class="s1">&#39;int16&#39;</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">random</span>
+    <span class="n">arr_rand</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">4096</span><span class="p">,</span><span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">):</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">arr_rand</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+        <span class="n">j</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">queue</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">length</span><span class="p">,</span><span class="n">queue</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">length</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">((</span><span class="n">queue</span><span class="o">.</span><span class="n">peek_last_N</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">arr_rand</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
            </div>

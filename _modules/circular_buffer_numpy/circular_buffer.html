@@ -7,12 +7,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>circular_buffer_numpy.circular_buffer &mdash; Numpy array circular buffer 0.0.16.post6+g1bf661b documentation</title>
+  <title>circular_buffer_numpy.circular_buffer &mdash; Numpy array circular buffer 0.0.16.post25+g1224f3d documentation</title>
   
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
 
@@ -31,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -65,7 +68,7 @@
             
             
               <div class="version">
-                0.0.16.post6+g1bf661b
+                0.0.16.post25+g1224f3d
               </div>
             
           
@@ -230,7 +233,7 @@
 <span class="sd">        &gt;&gt;&gt; buffer = circular_buffer_numpy.circular_buffer.CircularBuffer(shape = (10,4)</span>
 <span class="sd">        &gt;&gt;&gt; from numpy.random import random</span>
 <span class="sd">        &gt;&gt;&gt; rand_arr = random(size=(6,4))</span>
-<span class="sd">        &gt;&gt;&gt; buffer.apppend(rand_arr)</span>
+<span class="sd">        &gt;&gt;&gt; buffer.append(rand_arr)</span>
 <span class="sd">        &gt;&gt;&gt; buffer.pointer</span>
 <span class="sd">        5</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -433,7 +436,7 @@
         <span class="k">if</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">P</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">P</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">N</span><span class="p">:</span><span class="n">P</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">P</span><span class="o">-</span><span class="mi">1</span><span class="p">):],</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[:</span><span class="n">P</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">P</span><span class="o">-</span><span class="mi">1</span><span class="p">):],</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[:</span><span class="n">P</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div>
 
     <span class="nd">@property</span>
