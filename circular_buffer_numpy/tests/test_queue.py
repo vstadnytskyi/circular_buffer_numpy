@@ -40,7 +40,7 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.rear, 5)
         self.assertEqual(queue.shape, (100, 2, 3, 4))
         self.assertEqual(queue.size, 100*2*3*4)
-        self.assertEqual(queue.get_dtype, 'int16')
+        self.assertEqual(queue.dtype, 'int16')
         self.assertEqual(queue.isfull, False)
         self.assertEqual(queue.isempty, False)
 
@@ -54,7 +54,7 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.rear, 0)
         self.assertEqual(queue.shape, (50, 2, 3, 4))
         self.assertEqual(queue.size, 50*2*3*4)
-        self.assertEqual(queue.get_dtype, 'float64')
+        self.assertEqual(queue.dtype, 'float64')
 
     def test_loop_around(self):
         queue = Queue(shape=(100, 2, 3, 4), dtype='int16')
@@ -63,7 +63,7 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.rear, 0)
         self.assertEqual(queue.shape, (50, 2, 3, 4))
         self.assertEqual(queue.size, 50*2*3*4)
-        self.assertEqual(queue.get_dtype, 'float64')
+        self.assertEqual(queue.dtype, 'float64')
 
     def test_peak_first_N(self):
         from numpy import random, array
@@ -73,7 +73,7 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.rear, 0)
         self.assertEqual(queue.shape, (10, 2))
         self.assertEqual(queue.size, 10*2)
-        self.assertEqual(queue.get_dtype, 'int16')
+        self.assertEqual(queue.dtype, 'int16')
 
         queue.buffer[:,0] = array(range(10))
         queue.buffer[:,1] = array(range(10))*10
@@ -93,7 +93,7 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.rear, 0)
         self.assertEqual(queue.shape, (10, 2, 3, 4))
         self.assertEqual(queue.size, 10*2*3*4)
-        self.assertEqual(queue.get_dtype, 'int16')
+        self.assertEqual(queue.dtype, 'int16')
 
         from numpy import random
         arr_rand = random.randint(4096,size = (25,2,3,4))
@@ -127,11 +127,11 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.rear, 0)
         self.assertEqual(queue.shape, (10, 2, 2))
         self.assertEqual(queue.size, 10*2*2)
-        self.assertEqual(queue.get_dtype, 'int16')
+        self.assertEqual(queue.dtype, 'int16')
         arr_in = random.randint(4096,size = (1,2,2))*0+1
         for i in range(10):
             queue.enqueue(arr_in*i)
-        self.assertEqual(queue.get_dtype, 'int16')
+        self.assertEqual(queue.dtype, 'int16')
         self.assertEqual(queue.peek_i_j(0,1)[0,0,0],0)
         self.assertEqual(queue.peek_i_j(0,2)[0,0,0],0)
 
@@ -157,7 +157,7 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(queue.rear, 0)
         self.assertEqual(queue.shape, (10, 2, 3, 4))
         self.assertEqual(queue.size, 10*2*3*4)
-        self.assertEqual(queue.get_dtype, 'int16')
+        self.assertEqual(queue.dtype, 'int16')
 
         from numpy import random
         arr_rand = random.randint(4096,size = (25,2,3,4))
