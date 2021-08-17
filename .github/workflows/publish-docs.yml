@@ -50,11 +50,11 @@ jobs:
       shell: bash -l {0}
       run: make -C docs/ html
 
-    - name: Deploy documentation to blueskyproject.io.
+    - name: Deploy documentation to circular_buffer_numpy.io.
       # We pin to the SHA, not the tag, for security reasons.
       # https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/security-hardening-for-github-actions#using-third-party-actions
       uses: peaceiris/actions-gh-pages@bbdfb200618d235585ad98e965f4aafc39b4c501  # v3.7.3
       with:
-        deploy_key: ${{ secrets.ACTIONS_DOCUMENTATION_DEPLOY_KEY }}
+        deploy_key: ${{ secrets.Doctr deploy key for pushing to gh-pages from Travis }}
         publish_branch: gh-pages
         publish_dir: ./docs/build/html
