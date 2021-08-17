@@ -82,4 +82,4 @@ target/
 .ipynb_checkpoints
 
 #github secrets
-github_secret_
+github_secret_*
