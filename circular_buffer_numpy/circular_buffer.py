@@ -267,7 +267,7 @@ class CircularBuffer(object):
         if N-1 <= P:
             result = self.buffer[P+1-N:P+1]
         else:
-            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=1)
+            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=0)
         return result
 
     @property
