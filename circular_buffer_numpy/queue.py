@@ -245,12 +245,11 @@ class Queue(object):
         return self.buffer.shape[1:]
 
     @property
-    def get_dtype(self):
+    def dtype(self):
         """
         dtype: returns the dtype of the circular buffer
         """
         return self.buffer.dtype
-    dtype = property(get_dtype)
 
     @property
     def front(self):
