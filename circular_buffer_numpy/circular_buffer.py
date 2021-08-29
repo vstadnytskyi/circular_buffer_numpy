@@ -20,7 +20,7 @@ class CircularBuffer(object):
     g_pointer = -1 # running current global_pointer value
 
     def __init__(self, shape=(100, 2), dtype='float64', packet_length=1):
-        from numpy import nan, zeros
+        from numpy import nan, zeros, empty
         """
         initializes the class. creates an empty numpy array with given size and give dtype.
         the shape follows numpy definition where the first index corresponds to x or col and second is y or row.
@@ -42,10 +42,7 @@ class CircularBuffer(object):
         self.type = 'server'
         self.packet_length = packet_length
 
-        if 'float' in dtype:
-            self.buffer = zeros(shape, dtype=dtype) * nan
-        else:
-            self.buffer = zeros(shape, dtype=dtype)
+        self.buffer = empty(shape, dtype=dtype)
 
     def append(self, data):
         """
@@ -264,6 +261,36 @@ class CircularBuffer(object):
         """
         from numpy import concatenate
         P = M
+        if N-1 <= P:
+            result = self.buffer[P+1-N:P+1]
+        else:
+            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=0)
+        return result
+
+    def get_N_global(self, N=0, M=0):
+        """
+        return N points before global index M in the circular buffer.
+
+        Parameters
+        ----------
+        N :: (integer)
+            number of points to return
+        M :: (integer)
+            global index of the pointer
+
+        Returns
+        -------
+        array (numpy array)
+
+        Examples
+        --------
+        >>> data = circual_buffer.CircularBuffer.get_N(N=2, M=5)
+        """
+        from numpy import concatenate
+        while M >= self.shape[0]:
+            M = M - self.shape[0]
+        P = M
+
         if N-1 <= P:
             result = self.buffer[P+1-N:P+1]
         else:
