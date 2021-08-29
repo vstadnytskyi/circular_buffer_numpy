@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>The Circular Buffer Class Details &mdash; Numpy array circular buffer 0.0.16.post28+gee0ea0f documentation</title>
+  <title>The Circular Buffer Class Details &mdash; Numpy array circular buffer 0.0.16.post30+ga1db98d documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.0.16.post28+gee0ea0f
+                0.0.16.post30+ga1db98d
               </div>
             
           
@@ -262,6 +262,31 @@ The packet pointer can be a float number. It serves as an indaction something wa
 <dt><strong>N :: (integer)</strong></dt><dd><p>number of points to return</p>
 </dd>
 <dt><strong>M :: (integer)</strong></dt><dd><p>index of the pointer</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>array (numpy array)</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">get_N</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.get_N_global">
+<span class="sig-name descname"><span class="pre">get_N_global</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_N_global"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_N_global" title="Permalink to this definition">¶</a></dt>
+<dd><p>return N points before global index M in the circular buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>N :: (integer)</strong></dt><dd><p>number of points to return</p>
+</dd>
+<dt><strong>M :: (integer)</strong></dt><dd><p>global index of the pointer</p>
 </dd>
 </dl>
 </dd>
