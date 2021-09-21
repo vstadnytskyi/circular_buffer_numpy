@@ -239,9 +239,36 @@ class CircularBuffer(object):
         if j > i:
             res = self.buffer[i:j]
         else:
-            length = self.shape[1] - i + j
+            length = self.shape[0] - i + j
             res = self.get_N(N=length, M=j-1)
         return res
+
+    def get_N(self, N=0, M=0):
+        """
+        return N points before index M in the circular buffer
+
+        Parameters
+        ----------
+        N :: (integer)
+            number of points to return
+        M :: (integer)
+            index of the pointer
+
+        Returns
+        -------
+        array (numpy array)
+
+        Examples
+        --------
+        >>> data = circual_buffer.CircularBuffer.get_N(N=2, M=5)
+        """
+        from numpy import concatenate
+        P = M
+        if N-1 <= P:
+            result = self.buffer[P+1-N:P+1]
+        else:
+            result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=0)
+        return result
 
     def get_N(self, N=0, M=0):
         """
