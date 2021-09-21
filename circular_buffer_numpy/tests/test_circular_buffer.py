@@ -123,3 +123,30 @@ class CircularBufferTest(unittest.TestCase):
             res_buffer.append(vec)
             j+=1
         assert_array_equal(array(res_buffer[-1000:]),buffer.get_data())
+
+    def test_get_N(self):
+        from ..circular_buffer import CircularBuffer
+        from numpy import random, sum, zeros, concatenate, array
+        buffer = CircularBuffer(shape=(102, 2))
+        for pointer in range(1000):
+            while pointer >= (buffer.shape[0]):
+                pointer = int(pointer - buffer.shape[0])
+            data = buffer.get_N(3,pointer)
+            self.assertEqual(data.shape, (3,2))
+
+    def test_different_dtype(self):
+        from ..circular_buffer import CircularBuffer
+        import numpy
+
+        buffer_int16 = CircularBuffer(shape=(102, 2), dtype = numpy.int16)
+        buffer_int32 = CircularBuffer(shape=(102, 2), dtype = numpy.int32)
+        buffer_int64 = CircularBuffer(shape=(102, 2), dtype = numpy.int64)
+        buffer_float32 = CircularBuffer(shape=(102, 2), dtype = numpy.float32)
+        buffer_float64 = CircularBuffer(shape=(102, 2), dtype = numpy.float64)
+
+        self.assertEqual(buffer_int16.dtype, numpy.int16)
+        self.assertEqual(buffer_int16.dtype, numpy.int16)
+        self.assertEqual(buffer_int32.dtype, numpy.int32)
+        self.assertEqual(buffer_int64.dtype, numpy.int64)
+        self.assertEqual(buffer_float32.dtype, numpy.float32)
+        self.assertEqual(buffer_float64.dtype, numpy.float64)
