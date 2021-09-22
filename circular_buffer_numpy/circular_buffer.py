@@ -270,6 +270,7 @@ class CircularBuffer(object):
     def get_N_global(self, N=0, M=0):
         """
         return N points before global index M in the circular buffer.
+        
         Parameters
         ----------
         N :: (integer)
