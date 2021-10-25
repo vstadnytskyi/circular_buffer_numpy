@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>circular_buffer_numpy.circular_buffer &mdash; Numpy array circular buffer 0.1.0.post9+g3b64393 documentation</title>
+  <title>circular_buffer_numpy.circular_buffer &mdash; Numpy array circular buffer 0.1.0.post10+g2d2f640 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
@@ -31,7 +31,7 @@
             <a href="../../index.html" class="icon icon-home"> Numpy array circular buffer
           </a>
               <div class="version">
-                0.1.0.post9+g3b64393
+                0.1.0.post10+g2d2f640
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -287,6 +287,34 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_N</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="CircularBuffer.get_value"><a class="viewcode-back" href="../../the-circular-buffer-class-details.html#circular_buffer_numpy.circular_buffer.CircularBuffer.get_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">linear_pointer</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">circular_pointer</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns last entry from the known. Same as self.buffer[self.pointer]</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array (numpy array)</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; data = circual_buffer.CircularBuffer.get_last_value()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">linear_pointer</span> <span class="ow">is</span>  <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">circular_pointer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;linear_pointer or circular_pointer has to be supplied. None were supplied.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">linear_pointer</span> <span class="ow">is</span> <span class="ow">not</span>  <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">circular_pointer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;linear_pointer or circular_pointer has to be supplied, not both.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">linear_pointer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">circular_pointer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="n">linear_pointer</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="p">(</span><span class="n">linear_pointer</span><span class="o">//</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">linear_pointer</span> <span class="ow">is</span>  <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">circular_pointer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">circular_pointer</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">:</span>
+                <span class="n">pointer</span> <span class="o">=</span> <span class="n">circular_pointer</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;circular_pointer exceeds the length of the buffer&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">pointer</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="CircularBuffer.get_i_j"><a class="viewcode-back" href="../../the-circular-buffer-class-details.html#circular_buffer_numpy.circular_buffer.CircularBuffer.get_i_j">[docs]</a>    <span class="k">def</span> <span class="nf">get_i_j</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns buffer between indices i and j (including index i)</span>
@@ -348,7 +376,7 @@
 <div class="viewcode-block" id="CircularBuffer.get_N_global"><a class="viewcode-back" href="../../the-circular-buffer-class-details.html#circular_buffer_numpy.circular_buffer.CircularBuffer.get_N_global">[docs]</a>    <span class="k">def</span> <span class="nf">get_N_global</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        return N points before global index M in the circular buffer.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        N :: (integer)</span>
@@ -429,7 +457,20 @@
 <span class="sd">        dtype: property objects that returns the shape of one data point</span>
 <span class="sd">        (or N dimensional array) of the circular buffer</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">dtype</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">dtype</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">linear_pointer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &#39;linear pointer&#39; refers to a global pointer that has been counting from the beginning of times.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">g_pointer</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">circular_pointer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &#39;circular pointer&#39; refers to an actual pointer in the circular buffer numpy array and is an alias of &#39;pointer&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>  <span class="c1"># for testing purposes</span>

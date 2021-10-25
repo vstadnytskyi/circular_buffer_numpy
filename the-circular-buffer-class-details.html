@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Circular Buffer Class Details &mdash; Numpy array circular buffer 0.1.0.post9+g3b64393 documentation</title>
+  <title>The Circular Buffer Class Details &mdash; Numpy array circular buffer 0.1.0.post10+g2d2f640 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="index.html" class="icon icon-home"> Numpy array circular buffer
           </a>
               <div class="version">
-                0.1.0.post9+g3b64393
+                0.1.0.post10+g2d2f640
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -137,6 +137,12 @@
 <span class="go">(12,4)</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.circular_pointer">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">circular_pointer</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.circular_pointer" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘circular pointer’ refers to an actual pointer in the circular buffer numpy array and is an alias of ‘pointer’</p>
 </dd></dl>
 
 <dl class="py property">
@@ -322,10 +328,33 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 <dd><p>integer: returns the length of the circular buffer along fast</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.get_value">
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">linear_pointer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circular_pointer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns last entry from the known. Same as self.buffer[self.pointer]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>array (numpy array)</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">get_last_value</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.length">
 <em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.length" title="Permalink to this definition">¶</a></dt>
 <dd><p>integer: returns the length of the circular buffer along fast</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.linear_pointer">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">linear_pointer</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.linear_pointer" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘linear pointer’ refers to a global pointer that has been counting from the beginning of times.</p>
 </dd></dl>
 
 <dl class="py property">
