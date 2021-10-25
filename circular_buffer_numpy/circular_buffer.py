@@ -209,6 +209,34 @@ class CircularBuffer(object):
         """
         return self.get_last_N(N=1)
 
+    def get_value(self, linear_pointer = None, circular_pointer = None):
+        """
+        returns last entry from the known. Same as self.buffer[self.pointer]
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+        array (numpy array)
+
+        Examples
+        --------
+        >>> data = circual_buffer.CircularBuffer.get_last_value()
+        """
+        if (linear_pointer is  None) and (circular_pointer is None):
+            raise Exception('linear_pointer or circular_pointer has to be supplied. None were supplied.')
+        if (linear_pointer is not  None) and (circular_pointer is not None):
+            raise Exception('linear_pointer or circular_pointer has to be supplied, not both.')
+        if (linear_pointer is not None) and (circular_pointer is None):
+            pointer = linear_pointer - self.length*(linear_pointer//self.length)
+        if (linear_pointer is  None) and (circular_pointer is not None):
+            if not circular_pointer>self.length:
+                pointer = circular_pointer
+            else:
+                raise Exception('circular_pointer exceeds the length of the buffer')
+        return self.buffer[pointer]
+
     def get_i_j(self, i, j):
         """
         returns buffer between indices i and j (including index i)
@@ -270,7 +298,7 @@ class CircularBuffer(object):
     def get_N_global(self, N=0, M=0):
         """
         return N points before global index M in the circular buffer.
-        
+
         Parameters
         ----------
         N :: (integer)
@@ -352,6 +380,19 @@ class CircularBuffer(object):
         (or N dimensional array) of the circular buffer
         """
         return self.buffer.dtype
+
+    @property
+    def linear_pointer(self):
+        """
+        'linear pointer' refers to a global pointer that has been counting from the beginning of times.
+        """
+        return self.g_pointer
+    @property
+    def circular_pointer(self):
+        """
+        'circular pointer' refers to an actual pointer in the circular buffer numpy array and is an alias of 'pointer'
+        """
+        return self.pointer
 
 
 if __name__ == "__main__":  # for testing purposes
