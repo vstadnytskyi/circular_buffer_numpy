@@ -150,3 +150,24 @@ class CircularBufferTest(unittest.TestCase):
         self.assertEqual(buffer_int64.dtype, numpy.int64)
         self.assertEqual(buffer_float32.dtype, numpy.float32)
         self.assertEqual(buffer_float64.dtype, numpy.float64)
+
+    def test_packets(self):
+        from numpy import random
+        from ..circular_buffer import CircularBuffer
+        buffer = CircularBuffer(shape=(100, 2, 4), packet_length = 5)
+        for i in range(1000):
+            data = random.randint(1024, size=(5, 2, 4))*0 + i
+            buffer.append(data)
+            self.assertEqual(buffer.circular_pointer, (i%20+1)*5-1)
+            self.assertEqual(buffer.linear_pointer,  (i+1)*5 -1)
+            self.assertEqual(buffer.circular_packet_pointer, (i)%20)
+            self.assertEqual(buffer.linear_packet_pointer, i)
+            data = buffer.get_packet_circular_i_j(i = i%20,j = i%20)
+            self.assertEqual(data.mean(), i)
+            self.assertEqual(buffer.get_packet_linear_i_j(i,i).mean(),i)
+            self.assertEqual(buffer.get_packet_linear_i_j(i).mean(),i)
+            self.assertEqual(buffer.get_packet_linear_i_j(i,copy = True).mean(),i)
+            if i > 15:
+                    self.assertEqual(buffer.get_packet_linear_i_j(i-10,i-8).mean(),i-9)
+                    self.assertEqual(buffer.get_packet_linear_i_j(i-10,i-7).mean(),(i-10+i-7)/2)
+                    self.assertEqual(buffer.get_packet_linear_i_j(i-10,i-7, copy=True).mean(),(i-10+i-7)/2)

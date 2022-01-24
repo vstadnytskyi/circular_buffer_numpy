@@ -44,6 +44,9 @@ class CircularBuffer(object):
 
         self.buffer = empty(shape, dtype=dtype)
 
+        if self.length%self.packet_length != 0:
+                warnings.warn('The number of packets that can fit into this buffer is not integer. The all functions related to manipulation with packets are not going to work properly.', DeprecationWarning, stacklevel=2)
+
     def append(self, data):
         """
         appends data to the existing circular buffer.
@@ -327,13 +330,50 @@ class CircularBuffer(object):
             result = concatenate((self.buffer[-(N-P-1):], self.buffer[:P+1]), axis=0)
         return result
 
+
+    def get_packet_linear_i_j(self,i, j = None, copy = False):
+        """
+        return packets between i and j linear packet pointers. If i==j, function returns i's packet only. if j is None, function returns only i's packet
+        """
+        if j is None:
+            j = i
+        N_of_packets = int(self.length/self.packet_length)
+        while (i) > N_of_packets-1:
+            i -= N_of_packets
+        while (j) > N_of_packets-1:
+            j -= N_of_packets
+        return self.get_packet_circular_i_j(i=i,j=j, copy = copy)
+
+    def get_packet_circular_i_j(self,i, j = None, copy = False):
+        """
+        return packets between i and j circular packet pointers. If i==j, function returns i's packet only. if j is None, function returns only i's packet
+        """
+        from numpy import copy as cp
+        if j is None:
+            j = i
+        pack_len = self.packet_length
+        if copy:
+            data = cp(self.get_i_j(i = i*pack_len,j = (j+1)*pack_len))
+        else:
+            data = self.get_i_j(i = i*pack_len,j = (j+1)*pack_len)
+        return data
+
     @property
-    def g_packet_pointer(self):
+    def linear_packet_pointer(self):
         """
         returns global packet pointer calculated from global pointer and packet size.
         The packet pointer can be a float number. It serves as an indaction something was not appended in packets.
         """
-        return ((self.g_pointer+1)/self.packet_length)-1
+        return int(((self.g_pointer+1)/self.packet_length)-1)
+    g_packet_pointer = linear_packet_pointer
+
+    @property
+    def circular_packet_pointer(self):
+        """
+        returns packet pointer calculated from local pointer and packet size.
+        The packet pointer can be a float number. It serves as an indaction something was not appended in packets.
+        """
+        return int(((self.pointer+1)/self.packet_length)-1)
 
     @property
     def packet_pointer(self):
@@ -341,7 +381,17 @@ class CircularBuffer(object):
         returns packet pointer calculated from local pointer and packet size.
         The packet pointer can be a float number. It serves as an indaction something was not appended in packets.
         """
-        return ((self.pointer+1)/self.packet_length)-1
+        warnings.warn('The packet pointer will be replaced with circular packet pointer and global packet pointer will be replaced with linear packet pointer', DeprecationWarning, stacklevel=2)
+        return self.circular_packet_pointer
+
+    @property
+    def g_packet_pointer(self):
+        """
+        returns packet pointer calculated from local pointer and packet size.
+        The packet pointer can be a float number. It serves as an indaction something was not appended in packets.
+        """
+        warnings.warn('The packet pointer will be replaced with circular packet pointer and global packet pointer will be replaced with linear packet pointer', DeprecationWarning, stacklevel=2)
+        return self.linear_packet_pointer
 
     @property
     def size(self):
@@ -417,3 +467,22 @@ if __name__ == "__main__":  # for testing purposes
     print("server.get_all()")
     print("server.get_N(N = integer)")
     print("---------------------------")
+
+    from circular_buffer_numpy.circular_buffer import CircularBuffer
+    from numpy import random
+    buffer = CircularBuffer(shape=(100, 2, 4), packet_length = 5)
+    buffer.reset(); j = 0
+    for i in range(101):
+        data = random.randint(1024, size=(5, 2, 4))*0 + i
+        buffer.append(data)
+        print(data.mean() == i)
+        j = i%5
+        print('c normal',buffer.circular_pointer,(i%20+1)*5-1)
+        print('l normal',buffer.linear_pointer,(i+1)*5-1)
+        print('c packet',buffer.circular_packet_pointer,i%20)
+        print('l packet',buffer.linear_packet_pointer, i)
+        print('01234567', buffer.get_packet_circular_i_j(i%20,i%20).mean()==i)
+        print('01234567',buffer.get_packet_linear_i_j(i,i).mean(),i)
+        if i > 20:
+            print('qqqqqqqq',buffer.get_packet_linear_i_j(i-10,i-8).mean(),i-9)
+        print('--------')
