@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Circular Buffer Class Details &mdash; Numpy array circular buffer 0.1.1 documentation</title>
+  <title>The Circular Buffer Class Details &mdash; Numpy array circular buffer 0.1.1.post1+g12e6ea9 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="index.html" class="icon icon-home"> Numpy array circular buffer
           </a>
               <div class="version">
-                0.1.1
+                0.1.1.post1+g12e6ea9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -83,7 +83,7 @@
 <p>Below are provided the details of the methods and properties of the circular buffer class.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">circular_buffer_numpy.circular_buffer.</span></span><span class="sig-name descname"><span class="pre">CircularBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(100,</span> <span class="pre">2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'float64'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packet_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">circular_buffer_numpy.circular_buffer.</span></span><span class="sig-name descname"><span class="pre">CircularBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(100,</span> <span class="pre">2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'float64'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packet_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
@@ -140,29 +140,36 @@
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.circular_packet_pointer">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">circular_packet_pointer</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.circular_packet_pointer" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns packet pointer calculated from local pointer and packet size.
+The packet pointer can be a float number. It serves as an indaction something was not appended in packets.</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.circular_pointer">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">circular_pointer</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.circular_pointer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">circular_pointer</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.circular_pointer" title="Permalink to this definition">¶</a></dt>
 <dd><p>‘circular pointer’ refers to an actual pointer in the circular buffer numpy array and is an alias of ‘pointer’</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.data_shape">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">data_shape</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.data_shape" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_shape</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.data_shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>tuple: property objects that returns the shape of one data point
 (or N dimensional array) of the circular buffer</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.dtype">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.dtype" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.dtype" title="Permalink to this definition">¶</a></dt>
 <dd><p>dtype: property objects that returns the shape of one data point
 (or N dimensional array) of the circular buffer</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.g_packet_pointer">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">g_packet_pointer</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.g_packet_pointer" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns global packet pointer calculated from global pointer and packet size.
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">g_packet_pointer</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.g_packet_pointer" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns packet pointer calculated from local pointer and packet size.
 The packet pointer can be a float number. It serves as an indaction something was not appended in packets.</p>
 </dd></dl>
 
@@ -329,6 +336,18 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.get_packet_circular_i_j">
+<span class="sig-name descname"><span class="pre">get_packet_circular_i_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_packet_circular_i_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_packet_circular_i_j" title="Permalink to this definition">¶</a></dt>
+<dd><p>return packets between i and j circular packet pointers. If i==j, function returns i’s packet only. if j is None, function returns only i’s packet</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.get_packet_linear_i_j">
+<span class="sig-name descname"><span class="pre">get_packet_linear_i_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_packet_linear_i_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_packet_linear_i_j" title="Permalink to this definition">¶</a></dt>
+<dd><p>return packets between i and j linear packet pointers. If i==j, function returns i’s packet only. if j is None, function returns only i’s packet</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.get_value">
 <span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">linear_pointer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circular_pointer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns last entry from the known. Same as self.buffer[self.pointer]</p>
@@ -347,19 +366,26 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.length">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.length" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.length" title="Permalink to this definition">¶</a></dt>
 <dd><p>integer: returns the length of the circular buffer along fast</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.linear_packet_pointer">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">linear_packet_pointer</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.linear_packet_pointer" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns global packet pointer calculated from global pointer and packet size.
+The packet pointer can be a float number. It serves as an indaction something was not appended in packets.</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.linear_pointer">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">linear_pointer</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.linear_pointer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">linear_pointer</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.linear_pointer" title="Permalink to this definition">¶</a></dt>
 <dd><p>‘linear pointer’ refers to a global pointer that has been counting from the beginning of times.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.packet_pointer">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">packet_pointer</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.packet_pointer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">packet_pointer</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.packet_pointer" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns packet pointer calculated from local pointer and packet size.
 The packet pointer can be a float number. It serves as an indaction something was not appended in packets.</p>
 </dd></dl>
@@ -385,13 +411,13 @@ The parameter clear can be used to</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.shape">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">shape</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.shape" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>tuple: property objects that returns the shape of the circular buffer.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.size">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.size" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>integer: property objects that returns the size of the circular buffer.</p>
 </dd></dl>
 

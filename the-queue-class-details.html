@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Queue Class Details &mdash; Numpy array circular buffer 0.1.1 documentation</title>
+  <title>The Queue Class Details &mdash; Numpy array circular buffer 0.1.1.post1+g12e6ea9 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="index.html" class="icon icon-home"> Numpy array circular buffer
           </a>
               <div class="version">
-                0.1.1
+                0.1.1.post1+g12e6ea9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -83,7 +83,7 @@
 <p>Below are provided the details of the methods and properties of the queue buffer class.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">circular_buffer_numpy.queue.</span></span><span class="sig-name descname"><span class="pre">Queue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(20,</span> <span class="pre">2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'float64'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">circular_buffer_numpy.queue.</span></span><span class="sig-name descname"><span class="pre">Queue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(20,</span> <span class="pre">2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'float64'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue" title="Permalink to this definition">¶</a></dt>
 <dd><p>queue data structure implemented using numpy arrays.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
@@ -95,7 +95,7 @@
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.data_shape">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">data_shape</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.data_shape" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_shape</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.data_shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>tuple: returns the shape of the circular buffer</p>
 </dd></dl>
 
@@ -124,7 +124,7 @@ return N points from the back and move rear_pointer</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.dtype">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.dtype" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.dtype" title="Permalink to this definition">¶</a></dt>
 <dd><p>dtype: returns the dtype of the circular buffer</p>
 </dd></dl>
 
@@ -153,13 +153,13 @@ return N points from the back and move rear_pointer</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.front">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">front</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.front" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">front</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.front" title="Permalink to this definition">¶</a></dt>
 <dd><p>points at the front element in the queue. first one to dequeue.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.isempty">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">isempty</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.isempty" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isempty</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.isempty" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the queue is empty.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -178,7 +178,7 @@ return N points from the back and move rear_pointer</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.isfull">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">isfull</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.isfull" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isfull</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.isfull" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the queue is full.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -313,13 +313,13 @@ dtype atribute can be passed if dtype of the queue needs changes</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.shape">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">shape</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.shape" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>tuple: returns the shape of the circular buffer</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.size">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.size" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>integer: returns the size of the circular buffer</p>
 </dd></dl>
 
