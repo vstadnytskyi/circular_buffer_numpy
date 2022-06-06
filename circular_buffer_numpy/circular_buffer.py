@@ -141,7 +141,7 @@ class CircularBuffer(object):
 
         Returns
         -------
-        array (numpy array)
+        array :: (numpy array)
 
         Examples
         --------
@@ -159,7 +159,7 @@ class CircularBuffer(object):
 
         Returns
         -------
-        array (numpy array)
+        array :: (numpy array)
 
         Examples
         --------
