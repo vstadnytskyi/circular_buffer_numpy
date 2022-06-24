@@ -133,9 +133,8 @@ class CircularBuffer(object):
 
     def get_all(self):
         """
-        return entire circular buffer server in ordered way, where
-        last value is the last collected.
-
+        return entire circular buffer server in ordered way, where last value is the last collected.
+        
         Parameters
         ----------
 
