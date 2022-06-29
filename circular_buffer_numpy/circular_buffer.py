@@ -132,6 +132,21 @@ class CircularBuffer(object):
         self.append(old_buffer)
 
     def get_all(self):
+        """
+        return entire circular buffer server in ordered way, where last value is the last collected.
+        
+        Parameters
+        ----------
+
+        Returns
+        -------
+        array :: (numpy array)
+            (numpy array)
+
+        Examples
+        --------
+        >>> data = circual_buffer.CircularBuffer.get_all()
+        """
         return self.get_last_N(N=self.shape[0])
 
     def get_data(self):
@@ -145,7 +160,8 @@ class CircularBuffer(object):
         Returns
         -------
         array :: (numpy array)
-
+            (numpy array)
+            
         Examples
         --------
         >>> data = circual_buffer.CircularBuffer.get_data()
