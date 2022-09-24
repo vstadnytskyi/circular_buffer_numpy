@@ -3,7 +3,6 @@
 """Circular buffer Server
     by Valentyn Stadnytskyi
     created: Nov 4, 2017
-    last update: February, 2019
 """
 import logging
 from logging import debug, info, warn, error
