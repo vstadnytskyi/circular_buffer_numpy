@@ -83,7 +83,7 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        clear ::  (boolean)
+        clear :  (boolean)
             force clearing the buffer
 
         Returns
@@ -109,7 +109,7 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        length ::  integer
+        length :  integer
             new length of the buffer
 
         Returns
@@ -134,14 +134,14 @@ class CircularBuffer(object):
         """
         return entire circular buffer server in ordered way, where last value is the last collected.
         
-        
         Parameters
         ----------
+        None
 
         Returns
         -------
-        array :: (numpy array)
-            (numpy array)
+        array : array_like
+            array of data points in the historic order
 
         Examples
         --------
@@ -156,10 +156,11 @@ class CircularBuffer(object):
 
         Parameters
         ----------
+        None
 
         Returns
         -------
-        array :: (numpy array)
+        array : array_like
             (numpy array)
             
         Examples
@@ -177,7 +178,7 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        N :: (integer)
+        N : integer
             number of points to return
 
         Returns
@@ -202,10 +203,11 @@ class CircularBuffer(object):
 
         Parameters
         ----------
+        None
 
         Returns
         -------
-        array (numpy array)
+        array : array_like
 
         Examples
         --------
@@ -219,10 +221,11 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-
+        None
+        
         Returns
         -------
-        array (numpy array)
+        array : array_like
 
         Examples
         --------
@@ -252,14 +255,14 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        i :: (integer)
+        i : integer
             start index in the buffer
-        j :: (integer)
+        j : integer
             end index in the buffer
 
         Returns
         -------
-        array (numpy array)
+        array : array_like 
 
         Examples
         --------
@@ -278,14 +281,14 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        N :: (integer)
+        N : integer
             number of points to return
-        M :: (integer)
+        M : integer
             index of the pointer
 
         Returns
         -------
-        array (numpy array)
+        array : array_like
 
         Examples
         --------
@@ -305,14 +308,14 @@ class CircularBuffer(object):
 
         Parameters
         ----------
-        N :: (integer)
+        N : integer
             number of points to return
-        M :: (integer)
+        M : integer
             global index of the pointer
 
         Returns
         -------
-        array (numpy array)
+        array : array_like
 
         Examples
         --------
@@ -397,7 +400,11 @@ class CircularBuffer(object):
     @property
     def size(self):
         """
-        integer: property objects that returns the size of the circular buffer.
+        Return
+        ------
+        size : integer
+            property objects that returns the size of the circular buffer.
+
         """
         debug('returing size')
         return self.buffer.size
@@ -405,7 +412,8 @@ class CircularBuffer(object):
     @property
     def shape(self):
         """
-        tuple: property objects that returns the shape of the circular buffer.
+        shape : tuple
+            property objects that returns the shape of the circular buffer.
         """
         return self.buffer.shape
 
