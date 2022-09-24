@@ -57,6 +57,7 @@ class Queue(object):
 
         Returns
         -------
+        None
 
         Examples
         --------
@@ -140,6 +141,7 @@ class Queue(object):
 
         Parameters
         ----------
+        None
 
         Returns
         -------
@@ -160,6 +162,7 @@ class Queue(object):
 
         Parameters
         ----------
+        None
 
         Returns
         -------
@@ -179,9 +182,11 @@ class Queue(object):
 
         Parameters
         ----------
+        None
 
         Returns
         -------
+        None
 
         Examples
         --------
@@ -206,6 +211,7 @@ class Queue(object):
 
         Returns
         -------
+        None
 
         Examples
         --------
@@ -282,7 +288,7 @@ class Queue(object):
 
         Returns
         -------
-        array (numpy array)
+        array : array_like
 
         Examples
         --------
@@ -309,7 +315,7 @@ class Queue(object):
 
         Returns
         -------
-        array (numpy array)
+        array : array_like
 
         Examples
         --------
