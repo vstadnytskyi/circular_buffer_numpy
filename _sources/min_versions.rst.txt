@@ -1,6 +1,6 @@
-===================================
+========================================
 Minimum Version of Python and NumPy
-===================================
+========================================
 
 
 - This project supports at least the minor versions of Python

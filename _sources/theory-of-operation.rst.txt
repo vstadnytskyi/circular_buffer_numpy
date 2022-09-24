@@ -39,10 +39,6 @@ The shape of the circular buffer and queue objects follows the numpy convention.
 Example:
 the shape circular buffer with the shape = (100,2,2) has the length of 100 and datapoint_shape of (2,2)
 
-Design Specification
-------------------------
-DI-4108 by DATAQ in 4kHz at 8 analog channels at 16bit resolution plus 1 digital channel will produce 68kB of data per second.
-
 
 
 Benchmarks

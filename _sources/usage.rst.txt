@@ -101,7 +101,7 @@ Next, we can examine the content of the circular buffer. There are several build
       Out[17]: array([[1.61452788e+09, 3.69000000e+03]])
 
 The Queue Class
----------------
+---------------------
 
 The queue class has very similar functionality to the circular buffer class with few modifications. The valid entry in the queue can be read only once, when you retrieve the data from the queue, it is not available anymore. The class mimics performance of first in first out(FIFO) buffer.
 

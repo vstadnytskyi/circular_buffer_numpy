@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Minimum Version of Python and NumPy &mdash; Numpy array circular buffer 0.2.0.post16+g1af3c26 documentation</title>
+  <title>The Queue Class Details &mdash; Numpy array circular buffer 0.2.0.post16+g1af3c26 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
@@ -24,7 +24,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Release History" href="release-history.html" /> 
+    <link rel="next" title="Release History" href="release-history.html" />
+    <link rel="prev" title="The Circular Buffer Class Details" href="circular-buffer-class-details.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,9 +51,9 @@
 <li class="toctree-l1"><a class="reference internal" href="theory-of-operation.html">Theory of Operation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="circular-buffer-class-details.html">The Circular Buffer Class Details</a></li>
-<li class="toctree-l1"><a class="reference internal" href="queue-class-details.html">The Queue Class Details</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The Queue Class Details</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-history.html">Release History</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Minimum Version of Python and NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="min_versions.html">Minimum Version of Python and NumPy</a></li>
 </ul>
 
         </div>
@@ -69,9 +70,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Minimum Version of Python and NumPy</li>
+      <li>The Queue Class Details</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/min_versions.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/queue-class-details.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -79,36 +80,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="minimum-version-of-python-and-numpy">
-<h1>Minimum Version of Python and NumPy<a class="headerlink" href="#minimum-version-of-python-and-numpy" title="Permalink to this heading">¶</a></h1>
-<ul class="simple">
-<li><p>This project supports at least the minor versions of Python
-initially released 42 months prior to a planned project release
-date.</p></li>
-<li><p>The project will always support at least the 2 latest minor
-versions of Python.</p></li>
-<li><p>The project will support minor versions of <code class="docutils literal notranslate"><span class="pre">numpy</span></code> initially
-released in the 24 months prior to a planned project release date or
-the oldest version that supports the minimum Python version
-(whichever is higher).</p></li>
-<li><p>The project will always support at least the 3 latest minor
-versions of NumPy.</p></li>
-</ul>
-<p>The minimum supported version of Python will be set to
-<code class="docutils literal notranslate"><span class="pre">python_requires</span></code> in <code class="docutils literal notranslate"><span class="pre">setup</span></code>.  All supported minor versions of
-Python will be in the test matrix and have binary artifacts built
-for releases.</p>
-<p>The project should adjust upward the minimum Python and NumPy
-version support on every minor and major release, but never on a
-patch release.</p>
-<p>This is consistent with NumPy <a class="reference external" href="https://numpy.org/neps/nep-0029-deprecation_policy.html">NEP 29</a>.</p>
-</section>
+  <section id="the-queue-class-details">
+<h1>The Queue Class Details<a class="headerlink" href="#the-queue-class-details" title="Permalink to this heading">¶</a></h1>
+<p>Below are provided the details of the methods and properties of the queue buffer class.</p>
+<p>queue data structure implemented using numpy arrays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">ivar rear</dt>
+<dd class="field-odd"><p>initial value: -1</p>
+</dd>
+<dt class="field-even">ivar length</dt>
+<dd class="field-even"><p>initial value: 0</p>
+</dd>
+</dl>
+<span class="target" id="module-circular_buffer_numpy.queue.Queue"></span></section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="release-history.html" class="btn btn-neutral float-left" title="Release History" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="circular-buffer-class-details.html" class="btn btn-neutral float-left" title="The Circular Buffer Class Details" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="release-history.html" class="btn btn-neutral float-right" title="Release History" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

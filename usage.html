@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usage &mdash; Numpy array circular buffer 0.1.1.post1+g12e6ea9 documentation</title>
+  <title>Usage &mdash; Numpy array circular buffer 0.2.0.post16+g1af3c26 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
@@ -16,13 +16,15 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The Circular Buffer Class Details" href="the-circular-buffer-class-details.html" />
+    <link rel="next" title="The Circular Buffer Class Details" href="circular-buffer-class-details.html" />
     <link rel="prev" title="Theory of Operation" href="theory-of-operation.html" /> 
 </head>
 
@@ -34,7 +36,7 @@
             <a href="index.html" class="icon icon-home"> Numpy array circular buffer
           </a>
               <div class="version">
-                0.1.1.post1+g12e6ea9
+                0.2.0.post16+g1af3c26
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -52,8 +54,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#the-queue-class">The Queue Class</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="the-circular-buffer-class-details.html">The Circular Buffer Class Details</a></li>
-<li class="toctree-l1"><a class="reference internal" href="the-queue-class-details.html">The Queue Class Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="circular-buffer-class-details.html">The Circular Buffer Class Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queue-class-details.html">The Queue Class Details</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-history.html">Release History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="min_versions.html">Minimum Version of Python and NumPy</a></li>
 </ul>
@@ -83,7 +85,7 @@
            <div itemprop="articleBody">
              
   <section id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h1>
 <p>In this section you will:</p>
 <ul class="simple">
 <li><p>Learn how to create your first circular buffer and perform simple operations with it.</p></li>
@@ -91,7 +93,7 @@
 <li><p>Learn few example on when to use circular buffer and when to use queue.</p></li>
 </ul>
 <section id="the-circular-buffer">
-<h2>The Circular Buffer<a class="headerlink" href="#the-circular-buffer" title="Permalink to this headline">¶</a></h2>
+<h2>The Circular Buffer<a class="headerlink" href="#the-circular-buffer" title="Permalink to this heading">¶</a></h2>
 <p>The circular buffer is a data structure that allows you to allocate part of memory to store data, quickly append data and retrieve data. Remember that the circular buffer has limited “length” and the data is overwritten when you append more data than it can hold. The naming of the buffer class properties are taken from numpy array names, hence it should be familiar to numpy array users.</p>
 <p>First, let us import the “CircularBuffer” class and create our first circular buffer. In the example below, we create a circular buffer with “shape” 100 by 2, and ‘float64’ as type of stored data. The length of the buffer is 100 and each entry holds 2 values, for example (time, temperature).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">circular_buffer_numpy.circular_buffer</span> <span class="kn">import</span> <span class="n">CircularBuffer</span>
@@ -173,7 +175,7 @@
 </div>
 </section>
 <section id="the-queue-class">
-<h2>The Queue Class<a class="headerlink" href="#the-queue-class" title="Permalink to this headline">¶</a></h2>
+<h2>The Queue Class<a class="headerlink" href="#the-queue-class" title="Permalink to this heading">¶</a></h2>
 <p>The queue class has very similar functionality to the circular buffer class with few modifications. The valid entry in the queue can be read only once, when you retrieve the data from the queue, it is not available anymore. The class mimics performance of first in first out(FIFO) buffer.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">circular_buffer_numpy.queue</span> <span class="kn">import</span> <span class="n">Queue</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s1">&#39;float64&#39;</span><span class="p">)</span>
@@ -211,7 +213,7 @@ Out[7]: 0</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="theory-of-operation.html" class="btn btn-neutral float-left" title="Theory of Operation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="the-circular-buffer-class-details.html" class="btn btn-neutral float-right" title="The Circular Buffer Class Details" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="circular-buffer-class-details.html" class="btn btn-neutral float-right" title="The Circular Buffer Class Details" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

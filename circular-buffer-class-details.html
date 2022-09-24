@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Circular Buffer Class Details &mdash; Numpy array circular buffer 0.1.1.post1+g12e6ea9 documentation</title>
+  <title>The Circular Buffer Class Details &mdash; Numpy array circular buffer 0.2.0.post16+g1af3c26 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
@@ -16,13 +16,15 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The Queue Class Details" href="the-queue-class-details.html" />
+    <link rel="next" title="The Queue Class Details" href="queue-class-details.html" />
     <link rel="prev" title="Usage" href="usage.html" /> 
 </head>
 
@@ -34,7 +36,7 @@
             <a href="index.html" class="icon icon-home"> Numpy array circular buffer
           </a>
               <div class="version">
-                0.1.1.post1+g12e6ea9
+                0.2.0.post16+g1af3c26
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -48,8 +50,38 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="theory-of-operation.html">Theory of Operation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">The Circular Buffer Class Details</a></li>
-<li class="toctree-l1"><a class="reference internal" href="the-queue-class-details.html">The Queue Class Details</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The Circular Buffer Class Details</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer"><code class="docutils literal notranslate"><span class="pre">CircularBuffer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.append"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.append()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.change_length"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.change_length()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.circular_packet_pointer"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.circular_packet_pointer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.circular_pointer"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.circular_pointer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.data_shape"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.dtype"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.g_packet_pointer"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.g_packet_pointer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_N"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.get_N()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_N_global"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.get_N_global()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_all"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.get_all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_data"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.get_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_i_j"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.get_i_j()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_last_N"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.get_last_N()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_last_value"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.get_last_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_length"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.get_length()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_packet_circular_i_j"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.get_packet_circular_i_j()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_packet_linear_i_j"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.get_packet_linear_i_j()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_value"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.get_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.length"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.length</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.linear_packet_pointer"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.linear_packet_pointer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.linear_pointer"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.linear_pointer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.packet_pointer"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.packet_pointer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.reset"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.shape"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.size"><code class="docutils literal notranslate"><span class="pre">CircularBuffer.size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="queue-class-details.html">The Queue Class Details</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release-history.html">Release History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="min_versions.html">Minimum Version of Python and NumPy</a></li>
 </ul>
@@ -70,7 +102,7 @@
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>The Circular Buffer Class Details</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/the-circular-buffer-class-details.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/circular-buffer-class-details.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -79,7 +111,7 @@
            <div itemprop="articleBody">
              
   <section id="the-circular-buffer-class-details">
-<h1>The Circular Buffer Class Details<a class="headerlink" href="#the-circular-buffer-class-details" title="Permalink to this headline">¶</a></h1>
+<h1>The Circular Buffer Class Details<a class="headerlink" href="#the-circular-buffer-class-details" title="Permalink to this heading">¶</a></h1>
 <p>Below are provided the details of the methods and properties of the circular buffer class.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer">
@@ -100,10 +132,12 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>data :: (numpy array)</strong></dt><dd><p>data to append</p>
+<dt><strong>data</strong><span class="classifier">: (numpy array)</span></dt><dd><p>data to append</p>
 </dd>
 </dl>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"></dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">buffer</span> <span class="o">=</span> <span class="n">circular_buffer_numpy</span><span class="o">.</span><span class="n">circular_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
@@ -123,10 +157,12 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>length ::  integer</strong></dt><dd><p>new length of the buffer</p>
+<dt><strong>length</strong><span class="classifier">integer</span></dt><dd><p>new length of the buffer</p>
 </dd>
 </dl>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"></dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">buffer</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
@@ -180,15 +216,15 @@ The packet pointer can be a float number. It serves as an indaction something wa
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>N :: (integer)</strong></dt><dd><p>number of points to return</p>
+<dt><strong>N</strong><span class="classifier">integer</span></dt><dd><p>number of points to return</p>
 </dd>
-<dt><strong>M :: (integer)</strong></dt><dd><p>index of the pointer</p>
+<dt><strong>M</strong><span class="classifier">integer</span></dt><dd><p>index of the pointer</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>array (numpy array)</dt><dd></dd>
+<dt><strong>array</strong><span class="classifier">array_like</span></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -205,15 +241,15 @@ The packet pointer can be a float number. It serves as an indaction something wa
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>N :: (integer)</strong></dt><dd><p>number of points to return</p>
+<dt><strong>N</strong><span class="classifier">integer</span></dt><dd><p>number of points to return</p>
 </dd>
-<dt><strong>M :: (integer)</strong></dt><dd><p>global index of the pointer</p>
+<dt><strong>M</strong><span class="classifier">integer</span></dt><dd><p>global index of the pointer</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>array (numpy array)</dt><dd></dd>
+<dt><strong>array</strong><span class="classifier">array_like</span></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -226,12 +262,17 @@ The packet pointer can be a float number. It serves as an indaction something wa
 <dl class="py method">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.get_all">
 <span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_all" title="Permalink to this definition">¶</a></dt>
-<dd><p>return entire circular buffer server in ordered way, where
-last value is the last collected.</p>
+<dd><p>return entire circular buffer server in ordered way, where last value is the last collected.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>array (numpy array)</dt><dd></dd>
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>array</strong><span class="classifier">array_like</span></dt><dd><p>array of data points in the historic order</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -247,9 +288,15 @@ last value is the last collected.</p>
 <dd><p>return all valid circular buffer entries in ordered way, where
 last value is the last collected.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>array (numpy array)</dt><dd></dd>
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>array</strong><span class="classifier">array_like</span></dt><dd><p>(numpy array)</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -271,15 +318,15 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>i :: (integer)</strong></dt><dd><p>start index in the buffer</p>
+<dt><strong>i</strong><span class="classifier">integer</span></dt><dd><p>start index in the buffer</p>
 </dd>
-<dt><strong>j :: (integer)</strong></dt><dd><p>end index in the buffer</p>
+<dt><strong>j</strong><span class="classifier">integer</span></dt><dd><p>end index in the buffer</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>array (numpy array)</dt><dd></dd>
+<dt><strong>array</strong><span class="classifier">array_like</span></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -296,7 +343,7 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>N :: (integer)</strong></dt><dd><p>number of points to return</p>
+<dt><strong>N</strong><span class="classifier">integer</span></dt><dd><p>number of points to return</p>
 </dd>
 </dl>
 </dd>
@@ -317,9 +364,14 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 <span class="sig-name descname"><span class="pre">get_last_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_last_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_last_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns last entry from the known. Same as self.buffer[self.pointer]</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>array (numpy array)</dt><dd></dd>
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>array</strong><span class="classifier">array_like</span></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -352,9 +404,14 @@ NOTE: index i cannot be -1 otherwise it will return empty array</p>
 <span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">linear_pointer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circular_pointer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/circular_buffer.html#CircularBuffer.get_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.get_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns last entry from the known. Same as self.buffer[self.pointer]</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>array (numpy array)</dt><dd></dd>
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>array</strong><span class="classifier">array_like</span></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -398,10 +455,12 @@ The parameter clear can be used to</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>clear ::  (boolean)</strong></dt><dd><p>force clearing the buffer</p>
+<dt><strong>clear</strong><span class="classifier">(boolean)</span></dt><dd><p>force clearing the buffer</p>
 </dd>
 </dl>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"></dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">circual_buffer</span><span class="o">.</span><span class="n">CircularBuffer</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
@@ -412,14 +471,16 @@ The parameter clear can be used to</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.shape">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.shape" title="Permalink to this definition">¶</a></dt>
-<dd><p>tuple: property objects that returns the shape of the circular buffer.</p>
+<dd><dl class="simple">
+<dt>shape<span class="classifier">tuple</span></dt><dd><p>property objects that returns the shape of the circular buffer.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="circular_buffer_numpy.circular_buffer.CircularBuffer.size">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#circular_buffer_numpy.circular_buffer.CircularBuffer.size" title="Permalink to this definition">¶</a></dt>
-<dd><p>integer: property objects that returns the size of the circular buffer.</p>
-</dd></dl>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -430,7 +491,7 @@ The parameter clear can be used to</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="the-queue-class-details.html" class="btn btn-neutral float-right" title="The Queue Class Details" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="queue-class-details.html" class="btn btn-neutral float-right" title="The Queue Class Details" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
