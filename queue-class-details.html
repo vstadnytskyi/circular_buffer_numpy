@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Queue Class Details &mdash; Numpy array circular buffer 0.2.0.post16+g1af3c26 documentation</title>
+  <title>The Queue Class Details &mdash; Numpy array circular buffer 0.2.0.post18+g4da57f4 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
@@ -36,7 +36,7 @@
             <a href="index.html" class="icon icon-home"> Numpy array circular buffer
           </a>
               <div class="version">
-                0.2.0.post16+g1af3c26
+                0.2.0.post18+g4da57f4
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -51,7 +51,29 @@
 <li class="toctree-l1"><a class="reference internal" href="theory-of-operation.html">Theory of Operation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="circular-buffer-class-details.html">The Circular Buffer Class Details</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">The Queue Class Details</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The Queue Class Details</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue"><code class="docutils literal notranslate"><span class="pre">Queue</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.data_shape"><code class="docutils literal notranslate"><span class="pre">Queue.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.dequeue"><code class="docutils literal notranslate"><span class="pre">Queue.dequeue()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.dtype"><code class="docutils literal notranslate"><span class="pre">Queue.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.enqueue"><code class="docutils literal notranslate"><span class="pre">Queue.enqueue()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.front"><code class="docutils literal notranslate"><span class="pre">Queue.front</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.isempty"><code class="docutils literal notranslate"><span class="pre">Queue.isempty</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.isfull"><code class="docutils literal notranslate"><span class="pre">Queue.isfull</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.peek_all"><code class="docutils literal notranslate"><span class="pre">Queue.peek_all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.peek_first_N"><code class="docutils literal notranslate"><span class="pre">Queue.peek_first_N()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.peek_front"><code class="docutils literal notranslate"><span class="pre">Queue.peek_front()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.peek_i_j"><code class="docutils literal notranslate"><span class="pre">Queue.peek_i_j()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.peek_last_N"><code class="docutils literal notranslate"><span class="pre">Queue.peek_last_N()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.peek_rear"><code class="docutils literal notranslate"><span class="pre">Queue.peek_rear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.reset"><code class="docutils literal notranslate"><span class="pre">Queue.reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.reshape"><code class="docutils literal notranslate"><span class="pre">Queue.reshape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.shape"><code class="docutils literal notranslate"><span class="pre">Queue.shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular_buffer_numpy.queue.Queue.size"><code class="docutils literal notranslate"><span class="pre">Queue.size</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="release-history.html">Release History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="min_versions.html">Minimum Version of Python and NumPy</a></li>
 </ul>
@@ -83,16 +105,283 @@
   <section id="the-queue-class-details">
 <h1>The Queue Class Details<a class="headerlink" href="#the-queue-class-details" title="Permalink to this heading">¶</a></h1>
 <p>Below are provided the details of the methods and properties of the queue buffer class.</p>
-<p>queue data structure implemented using numpy arrays.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">circular_buffer_numpy.queue.</span></span><span class="sig-name descname"><span class="pre">Queue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(20,</span> <span class="pre">2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'float64'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue" title="Permalink to this definition">¶</a></dt>
+<dd><p>queue data structure implemented using numpy arrays.</p>
 <dl class="field-list simple">
-<dt class="field-odd">ivar rear</dt>
-<dd class="field-odd"><p>initial value: -1</p>
-</dd>
-<dt class="field-even">ivar length</dt>
-<dd class="field-even"><p>initial value: 0</p>
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rear</strong> – initial value: -1</p></li>
+<li><p><strong>length</strong> – initial value: 0</p></li>
+</ul>
 </dd>
 </dl>
-<span class="target" id="module-circular_buffer_numpy.queue.Queue"></span></section>
+<dl class="py property">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.data_shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_shape</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.data_shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>tuple: returns the shape of the circular buffer</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.dequeue">
+<span class="sig-name descname"><span class="pre">dequeue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.dequeue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.dequeue" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove (access) an item from the queue.
+return N points from the back and move rear_pointer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>N</strong><span class="classifier">: integer</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>array</strong><span class="classifier">: numpy array</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">circual_buffer</span><span class="o">.</span><span class="n">Queue</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.dtype">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>dtype: returns the dtype of the circular buffer</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.enqueue">
+<span class="sig-name descname"><span class="pre">enqueue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.enqueue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.enqueue" title="Permalink to this definition">¶</a></dt>
+<dd><p>add (store) an item to the queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">: (numpy array)</span></dt><dd><p>data to append</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">circular_buffer_numpy</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rand_arr</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">rand_arr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">length</span>
+<span class="go">6</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.front">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">front</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.front" title="Permalink to this definition">¶</a></dt>
+<dd><p>points at the front element in the queue. first one to dequeue.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.isempty">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isempty</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.isempty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the queue is empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>flag</strong><span class="classifier">: boolean</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">isempty</span><span class="p">()</span>
+<span class="go">    True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.isfull">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isfull</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.isfull" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the queue is full.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>flag</strong><span class="classifier">: boolean</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">isfull</span><span class="p">()</span>
+<span class="go">    False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.peek_all">
+<span class="sig-name descname"><span class="pre">peek_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>peeks into the queue and return entire buffer sorted. The last entry will be the end of the queue.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.peek_first_N">
+<span class="sig-name descname"><span class="pre">peek_first_N</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_first_N"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_first_N" title="Permalink to this definition">¶</a></dt>
+<dd><p>return first N entries in the queue. [first to go].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>N:  (integer)</strong></dt><dd><p>number of points requested</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>array</strong><span class="classifier">array_like</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">circular_buffer_numpy.queue</span> <span class="kn">import</span> <span class="n">Queue</span>
+<span class="go">queue = Queue((100,2), dtype = &#39;int16&#39;)</span>
+<span class="go">queue.length = 5</span>
+<span class="go">queue.peek_first_N(N = 5)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.peek_front">
+<span class="sig-name descname"><span class="pre">peek_front</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_front"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_front" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the element at the front of the queue without removing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.peek_i_j">
+<span class="sig-name descname"><span class="pre">peek_i_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_i_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_i_j" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns buffer between indices i and j (including index i)
+if j &lt; i, it assumes that buffer wrapped around and will give information
+accordingly.
+NOTE: the user needs to pay attention to the order at which indices
+are passed
+NOTE: index i cannot be -1 otherwise it will return empty array</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.peek_last_N">
+<span class="sig-name descname"><span class="pre">peek_last_N</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_last_N"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_last_N" title="Permalink to this definition">¶</a></dt>
+<dd><p>return last N entries in the queue. [last to go].</p>
+<p>algorithms:
+1. find i (right index in the numpy array)
+2. find j (left index in the numpy array)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>N:  (integer)</strong></dt><dd><p>number of points requested</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>array</strong><span class="classifier">array_like</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">circual_buffer</span><span class="o">.</span><span class="n">Queue</span><span class="o">.</span><span class="n">peek_last_N</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.peek_rear">
+<span class="sig-name descname"><span class="pre">peek_rear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.peek_rear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.peek_rear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the element at the rear of the queue without removing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>resets the queue by setting front and back equal to 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.reshape">
+<span class="sig-name descname"><span class="pre">reshape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/circular_buffer_numpy/queue.html#Queue.reshape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.reshape" title="Permalink to this definition">¶</a></dt>
+<dd><p>reshapes buffer but also resets it. Takes two parameters as input, shape and dtype.
+dtype atribute can be passed if dtype of the queue needs changes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>shape</strong><span class="classifier">: tuple</span></dt><dd><p>new shape of the queue</p>
+</dd>
+<dt><strong>dtype</strong><span class="classifier">: numpy datatype string</span></dt><dd><p>new data type</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">queue</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">    (1000,2)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>tuple: returns the shape of the circular buffer</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="circular_buffer_numpy.queue.Queue.size">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#circular_buffer_numpy.queue.Queue.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>integer: returns the size of the circular buffer</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 
 
            </div>
