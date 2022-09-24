@@ -135,6 +135,7 @@ class CircularBuffer(object):
         """
         return entire circular buffer server in ordered way, where last value is the last collected.
         
+        
         Parameters
         ----------
 
