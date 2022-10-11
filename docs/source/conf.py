@@ -68,8 +68,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Numpy array circular buffer'
-copyright = '2017, Valentyn Stadnyskyi'
-author = 'Valentyn Stadnyskyi'
+copyright = '2017, Valentyn Stadnytskyi'
+author = 'Valentyn Stadnytskyi'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
